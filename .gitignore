@@ -1,0 +1,4 @@
+__pycache__/
+prototype/data_cache/
+prototype/results/raw/
+*.pyc
