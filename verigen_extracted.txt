@@ -1,0 +1,117 @@
+﻿PAGES: 9
+--- PAGE 1 ---
+MEENAKSHI SUNDARARAJAN ENGINEERING COLLEGE
+MEENAKSHI SUNDARARAJAN ENGINEERING COLLEGE
+Presented by :
+PRINCE R (243115243077)
+(An Autonomous Institution)
+Department of Artificial Intelligence and Datascience
+ECUBE û 2026 PAPER PRESENTATION
+5th Semester 
+VeriGen û A Self Healing Framework for LLM 
+--- PAGE 2 ---
+PROBLEM STATEMENT
+ò Large Language Models generate text based on statistical token prediction rather than explicit factual 
+verification. 
+ò This leads to hallucinations, where incorrect or fabricated information is presented with high confidence. 
+ò Current approaches (RAG, GraphRAG, CoVe, Self-RAG, CRAG) mainly retrieve information before generation or 
+verify answers after generation. 
+ò They lack claim-level evidence sufficiency assessment, localized reasoning repair, and adaptive inference
+during response generation. 
+ò There is a need for a self-healing inference architecture that minimizes hallucinations while preserving 
+factual accuracy, computational efficiency, and user trust.
+--- PAGE 3 ---
+LITERATURE REVIEW
+Existing Method Core Idea Strength Limitation
+Traditional LLM Generates text using next-token prediction Fast and fluent response generation No factual verification or evidence checking
+RAG Retrieves external documents before answering Improves factual grounding Retrieval happens mostly before generation; weak claim-level checking.
+Self-RAG Model decides when to retrieve and critique More adaptive than basic RAG Still relies heavily on self-reflection; limited localized repair.
+CoVe Generates an answer, then verifies it Reduces some hallucinations Verification happens after generation
+CRAG Evaluates retrieved documents and corrects poor retrieval Improves robustness of RAG Focuses on retrieval quality, not full claim-level self-healing.
+Multi-Agent Verification Multiple agents review or debate an answer Better error detection High latency and computational cost
+--- PAGE 4 ---
+
+--- PAGE 5 ---
+
+--- PAGE 6 ---
+CORE CONTRIBUTIONS
+1. Claim Risk Estimator (CRE)
+ò Predicts the hallucination risk of each atomic claim before 
+reasoning begins. 
+ò Identifies high-risk claims that require additional verification. 
+ò Enables adaptive inference by avoiding unnecessary processing 
+for low-risk claims. 
+2. Adaptive Evidence Sufficiency Predictor (AESP)
+ò Determines whether the available evidence is sufficient to 
+support each claim. 
+ò Dynamically decides when additional retrieval is required. 
+ò Reduces unnecessary retrieval while maintaining factual 
+reliability. 
+3. Dynamic ClaimûEvidence Graph (DCEG)
+ò Constructs a structured graph linking each claim with supporting 
+evidence. 
+ò Maintains confidence scores, dependencies, contradictions, and 
+evidence freshness. 
+ò Provides transparent and explainable reasoning. 
+.
+4. Localized Self-Healing Engine (LSHE)
+ò Detects unsupported or conflicting claims during 
+inference. 
+ò Repairs only the affected reasoning segments instead of 
+regenerating the entire response. 
+ò Improves efficiency while preserving verified content. 
+5. Adaptive Claim-Aware Generation (ACAG)
+ò Generates responses using claim reliability, evidence 
+quality, contradiction analysis, and reasoning consistency. 
+ò Produces responses with calibrated confidence instead of 
+relying solely on language-model probabilities
+--- PAGE 7 ---
+WORKFLOW
+Claim Risk Estimator
+Predicts hallucination risk before reasoning 
+begins.
+Evidence Sufficiency Predictor
+Determines whether each claim has sufficient 
+supporting evidence.
+Dynamic Claim-Evidence Graph
+Maps claims, evidence, dependencies, 
+contradictions, and confidence scores.
+Localized Self-Healing Engine
+Repairs only unsupported reasoning instead of 
+regenerating the full response.
+--- PAGE 8 ---
+Methodology
+ò Requirement Analysis 
+ò Domain Model Design 
+ò Page Creation 
+ò Microflow Development 
+ò Security Implementation 
+ò Testing Deployment
+Mendix Components
+ò Entities
+ò Associations 
+ò Pages
+ò Microflows
+ò Navigation 
+ò Data Grid
+Low-Code Development
+ò Rapid application development 
+ò Visual modeling
+ò Reusable components
+
+--- PAGE 9 ---
+CONCLUSION
+Conclusion
+VeriGen proposes an adaptive inference architecture integrating 
+semantic query understanding, claim-level reasoning, evidence 
+sufficiency estimation, adaptive retrieval, dynamic evidence graphs, 
+localized self-healing, and reliability-aware generationùimproving 
+factual consistency while reducing hallucinations and unnecessary 
+retrieval.
+Future Work
+ò Multimodal reasoning across text, image, and audio
+ò Medical domain adaptation for clinical decision support
+ò Legal AI with statute-level evidence grounding
+ò Scientific literature assistants with citation graphs
+ò Real-time knowledge updating and agentic AI integration
+ò Distributed evidence retrieval and federated knowledge systems
