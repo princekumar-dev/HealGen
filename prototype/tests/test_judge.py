@@ -9,6 +9,7 @@ by hard-coded position -- so swapping the name mapping must flip decisions.
 import time
 
 import pytest
+import torch
 
 from healgen import config
 from healgen import judge as judge_module
@@ -91,6 +92,108 @@ def test_support_empty_evidence(judge):
     supported, prob = judge.support("Paris is the capital of France.", [])
     assert supported is False
     assert prob == 0.0
+
+
+@pytest.mark.slow
+def test_support_blank_evidence_deterministic(judge):
+    """Blank-only evidence -> (False, 0.0) every call; never garbage memory.
+
+    Pins the empty branch of ``Judge._scores``: previously it returned a
+    fully-shaped *uninitialised* tensor (``torch.empty``), so blank-knowledge
+    records could read arbitrary floats as entailment scores.
+    """
+    outcomes = {
+        judge.support("Paris is the capital of France.", ["", "   "])
+        for _ in range(4)
+    }
+    assert outcomes == {(False, 0.0)}
+
+
+@pytest.mark.slow
+def test_support_minus1_argmax_never_surfaces(judge):
+    """The -1 argmax filler must not equal a real label index (no 0..k-1 read)."""
+    _probability, argmax = judge._scores(
+        ["Paris is the capital of France."], ["", "   "]
+    )
+    assert argmax.shape == (1, 0)
+    assert bool((argmax == -1).all())
+
+
+@pytest.mark.slow
+def test_support_blank_entries_among_real_evidence(judge):
+    """Blank strings are dropped, real premises in the same pool still judged."""
+    supported, prob = judge.support(
+        "Paris is the capital of France.",
+        ["", "Paris is the capital of France.", "   "],
+    )
+    assert supported is True
+    assert prob > 0.5
+
+
+@pytest.mark.slow
+def test_eval_blank_knowledge_deterministic(judge):
+    """A blank-knowledge record scores (False, 0.0) claims -- repeat runs agree.
+
+    This is the injected-record path from the review: one malformed row must
+    not poison accuracy/AUC with nondeterministic garbage.
+    """
+    pairs = [
+        {
+            "question": "What is the capital of France?",
+            "right_answer": "Paris is the capital of France.",
+            "hallucinated_answer": "Paris is the capital of Germany.",
+            "knowledge": "   ",
+        }
+    ]
+    runs = [judge_module.eval_contrast_pairs(judge, pairs) for _ in range(3)]
+    assert all(run == runs[0] for run in runs), "results must be deterministic"
+    assert runs[0]["n"] == 2
+    assert 0.0 <= runs[0]["accuracy"] <= 1.0
+    assert 0.0 <= runs[0]["auc"] <= 1.0
+
+
+@pytest.mark.slow
+def test_best_logits_selection_matches_eval_path(judge, monkeypatch):
+    """``_best_logits`` must pick the passage by tempered-prob argmax.
+
+    Crafted logits make the raw entailment-logit argmax (passage 0) disagree
+    with the probability argmax (passage 1): the old raw-logit selection
+    calibrated the temperature on passage 0's logits, the decision path
+    scored passage 1.  The binary logit built here from the *eval-selected*
+    passage is the only acceptable fit value.
+    """
+    entail = judge.entailment_index()
+    crafted = torch.tensor(
+        [[[3.0, 10.0, 0.0], [2.9, 0.0, 0.0], [2.0, 0.0, 0.0]]]
+    )
+
+    def fake_logits(claims, passages):
+        assert len(claims) == 1
+        return crafted
+
+    monkeypatch.setattr(judge, "_logits", fake_logits)
+
+    from scipy.special import logsumexp
+
+    probabilities = torch.softmax(crafted, dim=-1)
+    eval_best = int(probabilities[0, :, entail].argmax().item())
+    assert eval_best == 1, "probability argmax must pick passage 1"
+    raw_entail_best = int(crafted[0, :, entail].argmax().item())
+    assert raw_entail_best == 0, "raw-logit argmax picks passage 0 (the trap)"
+
+    binary = judge._best_logits(["c"], ["p0", "p1", "p2"])
+    selected_row = crafted[0, eval_best].numpy()
+    expected = selected_row[entail] - logsumexp(
+        selected_row[[i for i in range(3) if i != entail]]
+    )
+    assert float(binary.item()) == pytest.approx(float(expected), abs=1e-6)
+    # The old implementation returned the passage-0 value (3 - logsumexp(10, 0)),
+    # a completely different logit; pin that it is NOT that any more.
+    wrong_row = crafted[0, 0].numpy()
+    wrong_value = float(
+        wrong_row[entail] - logsumexp(wrong_row[[i for i in range(3) if i != entail]])
+    )
+    assert abs(float(binary.item()) - wrong_value) > 1.0
 
 
 # --- fit_temperature ---------------------------------------------------------

@@ -13,7 +13,9 @@ experiment contract:
   fits a single scalar ``T`` on dev pairs by minimising binary NLL over
   ``log(T)`` (bounded to ``[0.05, 20]``); ``support`` applies ``T`` before the
   softmax.  The score reported is still the raw entailment probability
-  (T = 1) unless a temperature has explicitly been fitted.
+  (T = 1) unless a temperature has explicitly been fitted.  Best-passage
+  *selection* is by tempered entailment probability in both the fit and the
+  decision paths, so calibration happens on the same passage that is scored.
 
 ``build_pool`` freezes the evidence each response is judged against: the gold
 knowledge first, then the union of what every system retrieved (deduped, order
@@ -114,10 +116,16 @@ class Judge:
         """Tensor of logits with shape (n_claims, n_passages, n_labels).
 
         Every claim is paired with every passage; pairs run through the
-        cross-encoder in batches of :data:`BATCH_SIZE`.
+        cross-encoder in batches of :data:`BATCH_SIZE`.  Blank/whitespace
+        premises are dropped first, and the tensor is keyed on the *filtered*
+        premise count -- including the degenerate no-passage case, whose shape
+        stays ``(n_claims, 0, n_labels)`` so callers never see a shape that
+        disagrees with this convention.
         """
         premises = [p.strip() for p in passages if p and p.strip()]
-        if not claims or not premises:
+        if not premises and claims:
+            return torch.empty((len(claims), 0, self.model.config.num_labels))
+        if not claims:
             return torch.empty(0)
         batch: list[tuple[str, str]] = []
         for claim in claims:
@@ -139,19 +147,32 @@ class Judge:
         stacked = torch.cat(outputs, dim=0)
         return stacked.view(len(claims), len(premises), -1)
 
-    def _scores(self, claims: list[str], passages: list[str]) -> tuple[torch.Tensor, torch.Tensor]:
-        """(entailment_probs, argmax_indices), both shaped (n_claims, n_passages).
+    def _scores(
+        self, claims: list[str], passages: list[str]
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """(entailment_probs, argmax_indices), both shaped (n_claims, n_premises).
 
-        Entailment probabilities apply the fitted temperature; argmax indices
-        are plain softmax over the tempered logits, so the label decision and
-        the reported probability stay consistent with each other.
+        Premises are filtered the same way :meth:`_logits` filters them
+        (blank/whitespace texts dropped), and both returned tensors are keyed
+        on that *filtered* count -- the empty branch too, with every cell
+        filled deterministically (prob 0.0, argmax -1), so no caller can ever
+        read an uninitialised value as a score.
         """
-        logits = self._logits(claims, passages)
-        if logits.numel() == 0:
-            return (
-                torch.empty((len(claims), len(passages))),
-                torch.empty((len(claims), len(passages)), dtype=torch.long),
+        premises = [p.strip() for p in passages if p and p.strip()]
+        if not claims or not premises:
+            empty_probs = torch.zeros((len(claims), len(premises)))
+            empty_argmax = torch.full(
+                (len(claims), len(premises)), -1, dtype=torch.long
             )
+            return empty_probs, empty_argmax
+        logits = self._logits(claims, premises)
+        if logits.numel() == 0:
+            n_premises = len(premises)
+            degenerate_probs = torch.zeros((len(claims), n_premises))
+            degenerate_argmax = torch.full(
+                (len(claims), n_premises), -1, dtype=torch.long
+            )
+            return degenerate_probs, degenerate_argmax
         tempered = logits / self.temperature
         entail = self.entailment_index()
         probs = torch.softmax(tempered, dim=-1)
@@ -190,6 +211,10 @@ class Judge:
         if not claims:
             return []
         probability, argmax = self._scores(claims, evidence)
+        if probability.shape[1] == 0:
+            # Blank-only evidence: no premise was scored, so every claim is
+            # deterministically unsupported with the neutral score 0.0.
+            return [(False, 0.0) for _ in claims]
         out: list[tuple[bool, float]] = []
         entail = self.entailment_index()
         for i in range(probability.shape[0]):
@@ -205,19 +230,29 @@ class Judge:
     # --- temperature fitting -------------------------------------------------
 
     def _best_logits(self, claims: list[str], passages: list[str]) -> torch.Tensor:
-        """1D tensor: per claim, (entail_logit - logsumexp(others)) of best passage."""
+        """1D tensor: per claim, (entail_logit - logsumexp(others)) of the best passage.
+
+        "Best" means the passage with the highest **tempered entailment
+        probability** -- exactly how ``support``/``evaluate_claims`` pick the
+        scored passage -- so a fitted temperature is calibrated on the very
+        same passage that is later judged.  (Selecting by the raw entailment
+        logit can disagree with the probability argmax, and fitting on a
+        passage the decision path would not even pick is meaningless.)  The
+        returned logit itself stays untempered: the fit needs the raw logit
+        to divide by the unknown scalar ``T``.
+        """
         raw = self._logits(claims, passages)
         if raw.numel() == 0:
             return torch.empty(0)
         entail = self.entailment_index()
-        # Un-tempered candidate logits; argmax of entailment prob == argmax of
-        # the entailment logit, so plain logits pick the same best passage.
-        entail_logits = raw[:, :, entail]
-        best_passage = entail_logits.argmax(dim=1)
-        best = raw[torch.arange(raw.shape[0]), best_passage].numpy()
-        others = np.delete(best, entail, axis=1)
-        # Return as a torch tensor so callers use one numeric API (.numel/.item).
-        return torch.as_tensor(best[:, entail] - logsumexp(others, axis=1))
+        # Selection mirrors the decision path (tempered entailment
+        # probability argmax), NOT the raw entailment logit -- the two
+        # argmaxes can disagree, and fit/eval must agree on the passage.
+        tempered_probs = torch.softmax(raw / self.temperature, dim=-1)
+        best = tempered_probs[:, :, entail].argmax(dim=1)
+        selected = raw[torch.arange(raw.shape[0]), best].numpy()
+        others = np.delete(selected, entail, axis=1)
+        return torch.as_tensor(selected[:, entail] - logsumexp(others, axis=1))
 
     def fit_temperature(self, dev_pairs: list[dict]) -> float:
         """Fit scalar T on dev pairs by binary NLL over log(T); sets ``self.temperature``.
