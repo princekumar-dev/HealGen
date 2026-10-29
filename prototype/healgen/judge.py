@@ -38,6 +38,7 @@ Known limits (deliberate, prototype scope):
 """
 
 import math
+import re
 
 import numpy as np
 import torch
@@ -51,6 +52,26 @@ from healgen.claims import decompose
 BATCH_SIZE = 16
 
 _TEMPERATURE_BOUNDS = (0.05, 20.0)
+
+# Hybrid-rule normalizer: lowercase, strip punctuation, collapse whitespace
+# (controller R8; matches the diag scoring's normalized containment).
+_PUNCTUATION_RE = re.compile(r"[^a-z0-9 ]+")
+_WHITESPACE_RE = re.compile(r"\s+")
+
+
+def _normalize(text: str) -> str:
+    """Lowercase text, replace punctuation with spaces, collapse whitespace."""
+    if not isinstance(text, str):
+        return ""
+    return _WHITESPACE_RE.sub(" ", _PUNCTUATION_RE.sub(" ", text.lower())).strip()
+
+
+def _is_lexical_match(claim: str, evidence: list[str]) -> bool:
+    """True when the normalized claim is contained in a normalized passage."""
+    norm_claim = _normalize(claim)
+    if not norm_claim:
+        return False
+    return any(norm_claim in _normalize(passage) for passage in evidence)
 
 
 def build_pool(
@@ -121,6 +142,12 @@ class Judge:
         premise count -- including the degenerate no-passage case, whose shape
         stays ``(n_claims, 0, n_labels)`` so callers never see a shape that
         disagrees with this convention.
+
+        Direction contract (MNLI model card): the tokenizer's FIRST argument
+        is the *premise* -- the long evidence passage -- and the SECOND is the
+        *hypothesis* -- the short claim being verified.  The Task-5 bug
+        inverted this (claim as premise), which collapsed support to ~3% and
+        is the registered root cause of the CRE label collapse.
         """
         premises = [p.strip() for p in passages if p and p.strip()]
         if not premises and claims:
@@ -135,9 +162,11 @@ class Judge:
         with torch.no_grad():
             for start in range(0, len(batch), BATCH_SIZE):
                 chunk = batch[start : start + BATCH_SIZE]
+                # Premise FIRST (evidence passage), hypothesis SECOND (claim),
+                # per the model card / MNLI convention.
                 encoded = self.tokenizer(
-                    [claim for claim, _ in chunk],
                     [passage for _, passage in chunk],
+                    [claim for claim, _ in chunk],
                     padding=True,
                     truncation=True,
                     return_tensors="pt",
@@ -181,15 +210,23 @@ class Judge:
     # --- public API ---------------------------------------------------------------
 
     def support(self, claim: str, evidence: list[str]) -> tuple[bool, float]:
-        """(supported, entailment_score) for one claim against the evidence pool.
+        """(supported, score) for one claim against the evidence pool.
 
-        The boolean follows the argmax rule on the *best* passage (highest
-        entailment score) -- not a ``>= 0.5`` read-off, which would differ on
-        flat distributions.  The float is the max entailment score over the
-        pool.  No evidence -> ``(False, 0.0)``.
+        **Hybrid support rule (controller R8):** a claim is supported if
+        EITHER its normalized form (lowercase, punctuation stripped,
+        whitespace collapsed) is a substring of some normalized evidence
+        passage -- the lexical branch, scored 1.0, which short-circuits the
+        model entirely -- OR the NLI argmax rule holds: the argmax label on
+        the *best* passage (highest entailment score) is ``entailment`` (not
+        a ``>= 0.5`` read-off, which would differ on flat distributions).
+        The reported score is ``max(1.0 if lexical else 0.0,
+        entailment_score)``, so it always lands in [0, 1]; the fitted
+        temperature applies to the NLI component only.
         """
         if not isinstance(claim, str):
             raise TypeError("claim must be a string")
+        if _is_lexical_match(claim, evidence):
+            return True, 1.0
         probability, argmax = self._scores([claim], evidence)
         if argmax.numel() == 0:
             return False, 0.0
@@ -201,31 +238,40 @@ class Judge:
     def evaluate_claims(
         self, claims: list[str], evidence: list[str]
     ) -> list[tuple[bool, float]]:
-        """Batched version of ``support``: one (supported, score) per claim.
+        """Batched hybrid version of ``support``: one (supported, score) per claim.
 
-        Each claim is judged against every pool passage; the returned tuple
-        mirrors ``support`` exactly (argmax rule on the best passage).  Used
-        by :func:`eval_contrast_pairs` so all claims of an answer share one
-        batched call.
+        Order and semantics mirror ``support`` exactly: normalized substring
+        matches short-circuit to ``(True, 1.0)``; only the claims that need
+        the NLI path are batched through the cross-encoder (lexically matched
+        claims never cause a forward pass).  Used by
+        :func:`eval_contrast_pairs` so all claims of an answer arrive in one
+        call.
         """
         if not claims:
             return []
-        probability, argmax = self._scores(claims, evidence)
-        if probability.shape[1] == 0:
-            # Blank-only evidence: no premise was scored, so every claim is
-            # deterministically unsupported with the neutral score 0.0.
-            return [(False, 0.0) for _ in claims]
-        out: list[tuple[bool, float]] = []
-        entail = self.entailment_index()
-        for i in range(probability.shape[0]):
-            best = int(torch.argmax(probability[i]).item())
-            out.append(
-                (
-                    int(argmax[i][best].item()) == entail,
-                    float(probability[i][best].item()),
-                )
-            )
-        return out
+        out: list[tuple[bool, float] | None] = [None] * len(claims)
+        nli_positions: list[int] = []
+        for i, claim in enumerate(claims):
+            if _is_lexical_match(claim, evidence):
+                out[i] = (True, 1.0)
+            else:
+                nli_positions.append(i)
+        if nli_positions:
+            pending = [claims[i] for i in nli_positions]
+            probability, argmax = self._scores(pending, evidence)
+            entail = self.entailment_index()
+            if probability.shape[1] == 0:
+                # Blank-only evidence: the NLI branch is deterministic.
+                for i in nli_positions:
+                    out[i] = (False, 0.0)
+            else:
+                for j, i in enumerate(nli_positions):
+                    best = int(torch.argmax(probability[j]).item())
+                    out[i] = (
+                        int(argmax[j][best].item()) == entail,
+                        float(probability[j][best].item()),
+                    )
+        return [result for result in out if result is not None]
 
     # --- temperature fitting -------------------------------------------------
 

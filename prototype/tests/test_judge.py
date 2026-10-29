@@ -68,8 +68,12 @@ def test_contradiction_not_supported(judge):
 
 
 def test_label_mapping_not_positional(judge, monkeypatch):
-    """Renaming id2label so a different index carries 'entailment' flips it."""
-    claim = "Paris is the capital of France."
+    """Renaming id2label so a different index carries 'entailment' flips it.
+
+    Uses an NLI-path pair (claim not a substring of the evidence) because
+    substring matches short-circuit the model entirely.
+    """
+    claim = "The capital of France is Paris."
     evidence = ["Paris is the capital of France."]
     before = judge.support(claim, evidence)[0]
 
@@ -117,6 +121,99 @@ def test_support_minus1_argmax_never_surfaces(judge):
     )
     assert argmax.shape == (1, 0)
     assert bool((argmax == -1).all())
+
+
+@pytest.mark.slow
+def test_support_tokenizes_passage_then_claim(judge, monkeypatch):
+    """Model-card order: tokenizer(premise=evidence, hypothesis=claim).
+
+    Spy on the tokenizer: the FIRST argument must be the evidence passage,
+    the SECOND the short claim.  Regression for the Task-5 direction bug
+    (claim was passed as premise, collapsing support to ~3%).
+    """
+    evidence = ["Paris is the capital of France."]
+    claim = "The capital of France is Paris."
+
+    calls = []
+    real_tokenizer = judge.tokenizer
+
+    class _SpyTokenizer:
+        def __call__(self, first, second, **kwargs):
+            calls.append((list(first), list(second)))
+            return real_tokenizer(first, second, **kwargs)
+
+    monkeypatch.setattr(judge, "tokenizer", _SpyTokenizer())
+    supported, prob = judge.support(claim, evidence)
+
+    assert len(calls) == 1
+    premise_args, hypothesis_args = calls[0]
+    assert premise_args == evidence, "first tokenizer arg must be the passage"
+    assert hypothesis_args == [claim], "second tokenizer arg must be the claim"
+    assert supported is True, "paraphrase must be entailed in the right direction"
+
+
+@pytest.mark.slow
+def test_support_hypothesis_longer_than_premise_not_supported(judge):
+    """A claim adding a fact outside the evidence is never entailed.
+
+    Discriminator for the direction bug (verified empirically both ways):
+    the model card direction asks "does the evidence entail the claim?" ->
+    the invented fact 'It was completed in 1889.' is NEUTRAL (p_ent 0.007).
+    The broken claim-as-premise order asks the reverse and wrongly returns
+    ENTAILED (p_ent 0.998).  Substring rule does not fire (claim is longer).
+    """
+    supported, prob = judge.support(
+        "The Eiffel Tower is in Paris. It was completed in 1889.",
+        ["The Eiffel Tower is in Paris."],
+    )
+    assert supported is False
+    assert prob < 0.5
+
+
+@pytest.mark.slow
+def test_substring_claim_supported_score_one(judge):
+    """Claim contained in (normalized) evidence -> supported with score 1.0.
+
+    The NLI path on this pair returns a near-1 but NOT exactly 1.0 score, so
+    the exact equality pins the lexical branch.
+    """
+    supported, prob = judge.support(
+        "Paris is the capital of France.",
+        ["Founded in antiquity, Paris is the capital of France. It is in Europe."],
+    )
+    assert supported is True
+    assert prob == 1.0
+
+
+@pytest.mark.slow
+def test_substring_claim_short_circuits_nli(judge, monkeypatch):
+    """Lexical match must skip the model forward entirely."""
+    calls = []
+    real_tokenizer = judge.tokenizer
+
+    class _SpyTokenizer:
+        def __call__(self, first, second, **kwargs):
+            calls.append((first, second))
+            return real_tokenizer(first, second, **kwargs)
+
+    monkeypatch.setattr(judge, "tokenizer", _SpyTokenizer())
+    supported, prob = judge.support(
+        "Paris is the capital of France.",
+        ["Founded in antiquity, Paris is the capital of France. It is in Europe."],
+    )
+    assert calls == [], "substring match must short-circuit the NLI forward"
+    assert (supported, prob) == (True, 1.0)
+
+
+@pytest.mark.slow
+def test_swapped_entity_claim_judged_by_nli_only(judge):
+    """Entity-substituted claim is not a substring -> falls through to NLI."""
+    supported, prob = judge.support(
+        "London is the capital of France.",
+        ["Paris is the capital of France."],
+    )
+    assert supported is False
+    assert 0.0 <= prob < 1.0
 
 
 @pytest.mark.slow
