@@ -2,3 +2,5 @@ __pycache__/
 prototype/data_cache/
 prototype/results/raw/
 *.pyc
+prototype/results/cre_train_cache.csv
+prototype/results/cre_dev_cache.csv

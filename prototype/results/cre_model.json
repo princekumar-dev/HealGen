@@ -1,0 +1,49 @@
+{
+  "feature_names": [
+    "claim_words",
+    "digit_cap_count",
+    "max_bm25",
+    "claim_question_cos",
+    "novelty",
+    "rarity_flag"
+  ],
+  "scaler": {
+    "mean": [
+      6.3046875,
+      2.12109375,
+      26.796833672910193,
+      0.4593207922627764,
+      0.5128282152879553,
+      0.4921875
+    ],
+    "scale": [
+      5.7697467905744135,
+      2.2323492510606258,
+      19.653959319891268,
+      0.2740341191056984,
+      0.19025440953670106,
+      0.4999389611180049
+    ]
+  },
+  "coef": [
+    0.6015263622971192,
+    0.02089970412601822,
+    -0.3943433440783216,
+    -0.034977727967584624,
+    0.16027445174300103,
+    -0.2351263214015974
+  ],
+  "intercept": 4.438484105306651,
+  "model": "LogisticRegression(max_iter=1000, random_state=0) on StandardScaler",
+  "metadata": {
+    "n_train": 2048,
+    "positive_rate": 0.9873046875,
+    "train_accuracy": 0.9873046875,
+    "baseline": 0.9873046875,
+    "dev_accuracy": 0.9807692307692307,
+    "n_dev": 104,
+    "judge_model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "emb_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "wall_seconds": 839.3
+  }
+}
