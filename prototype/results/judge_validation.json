@@ -1,0 +1,19 @@
+{
+  "judge1": {
+    "accuracy": 0.83,
+    "auc": 0.9895,
+    "n": 200,
+    "time_s": 321.75,
+    "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
+  },
+  "judge2": {
+    "accuracy": 0.85,
+    "auc": 0.9877999999999999,
+    "n": 200,
+    "time_s": 21.13,
+    "model": "cross-encoder/nli-deberta-v3-small"
+  },
+  "gate_threshold_auc": 0.7,
+  "gate_passed": true,
+  "primary_selected": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
+}
