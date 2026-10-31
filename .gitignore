@@ -4,3 +4,5 @@ prototype/results/raw/
 *.pyc
 prototype/results/cre_train_cache.csv
 prototype/results/cre_dev_cache.csv
+.tools/
+.superpowers/
