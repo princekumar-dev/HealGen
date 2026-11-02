@@ -6,3 +6,7 @@ prototype/results/cre_train_cache.csv
 prototype/results/cre_dev_cache.csv
 .tools/
 .superpowers/
+paper/main.log
+paper/main.blg
+paper/*.aux
+paper/*.xdv
