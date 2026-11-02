@@ -1,0 +1,601 @@
+qid,system,question,answer,num_claims,num_supported_claims,sp_macro,any_hallucination,num_bm25_calls,latency_s,abstained,em,f1
+qa_06321,vanilla,The film Citizen Cohn follows the life of a man who was chief counsel to a Senator from which state?,texas,1,1,1.0,0,0,3.257,0,0.0,0.0
+qa_06321,rag,The film Citizen Cohn follows the life of a man who was chief counsel to a Senator from which state?,Wisconsin,1,1,1.0,0,1,0.913,0,1.0,1.0
+qa_06321,cove,The film Citizen Cohn follows the life of a man who was chief counsel to a Senator from which state?,texas,1,1,1.0,0,1,0.608,0,0.0,0.0
+qa_06321,healgen,The film Citizen Cohn follows the life of a man who was chief counsel to a Senator from which state?,texas,1,1,1.0,0,1,0.607,0,0.0,0.0
+qa_02365,vanilla,"Wellingrove, New South Wales is northwest of the parish and town in what region of NSW?",sydney,1,0,0.0,1,0,0.58,0,0.0,0.0
+qa_02365,rag,"Wellingrove, New South Wales is northwest of the parish and town in what region of NSW?",Northern Tablelands,1,1,1.0,0,1,0.853,0,0.0,0.0
+qa_02365,cove,"Wellingrove, New South Wales is northwest of the parish and town in what region of NSW?",Western,1,1,1.0,0,1,19.975,0,0.0,0.0
+qa_02365,healgen,"Wellingrove, New South Wales is northwest of the parish and town in what region of NSW?",Sydney is the capital of Australia.,1,0,0.0,1,1,11.538,0,0.0,0.0
+qa_04852,vanilla,"Which game has more pieces, King of Tokyo or Tsuro?",King of Tokyo,1,1,1.0,0,0,0.473,0,1.0,1.0
+qa_04852,rag,"Which game has more pieces, King of Tokyo or Tsuro?",King of Tokyo,1,1,1.0,0,1,1.335,0,1.0,1.0
+qa_04852,cove,"Which game has more pieces, King of Tokyo or Tsuro?",King of Tokyo,1,1,1.0,0,1,0.57,0,1.0,1.0
+qa_04852,healgen,"Which game has more pieces, King of Tokyo or Tsuro?",King of Tokyo,1,1,1.0,0,1,8.198,0,1.0,1.0
+qa_08380,vanilla,Choi Seung-hyun composed the song Doom Dada with who?,sam sung,1,0,0.0,1,0,0.707,0,0.0,0.0
+qa_08380,rag,Choi Seung-hyun composed the song Doom Dada with who?,Choice37,1,1,1.0,0,1,0.78,0,1.0,1.0
+qa_08380,cove,Choi Seung-hyun composed the song Doom Dada with who?,Astrix,1,1,1.0,0,1,10.688,0,0.0,0.0
+qa_08380,healgen,Choi Seung-hyun composed the song Doom Dada with who?,Sam sang is a musical instrument.,1,1,1.0,0,1,10.976,0,0.0,0.0
+qa_06443,vanilla,Who is the current editor of the magazine that the fictional character Sharon appears in?,edward scott,1,0,0.0,1,0,0.668,0,0.0,0.0
+qa_06443,rag,Who is the current editor of the magazine that the fictional character Sharon appears in?,Marcus Hearn,1,1,1.0,0,1,1.138,0,1.0,1.0
+qa_06443,cove,Who is the current editor of the magazine that the fictional character Sharon appears in?,Laura Smith,1,1,1.0,0,1,8.214,0,0.0,0.0
+qa_06443,healgen,Who is the current editor of the magazine that the fictional character Sharon appears in?,Edward Scott is the name of the person who is the leader of the Labour Party.,1,0,0.0,1,1,10.656,0,0.0,0.0
+qa_09552,vanilla,"Which fighter from WEC 38 is known as the ""busiest"" fighter in the UFC?",john dillinger,1,0,0.0,1,0,0.752,0,0.0,0.0
+qa_09552,rag,"Which fighter from WEC 38 is known as the ""busiest"" fighter in the UFC?",Jamie Varner,1,1,1.0,0,1,0.959,0,0.0,0.0
+qa_09552,cove,"Which fighter from WEC 38 is known as the ""busiest"" fighter in the UFC?",John Graves Shedd,1,1,1.0,0,1,12.242,0,0.0,0.0
+qa_09552,healgen,"Which fighter from WEC 38 is known as the ""busiest"" fighter in the UFC?",The John Lennon Peace Monument is dedicated to the memory of John Lennon.,1,1,1.0,0,1,13.39,0,0.0,0.0
+qa_04888,vanilla,"Until 2010, who led the electoral alliance of which Mónica Troadello was a part?",el rey,1,1,1.0,0,0,0.642,0,0.0,0.0
+qa_04888,rag,"Until 2010, who led the electoral alliance of which Mónica Troadello was a part?",Néstor Kirchner,1,1,1.0,0,1,1.192,0,1.0,1.0
+qa_04888,cove,"Until 2010, who led the electoral alliance of which Mónica Troadello was a part?",el rey,1,1,1.0,0,1,8.177,0,0.0,0.0
+qa_04888,healgen,"Until 2010, who led the electoral alliance of which Mónica Troadello was a part?",el rey,1,1,1.0,0,1,8.686,0,0.0,0.0
+qa_02348,vanilla,The Golden Turkey Awards is a 1980 book by a film critic born in which year ?,1939,1,1,1.0,0,0,0.375,0,0.0,0.0
+qa_02348,rag,The Golden Turkey Awards is a 1980 book by a film critic born in which year ?,1948,1,1,1.0,0,1,0.738,0,1.0,1.0
+qa_02348,cove,The Golden Turkey Awards is a 1980 book by a film critic born in which year ?,1939,1,1,1.0,0,1,0.468,0,0.0,0.0
+qa_02348,healgen,The Golden Turkey Awards is a 1980 book by a film critic born in which year ?,1939,1,1,1.0,0,1,0.463,0,0.0,0.0
+qa_03187,vanilla,Lambic is brewed in Brussels at a brewery founded in what year?,1892,1,1,1.0,0,0,0.402,0,0.0,0.0
+qa_03187,rag,Lambic is brewed in Brussels at a brewery founded in what year?,1900,1,1,1.0,0,1,0.835,0,1.0,1.0
+qa_03187,cove,Lambic is brewed in Brussels at a brewery founded in what year?,1892,1,1,1.0,0,1,0.5,0,0.0,0.0
+qa_03187,healgen,Lambic is brewed in Brussels at a brewery founded in what year?,1892,1,1,1.0,0,1,6.587,0,0.0,0.0
+qa_02688,vanilla,Wonder World is the second studio album by a pop group formed by what producer?,Freddie Mercury,1,1,1.0,0,0,0.462,0,0.0,0.0
+qa_02688,rag,Wonder World is the second studio album by a pop group formed by what producer?,Park Jin-young,1,1,1.0,0,1,0.812,0,1.0,1.0
+qa_02688,cove,Wonder World is the second studio album by a pop group formed by what producer?,Michael Jackson,1,0,0.0,1,1,19.584,0,0.0,0.0
+qa_02688,healgen,Wonder World is the second studio album by a pop group formed by what producer?,The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft.,1,1,1.0,0,1,14.489,0,0.0,0.0
+qa_09600,vanilla,Do Derek Jarman and Joseph Ruben have the same nationality?,no,1,1,1.0,0,0,0.308,0,1.0,1.0
+qa_09600,rag,Do Derek Jarman and Joseph Ruben have the same nationality?,yes,1,1,1.0,0,1,9.24,0,0.0,0.0
+qa_09600,cove,Do Derek Jarman and Joseph Ruben have the same nationality?,no,1,1,1.0,0,1,0.435,0,1.0,1.0
+qa_09600,healgen,Do Derek Jarman and Joseph Ruben have the same nationality?,no,1,1,1.0,0,1,0.378,0,1.0,1.0
+qa_06699,vanilla,Joe Buck is the son of an American sportscaster who was best known for his work announcing Major League Baseball games for what team?,Chicago White Sox,1,0,0.0,1,0,0.517,0,0.0,0.0
+qa_06699,rag,Joe Buck is the son of an American sportscaster who was best known for his work announcing Major League Baseball games for what team?,St. Louis Cardinals,1,1,1.0,0,1,0.995,0,1.0,1.0
+qa_06699,cove,Joe Buck is the son of an American sportscaster who was best known for his work announcing Major League Baseball games for what team?,Chicago White Sox,1,0,0.0,1,1,15.194,0,0.0,0.0
+qa_06699,healgen,Joe Buck is the son of an American sportscaster who was best known for his work announcing Major League Baseball games for what team?,"The Chicago White Sox are not the same as the ""Mortal Kombat"" action game spin-off "".",1,1,1.0,0,1,10.679,0,0.0,0.0
+qa_07010,vanilla,"What nationality was the character portrayed by Richard Heinrich Ludwig Münch in ""Patton"" (1970)?",german,1,1,1.0,0,0,0.328,0,1.0,1.0
+qa_07010,rag,"What nationality was the character portrayed by Richard Heinrich Ludwig Münch in ""Patton"" (1970)?",German,1,1,1.0,0,1,0.884,0,1.0,1.0
+qa_07010,cove,"What nationality was the character portrayed by Richard Heinrich Ludwig Münch in ""Patton"" (1970)?",german,1,1,1.0,0,1,0.411,0,1.0,1.0
+qa_07010,healgen,"What nationality was the character portrayed by Richard Heinrich Ludwig Münch in ""Patton"" (1970)?",german,1,1,1.0,0,1,0.412,0,1.0,1.0
+qa_08719,vanilla,The Centennial Olympic Stadium and the Georgia State Stadium are both located where?,Atlanta,1,1,1.0,0,0,0.344,0,0.0,0.6667
+qa_08719,rag,The Centennial Olympic Stadium and the Georgia State Stadium are both located where?,"Atlanta, Georgia",1,1,1.0,0,1,0.75,0,1.0,1.0
+qa_08719,cove,The Centennial Olympic Stadium and the Georgia State Stadium are both located where?,Atlanta,1,1,1.0,0,1,0.44,0,0.0,0.6667
+qa_08719,healgen,The Centennial Olympic Stadium and the Georgia State Stadium are both located where?,Atlanta,1,1,1.0,0,1,6.511,0,0.0,0.6667
+qa_05516,vanilla,"Which band from Lancaster, Pennsylvania formed in 2003 has toured with Iwrestledabearonce?",sonic scream,1,0,0.0,1,0,0.717,0,0.0,0.0
+qa_05516,rag,"Which band from Lancaster, Pennsylvania formed in 2003 has toured with Iwrestledabearonce?",August Burns Red,1,1,1.0,0,1,1.075,0,1.0,1.0
+qa_05516,cove,"Which band from Lancaster, Pennsylvania formed in 2003 has toured with Iwrestledabearonce?",The Flying Irishman,1,1,1.0,0,1,13.328,0,0.0,0.0
+qa_05516,healgen,"Which band from Lancaster, Pennsylvania formed in 2003 has toured with Iwrestledabearonce?",Sonic Scream is a song by the band Sonic Youth.,1,0,0.0,1,1,11.407,0,0.0,0.0
+qa_02948,vanilla,Which director has produced 34 films since 1983: Spike Lee or Manny Coto?,Spike Lee,1,1,1.0,0,0,0.487,0,0.0,0.8
+qa_02948,rag,Which director has produced 34 films since 1983: Spike Lee or Manny Coto?,Spike Lee,1,1,1.0,0,1,0.955,0,0.0,0.8
+qa_02948,cove,Which director has produced 34 films since 1983: Spike Lee or Manny Coto?,Spike Lee,1,1,1.0,0,1,0.597,0,0.0,0.8
+qa_02948,healgen,Which director has produced 34 films since 1983: Spike Lee or Manny Coto?,Spike Lee,1,1,1.0,0,1,7.262,0,0.0,0.8
+qa_00812,vanilla,"who voiced the  cartoon character in the animated television series which , Pablo Aurrecochea wears kits adorned with its cartoon characters",John Wayne,1,0,0.0,1,0,0.44,0,0.0,0.0
+qa_00812,rag,"who voiced the  cartoon character in the animated television series which , Pablo Aurrecochea wears kits adorned with its cartoon characters",Dan Castellaneta,1,1,1.0,0,1,1.065,0,1.0,1.0
+qa_00812,cove,"who voiced the  cartoon character in the animated television series which , Pablo Aurrecochea wears kits adorned with its cartoon characters",John Gilbert,1,1,1.0,0,1,10.332,0,0.0,0.0
+qa_00812,healgen,"who voiced the  cartoon character in the animated television series which , Pablo Aurrecochea wears kits adorned with its cartoon characters","John Wayne is the name of the person who played John Wayne in the film ""The Great Lover"".",1,0,0.0,1,1,12.678,0,0.0,0.0
+qa_06944,vanilla,"Which building is nicknamed ""The Billionaire Building"" and hosts 92 condominiums units on top of a 210-room Hyatt Hotel: 30 Hudson Yards or One57?",One57,1,1,1.0,0,0,0.443,0,1.0,1.0
+qa_06944,rag,"Which building is nicknamed ""The Billionaire Building"" and hosts 92 condominiums units on top of a 210-room Hyatt Hotel: 30 Hudson Yards or One57?",One57,1,1,1.0,0,1,0.944,0,1.0,1.0
+qa_06944,cove,"Which building is nicknamed ""The Billionaire Building"" and hosts 92 condominiums units on top of a 210-room Hyatt Hotel: 30 Hudson Yards or One57?",One57,1,1,1.0,0,1,0.541,0,1.0,1.0
+qa_06944,healgen,"Which building is nicknamed ""The Billionaire Building"" and hosts 92 condominiums units on top of a 210-room Hyatt Hotel: 30 Hudson Yards or One57?",One57,1,1,1.0,0,1,6.64,0,1.0,1.0
+qa_09468,vanilla,Which J.K. Rowling book does Emma Watson's character first appear in?,harry potter and jr and sam,1,1,1.0,0,0,1.095,0,0.0,0.5455
+qa_09468,rag,Which J.K. Rowling book does Emma Watson's character first appear in?,Harry Potter and the Philosopher's Stone,1,1,1.0,0,1,1.333,0,1.0,1.0
+qa_09468,cove,Which J.K. Rowling book does Emma Watson's character first appear in?,Harry Potter and the Philosopher's Stone,1,1,1.0,0,1,8.625,0,1.0,1.0
+qa_09468,healgen,Which J.K. Rowling book does Emma Watson's character first appear in?,"The film stars Daniel Radcliffe as Harry Potter, with Rupert Grint as Ron Weasley, and Emma Watson as Hermione Granger.",2,2,1.0,0,1,11.528,0,0.0,0.25
+qa_08095,vanilla,What college team did brothers Colt and Case McCoy play for?,Alabama Crimson Tide,1,1,1.0,0,0,0.62,0,0.0,0.0
+qa_08095,rag,What college team did brothers Colt and Case McCoy play for?,University of Texas,1,1,1.0,0,1,0.975,0,0.0,0.8571
+qa_08095,cove,What college team did brothers Colt and Case McCoy play for?,Texas Southern University,1,1,1.0,0,1,8.032,0,0.0,0.5714
+qa_08095,healgen,What college team did brothers Colt and Case McCoy play for?,The 2014 Texas Southern Tigers football team represented Texas Southern University in the 2014 NCAA Division I FCS football season. They were a member of the West Division of the Southwestern Athletic Conference (SWAC).,2,2,1.0,0,1,11.239,0,0.0,0.1818
+qa_03319,vanilla,"Where was the Rector of an evangelical Anglican church in the city of Adelaide, South Australia from 1957-1973 born?",sydney,1,0,0.0,1,0,0.612,0,0.0,0.0
+qa_03319,rag,"Where was the Rector of an evangelical Anglican church in the city of Adelaide, South Australia from 1957-1973 born?","Elsternwick, Victoria",1,1,1.0,0,1,0.95,0,1.0,1.0
+qa_03319,cove,"Where was the Rector of an evangelical Anglican church in the city of Adelaide, South Australia from 1957-1973 born?","Galveston, Texas",1,1,1.0,0,1,10.793,0,0.0,0.0
+qa_03319,healgen,"Where was the Rector of an evangelical Anglican church in the city of Adelaide, South Australia from 1957-1973 born?",Sydney is the capital of Australia.,1,0,0.0,1,1,11.644,0,0.0,0.0
+qa_09660,vanilla,"Who did Eric Hilton found ESL Music, the independent record label in Washington DC, with?",adrian scott,1,0,0.0,1,0,0.716,0,0.0,0.0
+qa_09660,rag,"Who did Eric Hilton found ESL Music, the independent record label in Washington DC, with?",Rob Garza,1,1,1.0,0,1,1.033,0,1.0,1.0
+qa_09660,cove,"Who did Eric Hilton found ESL Music, the independent record label in Washington DC, with?",Craig Ferguson,1,1,1.0,0,1,18.448,0,0.0,0.0
+qa_09660,healgen,"Who did Eric Hilton found ESL Music, the independent record label in Washington DC, with?","The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft. Douglas Corrigan (January 22, 1907",2,2,1.0,0,1,14.111,0,0.0,0.0
+qa_07606,vanilla,"The mother of Julian Lennon unveiled what monument in Liverpool, England?",st john s cathedral,1,1,1.0,0,0,0.766,0,0.0,0.0
+qa_07606,rag,"The mother of Julian Lennon unveiled what monument in Liverpool, England?",Peace & Harmony,1,1,1.0,0,1,1.284,0,1.0,1.0
+qa_07606,cove,"The mother of Julian Lennon unveiled what monument in Liverpool, England?",st john s cathedral,1,1,1.0,0,1,9.606,0,0.0,0.0
+qa_07606,healgen,"The mother of Julian Lennon unveiled what monument in Liverpool, England?","The John Lennon Peace Monument, also known as the European Peace Monument, is a peace monument entitled Peace & Harmony in Liverpool, England, dedicated to the memory of John Lennon.",1,1,1.0,0,1,13.116,0,0.0,0.1481
+qa_06617,vanilla,How many tropical storms were in the typhoon season that Typhoon Neoguri was in?,four,1,1,1.0,0,0,0.384,0,0.0,0.0
+qa_06617,rag,How many tropical storms were in the typhoon season that Typhoon Neoguri was in?,23,1,1,1.0,0,1,0.72,0,1.0,1.0
+qa_06617,cove,How many tropical storms were in the typhoon season that Typhoon Neoguri was in?,four,1,1,1.0,0,1,0.493,0,0.0,0.0
+qa_06617,healgen,How many tropical storms were in the typhoon season that Typhoon Neoguri was in?,four,1,1,1.0,0,1,0.558,0,0.0,0.0
+qa_01560,vanilla,"What is is a Japanese collectible card game that embody's the art of applying design and aesthetics to create a game for entertainment or for educational, exercise, or experimental purposes and was published by Konami  ?",samurai,1,0,0.0,1,0,0.636,0,0.0,0.0
+qa_01560,rag,"What is is a Japanese collectible card game that embody's the art of applying design and aesthetics to create a game for entertainment or for educational, exercise, or experimental purposes and was published by Konami  ?","The ""Yu-Gi-Oh!"" Trading Card Game",1,1,1.0,0,1,1.721,0,0.0,0.4
+qa_01560,cove,"What is is a Japanese collectible card game that embody's the art of applying design and aesthetics to create a game for entertainment or for educational, exercise, or experimental purposes and was published by Konami  ?",The Kingdom,1,1,1.0,0,1,10.602,0,0.0,0.0
+qa_01560,healgen,"What is is a Japanese collectible card game that embody's the art of applying design and aesthetics to create a game for entertainment or for educational, exercise, or experimental purposes and was published by Konami  ?",Asher Swissa (Hebrew:   ) is a member of the band Skazi.,1,1,1.0,0,1,12.678,0,0.0,0.0
+qa_06596,vanilla,"Alex Joseph ""AJ"" Pritchard reached the simi-finals of ""Britain's Got Talent"" with his partner a 1995 born dancer and what?",songwriter,1,1,1.0,0,0,0.413,0,0.0,0.0
+qa_06596,rag,"Alex Joseph ""AJ"" Pritchard reached the simi-finals of ""Britain's Got Talent"" with his partner a 1995 born dancer and what?",choreographer,1,1,1.0,0,1,0.985,0,1.0,1.0
+qa_06596,cove,"Alex Joseph ""AJ"" Pritchard reached the simi-finals of ""Britain's Got Talent"" with his partner a 1995 born dancer and what?",songwriter,1,1,1.0,0,1,0.482,0,0.0,0.0
+qa_06596,healgen,"Alex Joseph ""AJ"" Pritchard reached the simi-finals of ""Britain's Got Talent"" with his partner a 1995 born dancer and what?",songwriter,1,1,1.0,0,1,0.485,0,0.0,0.0
+qa_09650,vanilla,What singer known for narrative songs about her personal life won two 2013 Teen Choice Awards while being nominated for seven?,sarah taylor,1,0,0.0,1,0,0.856,0,0.0,0.5
+qa_09650,rag,What singer known for narrative songs about her personal life won two 2013 Teen Choice Awards while being nominated for seven?,Taylor Swift,1,1,1.0,0,1,1.004,0,1.0,1.0
+qa_09650,cove,What singer known for narrative songs about her personal life won two 2013 Teen Choice Awards while being nominated for seven?,Taylor Swift,1,1,1.0,0,1,13.448,0,1.0,1.0
+qa_09650,healgen,What singer known for narrative songs about her personal life won two 2013 Teen Choice Awards while being nominated for seven?,Taylor Swift is the name of American singer-songwriter Taylor Swift.,1,1,1.0,0,1,12.183,0,0.0,0.3636
+qa_03188,vanilla,Sensitivity was covered by a Tejano singer who was called what for her clothing choices?,a sex slave,1,0,0.0,1,0,0.639,0,0.0,0.0
+qa_03188,rag,Sensitivity was covered by a Tejano singer who was called what for her clothing choices?,Tejano Madonna,1,1,1.0,0,1,1.112,0,1.0,1.0
+qa_03188,cove,Sensitivity was covered by a Tejano singer who was called what for her clothing choices?,Malice,1,1,1.0,0,1,9.929,0,0.0,0.0
+qa_03188,healgen,Sensitivity was covered by a Tejano singer who was called what for her clothing choices?,"She is the alleged sister of Polaris, a claim made at a time when Polaris' own parentage had not yet been confirmed.",1,1,1.0,0,1,12.022,0,0.0,0.0
+qa_07067,vanilla,"New York State Route 406 (NY 406) is a state highway in Schenectady County, New York, the western terminus of the route is at an intersection with U.S. Route 20 (US 20) in which town in Schenectady County, New York?",st. johns,1,1,1.0,0,0,0.776,0,0.0,0.0
+qa_07067,rag,"New York State Route 406 (NY 406) is a state highway in Schenectady County, New York, the western terminus of the route is at an intersection with U.S. Route 20 (US 20) in which town in Schenectady County, New York?",Princetown,1,1,1.0,0,1,0.804,0,1.0,1.0
+qa_07067,cove,"New York State Route 406 (NY 406) is a state highway in Schenectady County, New York, the western terminus of the route is at an intersection with U.S. Route 20 (US 20) in which town in Schenectady County, New York?",Albany,1,0,0.0,1,1,13.474,0,0.0,0.0
+qa_07067,healgen,"New York State Route 406 (NY 406) is a state highway in Schenectady County, New York, the western terminus of the route is at an intersection with U.S. Route 20 (US 20) in which town in Schenectady County, New York?","Daniel Paul Johns (born 22 April 1979) is an Australian musician, singer, and songwriter.",2,2,1.0,0,1,10.033,0,0.0,0.0
+qa_01544,vanilla,what does The Freedom Force and Isis have in common?,a band,1,1,1.0,0,0,0.474,0,0.0,0.0
+qa_01544,rag,what does The Freedom Force and Isis have in common?,animated television series,1,1,1.0,0,1,1.014,0,0.0,0.5
+qa_01544,cove,what does The Freedom Force and Isis have in common?,a band,1,1,1.0,0,1,10.605,0,0.0,0.0
+qa_01544,healgen,what does The Freedom Force and Isis have in common?,a band,1,1,1.0,0,1,10.058,0,0.0,0.0
+qa_01773,vanilla,Which network hosted a show on which Ron Howard serves as both an executive producer and the series' uncredited narrator?,tv,1,1,1.0,0,0,0.457,0,0.0,0.0
+qa_01773,rag,Which network hosted a show on which Ron Howard serves as both an executive producer and the series' uncredited narrator?,Fox,1,1,1.0,0,1,0.795,0,1.0,1.0
+qa_01773,cove,Which network hosted a show on which Ron Howard serves as both an executive producer and the series' uncredited narrator?,tv,1,1,1.0,0,1,0.546,0,0.0,0.0
+qa_01773,healgen,Which network hosted a show on which Ron Howard serves as both an executive producer and the series' uncredited narrator?,tv,1,1,1.0,0,1,0.549,0,0.0,0.0
+qa_08650,vanilla,"Which is the only national park located in Galicia, Spain: Timanfaya National Park or Atlantic Islands of Galicia National Park?",Atlantic Islands of Galicia National Park,1,1,1.0,0,0,0.769,0,1.0,1.0
+qa_08650,rag,"Which is the only national park located in Galicia, Spain: Timanfaya National Park or Atlantic Islands of Galicia National Park?",Atlantic Islands of Galicia National Park,1,1,1.0,0,1,1.391,0,1.0,1.0
+qa_08650,cove,"Which is the only national park located in Galicia, Spain: Timanfaya National Park or Atlantic Islands of Galicia National Park?",Atlantic Islands of Galicia National Park,1,1,1.0,0,1,0.888,0,1.0,1.0
+qa_08650,healgen,"Which is the only national park located in Galicia, Spain: Timanfaya National Park or Atlantic Islands of Galicia National Park?",Atlantic Islands of Galicia National Park,1,1,1.0,0,1,6.404,0,1.0,1.0
+qa_08638,vanilla,"Which star of ""Not Like Everyone Else"" was also in ""Drunk History""?",sarah sandler,1,0,0.0,1,0,0.777,0,0.0,0.0
+qa_08638,rag,"Which star of ""Not Like Everyone Else"" was also in ""Drunk History""?",Alia Shawkat,1,1,1.0,0,1,1.16,0,1.0,1.0
+qa_08638,cove,"Which star of ""Not Like Everyone Else"" was also in ""Drunk History""?",Marisa Tomei,1,1,1.0,0,1,11.078,0,0.0,0.0
+qa_08638,healgen,"Which star of ""Not Like Everyone Else"" was also in ""Drunk History""?","Juskow is perhaps best known for such televisions shows and films as ""Men of a Certain Age"", ""Dr. Katz, Professional Therapist"", ""TV Funhouse"", ""The Sarah Silverman Program"" and ""The Wrestler"".",1,1,1.0,0,1,14.052,0,0.0,0.0
+qa_01304,vanilla,"University of Maryland, College Park is the largest university in that state. In what state is Rutgers University the largest institution for higher learning ?",New Jersey,1,1,1.0,0,0,0.398,0,1.0,1.0
+qa_01304,rag,"University of Maryland, College Park is the largest university in that state. In what state is Rutgers University the largest institution for higher learning ?",New Jersey,1,1,1.0,0,1,0.939,0,1.0,1.0
+qa_01304,cove,"University of Maryland, College Park is the largest university in that state. In what state is Rutgers University the largest institution for higher learning ?",New Jersey,1,1,1.0,0,1,0.463,0,1.0,1.0
+qa_01304,healgen,"University of Maryland, College Park is the largest university in that state. In what state is Rutgers University the largest institution for higher learning ?",New Jersey,1,1,1.0,0,1,2.887,0,1.0,1.0
+qa_08345,vanilla,"What is the real name of the musician who released the album ""Actor"" ?",John Paul Bryan,1,0,0.0,1,0,0.446,0,0.0,0.0
+qa_08345,rag,"What is the real name of the musician who released the album ""Actor"" ?","Anne Erin ""Annie"" Clark",1,1,1.0,0,1,1.26,0,1.0,1.0
+qa_08345,cove,"What is the real name of the musician who released the album ""Actor"" ?",Paul Kelly,1,1,1.0,0,1,9.998,0,0.0,0.0
+qa_08345,healgen,"What is the real name of the musician who released the album ""Actor"" ?","The John Lennon Peace Monument, also known as the European Peace Monument, is a peace monument entitled Peace & Harmony in Liverpool, England, dedicated to the memory of John Lennon.",1,1,1.0,0,1,13.041,0,0.0,0.0
+qa_00764,vanilla,"Hunter Mountain is the second highest peak in the Catskills, in the south east area of which U.S. State?",illinois,1,1,1.0,0,0,0.59,0,0.0,0.0
+qa_00764,rag,"Hunter Mountain is the second highest peak in the Catskills, in the south east area of which U.S. State?",New York,1,1,1.0,0,1,0.876,0,1.0,1.0
+qa_00764,cove,"Hunter Mountain is the second highest peak in the Catskills, in the south east area of which U.S. State?",illinois,1,1,1.0,0,1,0.667,0,0.0,0.0
+qa_00764,healgen,"Hunter Mountain is the second highest peak in the Catskills, in the south east area of which U.S. State?",illinois,1,1,1.0,0,1,3.072,0,0.0,0.0
+qa_05000,vanilla,"What radio station premiered Within Temptation's first single ""Faster"" from their fifth studio album on January 21,2011?",mca,1,1,1.0,0,0,0.476,0,0.0,0.0
+qa_05000,rag,"What radio station premiered Within Temptation's first single ""Faster"" from their fifth studio album on January 21,2011?",96.3 Rock Radio,1,1,1.0,0,1,1.062,0,1.0,1.0
+qa_05000,cove,"What radio station premiered Within Temptation's first single ""Faster"" from their fifth studio album on January 21,2011?",mca,1,1,1.0,0,1,9.648,0,0.0,0.0
+qa_05000,healgen,"What radio station premiered Within Temptation's first single ""Faster"" from their fifth studio album on January 21,2011?",mca,1,1,1.0,0,1,10.354,0,0.0,0.0
+qa_07439,vanilla,Who directed the film which won the BAFTA Award for Best Editing in 2006?,edward roosevelt,1,1,1.0,0,0,0.997,0,0.0,0.0
+qa_07439,rag,Who directed the film which won the BAFTA Award for Best Editing in 2006?,Paul Greengrass,1,1,1.0,0,1,1.053,0,1.0,1.0
+qa_07439,cove,Who directed the film which won the BAFTA Award for Best Editing in 2006?,edward roosevelt,1,1,1.0,0,1,8.553,0,0.0,0.0
+qa_07439,healgen,Who directed the film which won the BAFTA Award for Best Editing in 2006?,edward roosevelt,1,1,1.0,0,1,9.833,0,0.0,0.0
+qa_01904,vanilla,An American statistician and writer who analyzes baseball cited Leip's Atlas as what?,a book of statistics,1,1,1.0,0,0,0.604,0,0.0,0.0
+qa_01904,rag,An American statistician and writer who analyzes baseball cited Leip's Atlas as what?,"a ""preferred source for election results""",1,1,1.0,0,1,1.389,0,1.0,1.0
+qa_01904,cove,An American statistician and writer who analyzes baseball cited Leip's Atlas as what?,unanswerable,1,0,0.0,1,1,22.985,0,0.0,0.0
+qa_01904,healgen,An American statistician and writer who analyzes baseball cited Leip's Atlas as what?,The Quantum Universe: Everything That Can Happen Does Happen is a 2011 book by the theoretical physicists Brian Cox and Jeff Forshaw.,1,1,1.0,0,1,12.805,0,0.0,0.0
+qa_09723,vanilla,At what facility did a prison riot occur in response to the death of the man charged with the murder of John Vincent Mills?,st. john s prison,1,0,0.0,1,0,0.875,0,0.0,0.0
+qa_09723,rag,At what facility did a prison riot occur in response to the death of the man charged with the murder of John Vincent Mills?,Attica Correctional Facility,1,1,1.0,0,1,1.514,0,1.0,1.0
+qa_09723,cove,At what facility did a prison riot occur in response to the death of the man charged with the murder of John Vincent Mills?,Attica Correctional Facility,1,1,1.0,0,1,11.322,0,1.0,1.0
+qa_09723,healgen,At what facility did a prison riot occur in response to the death of the man charged with the murder of John Vincent Mills?,"The Attica Prison riot, also known as the Attica Prison rebellion or Attica Prison uprising, occurred at the Attica Correctional Facility in Attica, New York, United States in 1971.",1,1,1.0,0,1,13.3,0,0.0,0.2069
+qa_00418,vanilla,"What is based in Sankt Ulrich bei Steyr, Austria?",st gerald s st gerald s st gerald s st gerald s st gerald s st gerald s st gerald s ,1,1,1.0,0,0,4.096,0,0.0,0.0
+qa_00418,rag,"What is based in Sankt Ulrich bei Steyr, Austria?",Steyr Mannlicher,1,1,1.0,0,1,1.029,0,1.0,1.0
+qa_00418,cove,"What is based in Sankt Ulrich bei Steyr, Austria?",4AD,1,1,1.0,0,1,12.672,0,0.0,0.0
+qa_00418,healgen,"What is based in Sankt Ulrich bei Steyr, Austria?",St gerald s is the name of the song that St. Vincent wrote.,1,0,0.0,1,1,15.075,0,0.0,0.0
+qa_06707,vanilla,Was Elizabeth Bowen a Irish Novelist just as much as John Maynard Keynes was a British economist?,no,1,1,1.0,0,0,0.317,0,0.0,0.0
+qa_06707,rag,Was Elizabeth Bowen a Irish Novelist just as much as John Maynard Keynes was a British economist?,yes,1,1,1.0,0,1,8.1,0,1.0,1.0
+qa_06707,cove,Was Elizabeth Bowen a Irish Novelist just as much as John Maynard Keynes was a British economist?,no,1,1,1.0,0,1,0.414,0,0.0,0.0
+qa_06707,healgen,Was Elizabeth Bowen a Irish Novelist just as much as John Maynard Keynes was a British economist?,no,1,1,1.0,0,1,0.403,0,0.0,0.0
+qa_01564,vanilla,Who is the second youngest cricket captain to play in the 2016 Indian Premier League?,sam saif,1,1,1.0,0,0,0.71,0,0.0,0.0
+qa_01564,rag,Who is the second youngest cricket captain to play in the 2016 Indian Premier League?,Suresh Raina,1,1,1.0,0,1,1.037,0,1.0,1.0
+qa_01564,cove,Who is the second youngest cricket captain to play in the 2016 Indian Premier League?,sam saif,1,1,1.0,0,1,9.976,0,0.0,0.0
+qa_01564,healgen,Who is the second youngest cricket captain to play in the 2016 Indian Premier League?,sam saif,1,1,1.0,0,1,10.0,0,0.0,0.0
+qa_05972,vanilla,"What job does the promotor of the term ""Alt-Right"" Richard Spencer have?",politician,1,1,1.0,0,0,0.336,0,0.0,0.0
+qa_05972,rag,"What job does the promotor of the term ""Alt-Right"" Richard Spencer have?",president of the National Policy Institute,1,1,1.0,0,1,1.312,0,0.0,0.8333
+qa_05972,cove,"What job does the promotor of the term ""Alt-Right"" Richard Spencer have?",politician,1,1,1.0,0,1,0.387,0,0.0,0.0
+qa_05972,healgen,"What job does the promotor of the term ""Alt-Right"" Richard Spencer have?",politician,1,1,1.0,0,1,0.388,0,0.0,0.0
+qa_06530,vanilla,"For which political party does Mark Christopher Butler represent an electoral division in the state of South Australia, which includes Torrens Island and Garden Island?",senate,1,1,1.0,0,0,0.545,0,0.0,0.0
+qa_06530,rag,"For which political party does Mark Christopher Butler represent an electoral division in the state of South Australia, which includes Torrens Island and Garden Island?",Australian Labor Party,1,1,1.0,0,1,0.946,0,1.0,1.0
+qa_06530,cove,"For which political party does Mark Christopher Butler represent an electoral division in the state of South Australia, which includes Torrens Island and Garden Island?",senate,1,1,1.0,0,1,0.679,0,0.0,0.0
+qa_06530,healgen,"For which political party does Mark Christopher Butler represent an electoral division in the state of South Australia, which includes Torrens Island and Garden Island?",senate,1,1,1.0,0,1,6.662,0,0.0,0.0
+qa_07942,vanilla,American Drag racer Antron Brown has been known to compete in championships reaching what speed?,5000 mph,1,0,0.0,1,0,0.524,0,0.0,0.5
+qa_07942,rag,American Drag racer Antron Brown has been known to compete in championships reaching what speed?,335 mph,1,1,1.0,0,1,1.112,0,1.0,1.0
+qa_07942,cove,American Drag racer Antron Brown has been known to compete in championships reaching what speed?,335 mph,1,1,1.0,0,1,10.574,0,1.0,1.0
+qa_07942,healgen,American Drag racer Antron Brown has been known to compete in championships reaching what speed?,The fastest competitors reaching speeds of 335 mph and finishing the 1000 foot runs in 3.64 seconds.,1,1,1.0,0,1,10.918,0,0.0,0.2353
+qa_01404,vanilla,The 2003 Austrian Grand Prix was the last Austrian Grand Prix to be held until it returned in 2014 to a motorsport circuit located where?,saas,1,1,1.0,0,0,0.616,0,0.0,0.0
+qa_01404,rag,The 2003 Austrian Grand Prix was the last Austrian Grand Prix to be held until it returned in 2014 to a motorsport circuit located where?,"Spielberg, Styria, Austria",1,1,1.0,0,1,1.3,0,1.0,1.0
+qa_01404,cove,The 2003 Austrian Grand Prix was the last Austrian Grand Prix to be held until it returned in 2014 to a motorsport circuit located where?,saas,1,1,1.0,0,1,9.793,0,0.0,0.0
+qa_01404,healgen,The 2003 Austrian Grand Prix was the last Austrian Grand Prix to be held until it returned in 2014 to a motorsport circuit located where?,saas,1,1,1.0,0,1,10.445,0,0.0,0.0
+qa_05020,vanilla,Daniel Johns and Justin Currie both did what in their respective music groups?,lead singer,1,1,1.0,0,0,0.363,0,0.0,0.4
+qa_05020,rag,Daniel Johns and Justin Currie both did what in their respective music groups?,founding member,1,1,1.0,0,1,0.92,0,0.0,0.0
+qa_05020,cove,Daniel Johns and Justin Currie both did what in their respective music groups?,lead singer,1,1,1.0,0,1,0.446,0,0.0,0.4
+qa_05020,healgen,Daniel Johns and Justin Currie both did what in their respective music groups?,lead singer,1,1,1.0,0,1,3.252,0,0.0,0.4
+qa_07567,vanilla,"Wink and Aquafina are drinks, are they both owned by Canada Dry?",no,1,1,1.0,0,0,0.3,0,1.0,1.0
+qa_07567,rag,"Wink and Aquafina are drinks, are they both owned by Canada Dry?",no,1,1,1.0,0,1,0.733,0,1.0,1.0
+qa_07567,cove,"Wink and Aquafina are drinks, are they both owned by Canada Dry?",no,1,1,1.0,0,1,0.389,0,1.0,1.0
+qa_07567,healgen,"Wink and Aquafina are drinks, are they both owned by Canada Dry?",no,1,1,1.0,0,1,0.38,0,1.0,1.0
+qa_08034,vanilla,"Who has more solo albums, Scott Stapp or Björk?",Scott Stapp,1,0,0.0,1,0,0.462,0,0.0,0.0
+qa_08034,rag,"Who has more solo albums, Scott Stapp or Björk?",Björk,1,1,1.0,0,1,0.986,0,1.0,1.0
+qa_08034,cove,"Who has more solo albums, Scott Stapp or Björk?",Scott Stapp,1,0,0.0,1,1,19.825,0,0.0,0.0
+qa_08034,healgen,"Who has more solo albums, Scott Stapp or Björk?",Scott Stapp is the name of the person who wrote the musical.,1,0,0.0,1,1,10.988,0,0.0,0.0
+qa_06137,vanilla,Akihiro Gono is only one of six to  beat the DREAM Light Heavyweight Champion and former Strikeforce Light Heavyweight Champion that was born in this year?,1939,1,1,1.0,0,0,0.414,0,0.0,0.0
+qa_06137,rag,Akihiro Gono is only one of six to  beat the DREAM Light Heavyweight Champion and former Strikeforce Light Heavyweight Champion that was born in this year?,1974,1,1,1.0,0,1,0.91,0,0.0,0.0
+qa_06137,cove,Akihiro Gono is only one of six to  beat the DREAM Light Heavyweight Champion and former Strikeforce Light Heavyweight Champion that was born in this year?,1939,1,1,1.0,0,1,0.541,0,0.0,0.0
+qa_06137,healgen,Akihiro Gono is only one of six to  beat the DREAM Light Heavyweight Champion and former Strikeforce Light Heavyweight Champion that was born in this year?,1939,1,1,1.0,0,1,0.492,0,0.0,0.0
+qa_00686,vanilla,Are a Brandy Alexander and a Paloma both Tequila based?,no,1,1,1.0,0,0,0.309,0,1.0,1.0
+qa_00686,rag,Are a Brandy Alexander and a Paloma both Tequila based?,yes,1,1,1.0,0,1,5.445,0,0.0,0.0
+qa_00686,cove,Are a Brandy Alexander and a Paloma both Tequila based?,no,1,1,1.0,0,1,0.418,0,1.0,1.0
+qa_00686,healgen,Are a Brandy Alexander and a Paloma both Tequila based?,no,1,1,1.0,0,1,0.396,0,1.0,1.0
+qa_00170,vanilla,"Who was born first, Odysseas Elytis or Cornel West?",Cornel West,1,1,1.0,0,0,0.567,0,0.0,0.0
+qa_00170,rag,"Who was born first, Odysseas Elytis or Cornel West?",Odysseas Elytis,1,1,1.0,0,1,1.626,0,1.0,1.0
+qa_00170,cove,"Who was born first, Odysseas Elytis or Cornel West?",Cornel West,1,1,1.0,0,1,9.641,0,0.0,0.0
+qa_00170,healgen,"Who was born first, Odysseas Elytis or Cornel West?",Cornel West,1,1,1.0,0,1,10.378,0,0.0,0.0
+qa_00365,vanilla,In what city did Duane Swank get his PhD?,san francisco,1,1,1.0,0,0,0.693,0,0.0,0.0
+qa_00365,rag,In what city did Duane Swank get his PhD?,Northwestern University,1,1,1.0,0,1,0.911,0,0.0,0.0
+qa_00365,cove,In what city did Duane Swank get his PhD?,san francisco,1,1,1.0,0,1,0.731,0,0.0,0.0
+qa_00365,healgen,In what city did Duane Swank get his PhD?,san francisco,1,1,1.0,0,1,6.635,0,0.0,0.0
+qa_00412,vanilla,Who is married to Jim Tomlinson and released an album entitled Raconte-moi?,sarah taylor,1,0,0.0,1,0,0.908,0,0.0,0.0
+qa_00412,rag,Who is married to Jim Tomlinson and released an album entitled Raconte-moi?,Stacey Kent,1,1,1.0,0,1,1.027,0,1.0,1.0
+qa_00412,cove,Who is married to Jim Tomlinson and released an album entitled Raconte-moi?,Marisa Tomei,1,1,1.0,0,1,13.778,0,0.0,0.0
+qa_00412,healgen,Who is married to Jim Tomlinson and released an album entitled Raconte-moi?,Taylor Swift is the name of American singer-songwriter Taylor Swift.,1,1,1.0,0,1,12.402,0,0.0,0.0
+qa_01868,vanilla,"What multi-purpose arena located within the MGM Grand Las Vegas on the Las Vegas Strip was the 2012 ""Billboard"" Music Awards held?",MGM Grand Las Vegas,1,1,1.0,0,0,0.585,0,0.0,0.5
+qa_01868,rag,"What multi-purpose arena located within the MGM Grand Las Vegas on the Las Vegas Strip was the 2012 ""Billboard"" Music Awards held?",MGM Grand Garden Arena,1,1,1.0,0,1,1.094,0,1.0,1.0
+qa_01868,cove,"What multi-purpose arena located within the MGM Grand Las Vegas on the Las Vegas Strip was the 2012 ""Billboard"" Music Awards held?",MGM Grand Las Vegas,1,1,1.0,0,1,0.667,0,0.0,0.5
+qa_01868,healgen,"What multi-purpose arena located within the MGM Grand Las Vegas on the Las Vegas Strip was the 2012 ""Billboard"" Music Awards held?",MGM Grand Las Vegas,1,1,1.0,0,1,5.906,0,0.0,0.5
+qa_06869,vanilla,"Which is a genus of Australian shrubs, Anemonopsis or Westringia?",Anemonopsis,1,1,1.0,0,0,0.593,0,0.0,0.0
+qa_06869,rag,"Which is a genus of Australian shrubs, Anemonopsis or Westringia?",Westringia,1,1,1.0,0,1,1.053,0,1.0,1.0
+qa_06869,cove,"Which is a genus of Australian shrubs, Anemonopsis or Westringia?",Anemonopsis,1,1,1.0,0,1,0.682,0,0.0,0.0
+qa_06869,healgen,"Which is a genus of Australian shrubs, Anemonopsis or Westringia?",Anemonopsis,1,1,1.0,0,1,6.82,0,0.0,0.0
+qa_00293,vanilla,The President of Egypt that changed the Hamayouni Decree was born in what year?,1967,1,1,1.0,0,0,0.338,0,0.0,0.0
+qa_00293,rag,The President of Egypt that changed the Hamayouni Decree was born in what year?,1928,1,1,1.0,0,1,0.922,0,1.0,1.0
+qa_00293,cove,The President of Egypt that changed the Hamayouni Decree was born in what year?,1967,1,1,1.0,0,1,0.397,0,0.0,0.0
+qa_00293,healgen,The President of Egypt that changed the Hamayouni Decree was born in what year?,1967,1,1,1.0,0,1,0.407,0,0.0,0.0
+qa_05128,vanilla,What was the 2015 population of the city where Garsington Manor in located?,"87,020",1,0,0.0,1,0,0.589,0,0.0,0.0
+qa_05128,rag,What was the 2015 population of the city where Garsington Manor in located?,"168,270",1,1,1.0,0,1,1.032,0,1.0,1.0
+qa_05128,cove,What was the 2015 population of the city where Garsington Manor in located?,"212,020",1,0,0.0,1,1,20.029,0,0.0,0.0
+qa_05128,healgen,What was the 2015 population of the city where Garsington Manor in located?,"The population of All Souls is 87,020.",1,0,0.0,1,1,12.206,0,0.0,0.0
+qa_03354,vanilla,"Custom knifemaker Gil Hibben designed the knifes used by Ed Parker in this martial art characterized by the use of quick and powerful strikes delivered from the body's natural weapons, powered by rapid stance transitions?",kung fu,1,0,0.0,1,0,0.565,0,0.0,0.0
+qa_03354,rag,"Custom knifemaker Gil Hibben designed the knifes used by Ed Parker in this martial art characterized by the use of quick and powerful strikes delivered from the body's natural weapons, powered by rapid stance transitions?",American Kenpo,1,1,1.0,0,1,1.163,0,1.0,1.0
+qa_03354,cove,"Custom knifemaker Gil Hibben designed the knifes used by Ed Parker in this martial art characterized by the use of quick and powerful strikes delivered from the body's natural weapons, powered by rapid stance transitions?",kung fu,1,0,0.0,1,1,19.83,0,0.0,0.0
+qa_03354,healgen,"Custom knifemaker Gil Hibben designed the knifes used by Ed Parker in this martial art characterized by the use of quick and powerful strikes delivered from the body's natural weapons, powered by rapid stance transitions?",The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft.,1,1,1.0,0,1,14.639,0,0.0,0.0
+qa_01036,vanilla,Are Guadarrama National Park and Teide National Park both in the Spanish mainland?,no,1,1,1.0,0,0,0.318,0,1.0,1.0
+qa_01036,rag,Are Guadarrama National Park and Teide National Park both in the Spanish mainland?,yes,1,1,1.0,0,1,8.843,0,0.0,0.0
+qa_01036,cove,Are Guadarrama National Park and Teide National Park both in the Spanish mainland?,no,1,1,1.0,0,1,0.378,0,1.0,1.0
+qa_01036,healgen,Are Guadarrama National Park and Teide National Park both in the Spanish mainland?,no,1,1,1.0,0,1,0.374,0,1.0,1.0
+qa_05445,vanilla,"What is the other name for the area at which Ranney Hill, Northwest Territories anomaly  rose?",st johns,1,1,1.0,0,0,0.616,0,0.0,0.0
+qa_05445,rag,"What is the other name for the area at which Ranney Hill, Northwest Territories anomaly  rose?",Laurentian Plateau,1,1,1.0,0,1,1.054,0,1.0,1.0
+qa_05445,cove,"What is the other name for the area at which Ranney Hill, Northwest Territories anomaly  rose?",st johns,1,1,1.0,0,1,6.812,0,0.0,0.0
+qa_05445,healgen,"What is the other name for the area at which Ranney Hill, Northwest Territories anomaly  rose?",st johns,1,1,1.0,0,1,8.399,0,0.0,0.0
+qa_07276,vanilla,"Who owned and then sold in 1563 William Shakespeare's final place of residence, New Place?",henry ii,1,1,1.0,0,0,0.819,0,0.0,0.0
+qa_07276,rag,"Who owned and then sold in 1563 William Shakespeare's final place of residence, New Place?",William Clopton,1,1,1.0,0,1,0.804,0,1.0,1.0
+qa_07276,cove,"Who owned and then sold in 1563 William Shakespeare's final place of residence, New Place?",Aleksander Ford,1,1,1.0,0,1,15.569,0,0.0,0.0
+qa_07276,healgen,"Who owned and then sold in 1563 William Shakespeare's final place of residence, New Place?",Henry II is the last monarch of the United Kingdom.,1,0,0.0,1,1,13.289,0,0.0,0.0
+qa_03426,vanilla,"What is the university that Monica Heller is a professor at that is located in Toronto, Ontario, Canada?",Toronto University,1,1,1.0,0,0,0.383,0,0.0,0.8
+qa_03426,rag,"What is the university that Monica Heller is a professor at that is located in Toronto, Ontario, Canada?",University of Toronto,1,1,1.0,0,1,0.976,0,1.0,1.0
+qa_03426,cove,"What is the university that Monica Heller is a professor at that is located in Toronto, Ontario, Canada?",Toronto University,1,1,1.0,0,1,6.086,0,0.0,0.8
+qa_03426,healgen,"What is the university that Monica Heller is a professor at that is located in Toronto, Ontario, Canada?",Toronto University,1,1,1.0,0,1,7.442,0,0.0,0.8
+qa_08236,vanilla,"Who was the director of the 2009 British-American war parody comedy film starring the actor who won an Academy Award for Best Actor for midlife crisis-themed drama ""American Beauty""?",Jeremy Davies,1,0,0.0,1,0,0.511,0,0.0,0.0
+qa_08236,rag,"Who was the director of the 2009 British-American war parody comedy film starring the actor who won an Academy Award for Best Actor for midlife crisis-themed drama ""American Beauty""?",Grant Heslov,1,1,1.0,0,1,1.303,0,1.0,1.0
+qa_08236,cove,"Who was the director of the 2009 British-American war parody comedy film starring the actor who won an Academy Award for Best Actor for midlife crisis-themed drama ""American Beauty""?",Morten Arnfred,1,1,1.0,0,1,11.276,0,0.0,0.0
+qa_08236,healgen,"Who was the director of the 2009 British-American war parody comedy film starring the actor who won an Academy Award for Best Actor for midlife crisis-themed drama ""American Beauty""?",Jeremy Davies is the name of the person who played the role of Douglas Corrigan in The Flying Irishman.,1,0,0.0,1,1,13.104,0,0.0,0.0
+qa_07378,vanilla,"what is the name of the second album of the band that sang Ijime, Dame, Zettai"" ?","""Season""",1,1,1.0,0,0,0.63,0,0.0,0.0
+qa_07378,rag,"what is the name of the second album of the band that sang Ijime, Dame, Zettai"" ?",How Glory Goes,1,1,1.0,0,1,1.39,0,0.0,0.0
+qa_07378,cove,"what is the name of the second album of the band that sang Ijime, Dame, Zettai"" ?","""Season""",1,1,1.0,0,1,0.708,0,0.0,0.0
+qa_07378,healgen,"what is the name of the second album of the band that sang Ijime, Dame, Zettai"" ?","""Season""",1,1,1.0,0,1,0.704,0,0.0,0.0
+qa_04711,vanilla,What producer did David Juskow work with while filming The Wrestler?,John Carpenter,1,0,0.0,1,0,0.417,0,0.0,0.0
+qa_04711,rag,What producer did David Juskow work with while filming The Wrestler?,Darren Aronofsky,1,1,1.0,0,1,1.221,0,1.0,1.0
+qa_04711,cove,What producer did David Juskow work with while filming The Wrestler?,Marshall Field & Company,1,1,1.0,0,1,10.745,0,0.0,0.0
+qa_04711,healgen,What producer did David Juskow work with while filming The Wrestler?,"John Carpenter was an American actor, screenwriter and director.",1,0,0.0,1,1,12.112,0,0.0,0.0
+qa_07614,vanilla,Are The Gaslight Anthem and Dinosaur Jr. both bands formed in the 20th century?,yes,1,1,1.0,0,0,0.347,0,0.0,0.0
+qa_07614,rag,Are The Gaslight Anthem and Dinosaur Jr. both bands formed in the 20th century?,no,1,1,1.0,0,1,0.788,0,1.0,1.0
+qa_07614,cove,Are The Gaslight Anthem and Dinosaur Jr. both bands formed in the 20th century?,yes,1,1,1.0,0,1,9.55,0,0.0,0.0
+qa_07614,healgen,Are The Gaslight Anthem and Dinosaur Jr. both bands formed in the 20th century?,yes,1,1,1.0,0,1,10.069,0,0.0,0.0
+qa_02504,vanilla,Dean McCarthy played a boy becoming what in an adaptation of Billy Elliott?,a sailor,1,0,0.0,1,0,0.611,0,0.0,0.0
+qa_02504,rag,Dean McCarthy played a boy becoming what in an adaptation of Billy Elliott?,a professional ballet dancer,1,1,1.0,0,1,1.007,0,1.0,1.0
+qa_02504,cove,Dean McCarthy played a boy becoming what in an adaptation of Billy Elliott?,a sailor,1,0,0.0,1,1,18.428,0,0.0,0.0
+qa_02504,healgen,Dean McCarthy played a boy becoming what in an adaptation of Billy Elliott?,A sailor is a person who is possessed by a villainous telepathic entity.,1,0,0.0,1,1,11.519,0,0.0,0.0
+qa_08012,vanilla,What is the number one hit released by the rapper also known for his The Streets Made Me album?,"""I'm a Good Man""",1,0,0.0,1,0,0.865,0,0.0,0.0
+qa_08012,rag,What is the number one hit released by the rapper also known for his The Streets Made Me album?,Slow Motion,1,1,1.0,0,1,0.793,0,1.0,1.0
+qa_08012,cove,What is the number one hit released by the rapper also known for his The Streets Made Me album?,"""I'm Not Lisa""",1,1,1.0,0,1,10.758,0,0.0,0.0
+qa_08012,healgen,What is the number one hit released by the rapper also known for his The Streets Made Me album?,"The song ""I'm Not Lisa"" was a cover of the Jessi Colter hit.",1,1,1.0,0,1,13.536,0,0.0,0.0
+qa_01530,vanilla,"Cache is a city in Comanche County, Oklahoma, it is the location of Star House, the home of the Comanche chief Quanah Parker, was a Comanche war leader of the Quahadi (""Antelope"") band of which people?",chilean,1,0,0.0,1,0,0.608,0,0.0,0.0
+qa_01530,rag,"Cache is a city in Comanche County, Oklahoma, it is the location of Star House, the home of the Comanche chief Quanah Parker, was a Comanche war leader of the Quahadi (""Antelope"") band of which people?",Comanche,1,1,1.0,0,1,1.146,0,1.0,1.0
+qa_01530,cove,"Cache is a city in Comanche County, Oklahoma, it is the location of Star House, the home of the Comanche chief Quanah Parker, was a Comanche war leader of the Quahadi (""Antelope"") band of which people?",Cherokee,1,0,0.0,1,1,19.747,0,0.0,0.0
+qa_01530,healgen,"Cache is a city in Comanche County, Oklahoma, it is the location of Star House, the home of the Comanche chief Quanah Parker, was a Comanche war leader of the Quahadi (""Antelope"") band of which people?",The sentence is incorrect because the sentence is incorrect.,1,0,0.0,1,1,11.866,0,0.0,0.0
+qa_00528,vanilla,"What Bible college located in Louisville, Kentucky, was attended by Paul R. House who served for a time as president of the Evangelical Theological Society?",Evangelical Theological Seminary,1,0,0.0,1,0,0.698,0,0.0,0.5714
+qa_00528,rag,"What Bible college located in Louisville, Kentucky, was attended by Paul R. House who served for a time as president of the Evangelical Theological Society?",Southern Baptist Theological Seminary,1,1,1.0,0,1,1.069,0,1.0,1.0
+qa_00528,cove,"What Bible college located in Louisville, Kentucky, was attended by Paul R. House who served for a time as president of the Evangelical Theological Society?",Southern Baptist Theological Seminary,1,1,1.0,0,1,7.462,0,1.0,1.0
+qa_00528,healgen,"What Bible college located in Louisville, Kentucky, was attended by Paul R. House who served for a time as president of the Evangelical Theological Society?","The Southern Baptist Theological Seminary (SBTS), in Louisville, Kentucky, is the oldest of the six seminaries affiliated with the Southern Baptist Convention (SBC).",1,1,1.0,0,1,10.938,0,0.0,0.3478
+qa_07068,vanilla,What country does Elstree and Watling Street run through?,ukraine,1,1,1.0,0,0,0.581,0,0.0,0.0
+qa_07068,rag,What country does Elstree and Watling Street run through?,England,1,1,1.0,0,1,0.743,0,1.0,1.0
+qa_07068,cove,What country does Elstree and Watling Street run through?,ukraine,1,1,1.0,0,1,0.697,0,0.0,0.0
+qa_07068,healgen,What country does Elstree and Watling Street run through?,ukraine,1,1,1.0,0,1,6.742,0,0.0,0.0
+qa_09863,vanilla,Are Phil Mogg and Dave Peters musicians?,yes,1,1,1.0,0,0,0.329,0,1.0,1.0
+qa_09863,rag,Are Phil Mogg and Dave Peters musicians?,yes,1,1,1.0,0,1,13.851,0,1.0,1.0
+qa_09863,cove,Are Phil Mogg and Dave Peters musicians?,yes,1,1,1.0,0,1,9.397,0,1.0,1.0
+qa_09863,healgen,Are Phil Mogg and Dave Peters musicians?,yes,1,1,1.0,0,1,10.015,0,1.0,1.0
+qa_02871,vanilla,Shirley Collado is the president of the college located in what state?,Mississippi,1,1,1.0,0,0,0.364,0,0.0,0.0
+qa_02871,rag,Shirley Collado is the president of the college located in what state?,New York,1,1,1.0,0,1,0.759,0,1.0,1.0
+qa_02871,cove,Shirley Collado is the president of the college located in what state?,Mississippi,1,1,1.0,0,1,0.421,0,0.0,0.0
+qa_02871,healgen,Shirley Collado is the president of the college located in what state?,Mississippi,1,1,1.0,0,1,6.533,0,0.0,0.0
+qa_07500,vanilla,Are Andrew Stockdale and Sully Erna both vocalists?,yes,1,1,1.0,0,0,0.33,0,1.0,1.0
+qa_07500,rag,Are Andrew Stockdale and Sully Erna both vocalists?,yes,1,1,1.0,0,1,7.058,0,1.0,1.0
+qa_07500,cove,Are Andrew Stockdale and Sully Erna both vocalists?,yes,1,1,1.0,0,1,9.435,0,1.0,1.0
+qa_07500,healgen,Are Andrew Stockdale and Sully Erna both vocalists?,yes,1,1,1.0,0,1,10.111,0,1.0,1.0
+qa_09352,vanilla,John Loring is design director emeritus of which New York City jeweler?,emi saab,1,1,1.0,0,0,0.826,0,0.0,0.0
+qa_09352,rag,John Loring is design director emeritus of which New York City jeweler?,Tiffany & Co.,1,1,1.0,0,1,0.918,0,1.0,1.0
+qa_09352,cove,John Loring is design director emeritus of which New York City jeweler?,Diamonds,1,1,1.0,0,1,19.971,0,0.0,0.0
+qa_09352,healgen,John Loring is design director emeritus of which New York City jeweler?,The emi saab is a trance music dj and producer specializing in the subgenre of Full On psychedelic trance.,1,0,0.0,1,1,14.381,0,0.0,0.0
+qa_09204,vanilla,What is the name of the American Actress who serves as spokeswoman for Fashion for Relief?,sarah sandler,1,0,0.0,1,0,0.78,0,0.0,0.0
+qa_09204,rag,What is the name of the American Actress who serves as spokeswoman for Fashion for Relief?,Naomi Campbell,1,1,1.0,0,1,0.889,0,1.0,1.0
+qa_09204,cove,What is the name of the American Actress who serves as spokeswoman for Fashion for Relief?,Marisa Tomei,1,1,1.0,0,1,11.422,0,0.0,0.0
+qa_09204,healgen,What is the name of the American Actress who serves as spokeswoman for Fashion for Relief?,"Juskow is perhaps best known for such televisions shows and films as ""Men of a Certain Age"", ""Dr. Katz, Professional Therapist"", ""TV Funhouse"", ""The Sarah Silverman Program"" and ""The Wrestler"".",1,1,1.0,0,1,14.142,0,0.0,0.0
+qa_03743,vanilla,"Which artist typical of Afro-Surrealism was born October 7, 1963?",edward roosevelt,1,1,1.0,0,0,1.014,0,0.0,0.0
+qa_03743,rag,"Which artist typical of Afro-Surrealism was born October 7, 1963?",Keith Thornton,1,1,1.0,0,1,1.011,0,0.0,0.5
+qa_03743,cove,"Which artist typical of Afro-Surrealism was born October 7, 1963?",edward roosevelt,1,1,1.0,0,1,8.63,0,0.0,0.0
+qa_03743,healgen,"Which artist typical of Afro-Surrealism was born October 7, 1963?",edward roosevelt,1,1,1.0,0,1,9.772,0,0.0,0.0
+qa_04178,vanilla,"Light Chasers is the tenth studio album, released in stores on September 14, 2010, by the American indie rock group Cloud Cult, an experimental indie rock band from Duluth, Minnesota led by which singer/songwriter?",John Lennon,1,1,1.0,0,0,0.635,0,0.0,0.0
+qa_04178,rag,"Light Chasers is the tenth studio album, released in stores on September 14, 2010, by the American indie rock group Cloud Cult, an experimental indie rock band from Duluth, Minnesota led by which singer/songwriter?",Craig Minowa,1,1,1.0,0,1,1.013,0,1.0,1.0
+qa_04178,cove,"Light Chasers is the tenth studio album, released in stores on September 14, 2010, by the American indie rock group Cloud Cult, an experimental indie rock band from Duluth, Minnesota led by which singer/songwriter?",John Lennon,1,1,1.0,0,1,0.723,0,0.0,0.0
+qa_04178,healgen,"Light Chasers is the tenth studio album, released in stores on September 14, 2010, by the American indie rock group Cloud Cult, an experimental indie rock band from Duluth, Minnesota led by which singer/songwriter?",John Lennon,1,1,1.0,0,1,7.131,0,0.0,0.0
+qa_05588,vanilla,Seven Pillars of Wisdom was about the archaeologist who was a liaison during what campaign?,samurai campaign,1,1,1.0,0,0,0.649,0,0.0,0.3333
+qa_05588,rag,Seven Pillars of Wisdom was about the archaeologist who was a liaison during what campaign?,Sinai and Palestine Campaign,1,1,1.0,0,1,1.073,0,1.0,1.0
+qa_05588,cove,Seven Pillars of Wisdom was about the archaeologist who was a liaison during what campaign?,Sinai and Palestine Campaign,1,1,1.0,0,1,10.786,0,1.0,1.0
+qa_05588,healgen,Seven Pillars of Wisdom was about the archaeologist who was a liaison during what campaign?,The relevant sentence in the passage is: He was renowned for his liaison role during the Sinai and Palestine Campaign and the Arab Revolt against the Ottoman Empire during the First World War.,1,1,1.0,0,1,13.341,0,0.0,0.2581
+qa_07526,vanilla,Shedd Park Fieldhouse was named for the second president and chairman of what board?,senate,1,1,1.0,0,0,0.526,0,0.0,0.0
+qa_07526,rag,Shedd Park Fieldhouse was named for the second president and chairman of what board?,Marshall Field & Company,1,1,1.0,0,1,1.189,0,1.0,1.0
+qa_07526,cove,Shedd Park Fieldhouse was named for the second president and chairman of what board?,senate,1,1,1.0,0,1,0.619,0,0.0,0.0
+qa_07526,healgen,Shedd Park Fieldhouse was named for the second president and chairman of what board?,senate,1,1,1.0,0,1,6.623,0,0.0,0.0
+qa_04822,vanilla,At which world recognized festival did Stephen Ouimette perform on stage?,sydney festival,1,0,0.0,1,0,0.689,0,0.0,0.5
+qa_04822,rag,At which world recognized festival did Stephen Ouimette perform on stage?,Stratford Festival of Canada,1,1,1.0,0,1,1.216,0,0.0,0.6667
+qa_04822,cove,At which world recognized festival did Stephen Ouimette perform on stage?,Stratford Festival of Canada,1,1,1.0,0,1,10.783,0,0.0,0.6667
+qa_04822,healgen,At which world recognized festival did Stephen Ouimette perform on stage?,Sydney festival is a festival.,1,1,1.0,0,1,10.852,0,0.0,0.3333
+qa_06216,vanilla,"What collegiate athletic conference headquartered in Birmingham, Alabama includes schools such as Texas Southern University?",alabama,1,1,1.0,0,0,0.56,0,0.0,0.0
+qa_06216,rag,"What collegiate athletic conference headquartered in Birmingham, Alabama includes schools such as Texas Southern University?",Southwestern Athletic Conference,1,1,1.0,0,1,1.023,0,1.0,1.0
+qa_06216,cove,"What collegiate athletic conference headquartered in Birmingham, Alabama includes schools such as Texas Southern University?",alabama,1,1,1.0,0,1,0.617,0,0.0,0.0
+qa_06216,healgen,"What collegiate athletic conference headquartered in Birmingham, Alabama includes schools such as Texas Southern University?",alabama,1,1,1.0,0,1,3.101,0,0.0,0.0
+qa_02927,vanilla,"Which rocket propelled weapon, sometimes referred to as the ""Stovepipe,"" did Colonel Leslie Alfred Skinner help develop?",sabre,1,0,0.0,1,0,0.537,0,0.0,0.0
+qa_02927,rag,"Which rocket propelled weapon, sometimes referred to as the ""Stovepipe,"" did Colonel Leslie Alfred Skinner help develop?",the Bazooka,1,1,1.0,0,1,1.356,0,1.0,1.0
+qa_02927,cove,"Which rocket propelled weapon, sometimes referred to as the ""Stovepipe,"" did Colonel Leslie Alfred Skinner help develop?",a rocket,1,1,1.0,0,1,19.708,0,0.0,0.0
+qa_02927,healgen,"Which rocket propelled weapon, sometimes referred to as the ""Stovepipe,"" did Colonel Leslie Alfred Skinner help develop?",Asher Swissa (Hebrew:   ) is a member of the band Skazi.,1,1,1.0,0,1,12.69,0,0.0,0.0
+qa_01590,vanilla,Were Lee Ji-hye and Shim Eun-jin in the same band?,no,1,1,1.0,0,0,0.318,0,1.0,1.0
+qa_01590,rag,Were Lee Ji-hye and Shim Eun-jin in the same band?,no,1,1,1.0,0,1,0.74,0,1.0,1.0
+qa_01590,cove,Were Lee Ji-hye and Shim Eun-jin in the same band?,no,1,1,1.0,0,1,0.381,0,1.0,1.0
+qa_01590,healgen,Were Lee Ji-hye and Shim Eun-jin in the same band?,no,1,1,1.0,0,1,0.391,0,1.0,1.0
+qa_00866,vanilla,What film title does J. F. Lawton and Shawn Levy have in common?,saturday night live,1,0,0.0,1,0,0.7,0,0.0,0.0
+qa_00866,rag,What film title does J. F. Lawton and Shawn Levy have in common?,Peace & Harmony,1,1,1.0,0,1,1.083,0,0.0,0.0
+qa_00866,cove,What film title does J. F. Lawton and Shawn Levy have in common?,The John Lennon Peace Monument,1,1,1.0,0,1,10.625,0,0.0,0.0
+qa_00866,healgen,What film title does J. F. Lawton and Shawn Levy have in common?,"The relevant sentence in the passage is: The John Lennon Peace Monument, also known as the European Peace Monument, is a peace monument entitled Peace & Harmony in Liverpool, England, dedicated to the memory of John Lennon.",1,1,1.0,0,1,13.839,0,0.0,0.0
+qa_06958,vanilla,"Which was a businessman, Howard Kazanjian and Gerard Cafesjian?",henry k. kasanjian,1,0,0.0,1,0,1.039,0,0.0,0.0
+qa_06958,rag,"Which was a businessman, Howard Kazanjian and Gerard Cafesjian?",Howard G. Kazanjian,1,1,1.0,0,1,1.306,0,0.0,0.0
+qa_06958,cove,"Which was a businessman, Howard Kazanjian and Gerard Cafesjian?",Howard Kazanjian,1,1,1.0,0,1,25.674,0,0.0,0.0
+qa_06958,healgen,"Which was a businessman, Howard Kazanjian and Gerard Cafesjian?",The actor who played Harry Potter in the film is Daniel Radcliffe.,1,1,1.0,0,1,14.787,0,0.0,0.0
+qa_04912,vanilla,"What year was the debut single of the singer of ""3am (Pull Up)""?",2007,1,1,1.0,0,0,0.295,0,0.0,0.0
+qa_04912,rag,"What year was the debut single of the singer of ""3am (Pull Up)""?",2008,1,1,1.0,0,1,0.73,0,1.0,1.0
+qa_04912,cove,"What year was the debut single of the singer of ""3am (Pull Up)""?",2007,1,1,1.0,0,1,0.362,0,0.0,0.0
+qa_04912,healgen,"What year was the debut single of the singer of ""3am (Pull Up)""?",2007,1,1,1.0,0,1,0.355,0,0.0,0.0
+qa_04920,vanilla,What television network features a reality show that stars a former American football and baseball player who now works as an analyst for CBS sports?,CBS Sports,1,1,1.0,0,0,0.389,0,0.0,0.0
+qa_04920,rag,What television network features a reality show that stars a former American football and baseball player who now works as an analyst for CBS sports?,Oxygen,1,1,1.0,0,1,1.074,0,1.0,1.0
+qa_04920,cove,What television network features a reality show that stars a former American football and baseball player who now works as an analyst for CBS sports?,CBS Sports,1,1,1.0,0,1,0.458,0,0.0,0.0
+qa_04920,healgen,What television network features a reality show that stars a former American football and baseball player who now works as an analyst for CBS sports?,CBS Sports,1,1,1.0,0,1,4.838,0,0.0,0.0
+qa_00578,vanilla,"Which genus has a name derives from Greek words, Micromeria or Pamianthe?",Micromeria,1,1,1.0,0,0,0.472,0,1.0,1.0
+qa_00578,rag,"Which genus has a name derives from Greek words, Micromeria or Pamianthe?",Micromeria,1,1,1.0,0,1,1.042,0,1.0,1.0
+qa_00578,cove,"Which genus has a name derives from Greek words, Micromeria or Pamianthe?",Micromeria,1,1,1.0,0,1,0.57,0,1.0,1.0
+qa_00578,healgen,"Which genus has a name derives from Greek words, Micromeria or Pamianthe?",Micromeria,1,1,1.0,0,1,6.769,0,1.0,1.0
+qa_02574,vanilla,"What year was the artist who released the album, The A-Z Recordings, born?",1967,1,1,1.0,0,0,0.316,0,0.0,0.0
+qa_02574,rag,"What year was the artist who released the album, The A-Z Recordings, born?",1955,1,1,1.0,0,1,0.823,0,1.0,1.0
+qa_02574,cove,"What year was the artist who released the album, The A-Z Recordings, born?",1967,1,1,1.0,0,1,0.417,0,0.0,0.0
+qa_02574,healgen,"What year was the artist who released the album, The A-Z Recordings, born?",1967,1,1,1.0,0,1,0.48,0,0.0,0.0
+qa_08539,vanilla,"In which country does the Coop supermarket group also operate a mobile network, called CoopVoce?",poland,1,1,1.0,0,0,0.555,0,0.0,0.0
+qa_08539,rag,"In which country does the Coop supermarket group also operate a mobile network, called CoopVoce?",Italy,1,1,1.0,0,1,0.615,0,1.0,1.0
+qa_08539,cove,"In which country does the Coop supermarket group also operate a mobile network, called CoopVoce?",poland,1,1,1.0,0,1,0.649,0,0.0,0.0
+qa_08539,healgen,"In which country does the Coop supermarket group also operate a mobile network, called CoopVoce?",poland,1,1,1.0,0,1,6.719,0,0.0,0.0
+qa_04107,vanilla,What rock band formed in New York in 1981 worked with Martin Bisi?,sonic scream,1,0,0.0,1,0,0.672,0,0.0,0.5
+qa_04107,rag,What rock band formed in New York in 1981 worked with Martin Bisi?,Sonic Youth,1,1,1.0,0,1,0.813,0,1.0,1.0
+qa_04107,cove,What rock band formed in New York in 1981 worked with Martin Bisi?,Sonic Youth,1,1,1.0,0,1,13.012,0,1.0,1.0
+qa_04107,healgen,What rock band formed in New York in 1981 worked with Martin Bisi?,Sonic Scream is a song by the band Sonic Youth.,1,0,0.0,1,1,11.256,0,0.0,0.4
+qa_02325,vanilla,What American quarterback for the Vikings worked with Terry Shea?,mike harris,1,0,0.0,1,0,0.704,0,0.0,0.0
+qa_02325,rag,What American quarterback for the Vikings worked with Terry Shea?,Sam Bradford,1,1,1.0,0,1,0.866,0,0.0,0.4
+qa_02325,cove,What American quarterback for the Vikings worked with Terry Shea?,Patrick Bergin,1,1,1.0,0,1,10.553,0,0.0,0.0
+qa_02325,healgen,What American quarterback for the Vikings worked with Terry Shea?,"Mike Pence defeated the Democratic ticket of former First Lady, U.S. Senator of New York and Secretary of State Hillary Clinton and U.S. Senator from Virginia Tim Kaine.",1,1,1.0,0,1,12.719,0,0.0,0.0
+qa_03777,vanilla,"Esme Melville, was an Australian theatre, television and film actress, she was nominated for Best Supporting Actress for her role of Miss Collard in ""Romulus, My Father"", an Australian drama film, directed by Richard Roxburgh, released in what year?",2007,1,1,1.0,0,0,0.357,0,1.0,1.0
+qa_03777,rag,"Esme Melville, was an Australian theatre, television and film actress, she was nominated for Best Supporting Actress for her role of Miss Collard in ""Romulus, My Father"", an Australian drama film, directed by Richard Roxburgh, released in what year?",2007,1,1,1.0,0,1,0.975,0,1.0,1.0
+qa_03777,cove,"Esme Melville, was an Australian theatre, television and film actress, she was nominated for Best Supporting Actress for her role of Miss Collard in ""Romulus, My Father"", an Australian drama film, directed by Richard Roxburgh, released in what year?",2007,1,1,1.0,0,1,0.411,0,1.0,1.0
+qa_03777,healgen,"Esme Melville, was an Australian theatre, television and film actress, she was nominated for Best Supporting Actress for her role of Miss Collard in ""Romulus, My Father"", an Australian drama film, directed by Richard Roxburgh, released in what year?",2007,1,1,1.0,0,1,0.419,0,1.0,1.0
+qa_00406,vanilla,Tulapur is a village in which second largest city in Maharashtra?,chennai,1,1,1.0,0,0,0.577,0,0.0,0.0
+qa_00406,rag,Tulapur is a village in which second largest city in Maharashtra?,Pune,1,1,1.0,0,1,0.736,0,1.0,1.0
+qa_00406,cove,Tulapur is a village in which second largest city in Maharashtra?,Mumbai,1,0,0.0,1,1,19.409,0,0.0,0.0
+qa_00406,healgen,Tulapur is a village in which second largest city in Maharashtra?,The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft.,1,1,1.0,0,1,14.667,0,0.0,0.0
+qa_02625,vanilla,Liz Rose co-wrote the Taylor Swift song released on which date in 2007?,September 13,1,0,0.0,1,0,0.399,0,0.0,0.0
+qa_02625,rag,Liz Rose co-wrote the Taylor Swift song released on which date in 2007?,"February 19, 2007",1,1,1.0,0,1,0.952,0,0.0,0.8
+qa_02625,cove,Liz Rose co-wrote the Taylor Swift song released on which date in 2007?,September 13,1,0,0.0,1,1,16.069,0,0.0,0.0
+qa_02625,healgen,Liz Rose co-wrote the Taylor Swift song released on which date in 2007?,The date of the release of The A – Z Recordings is September 13.,1,0,0.0,1,1,10.269,0,0.0,0.0
+qa_05831,vanilla,"Walla Crag is a fell in the English Lake District, near Keswick, and a subsidiary top of  Bleaberry Fell is a fell in the Lake District in Cumbria, England, with a height of what?",850 ft,1,0,0.0,1,0,0.702,0,0.0,0.0
+qa_05831,rag,"Walla Crag is a fell in the English Lake District, near Keswick, and a subsidiary top of  Bleaberry Fell is a fell in the Lake District in Cumbria, England, with a height of what?","1,936 feet",1,1,1.0,0,1,1.167,0,0.0,0.0
+qa_05831,cove,"Walla Crag is a fell in the English Lake District, near Keswick, and a subsidiary top of  Bleaberry Fell is a fell in the Lake District in Cumbria, England, with a height of what?",83 m,1,0,0.0,1,1,21.202,0,0.0,0.0
+qa_05831,healgen,"Walla Crag is a fell in the English Lake District, near Keswick, and a subsidiary top of  Bleaberry Fell is a fell in the Lake District in Cumbria, England, with a height of what?",The elevation above the sea level is 850 ft.,1,0,0.0,1,1,11.005,0,0.0,0.0
+qa_01650,vanilla,"In 1981 the European School, Munich moved to its current location in a borough that was built starting in what year?",1898,1,0,0.0,1,0,0.413,0,0.0,0.0
+qa_01650,rag,"In 1981 the European School, Munich moved to its current location in a borough that was built starting in what year?",1967,1,1,1.0,0,1,0.811,0,1.0,1.0
+qa_01650,cove,"In 1981 the European School, Munich moved to its current location in a borough that was built starting in what year?",1892,1,0,0.0,1,1,19.475,0,0.0,0.0
+qa_01650,healgen,"In 1981 the European School, Munich moved to its current location in a borough that was built starting in what year?",The year The Flying Irishman was released was 1898.,1,0,0.0,1,1,12.004,0,0.0,0.0
+qa_03368,vanilla,"Wildsville, Louisiana is located on a US route that was extended to Colorado by what year?",1890,1,1,1.0,0,0,0.414,0,0.0,0.0
+qa_03368,rag,"Wildsville, Louisiana is located on a US route that was extended to Colorado by what year?",1941,1,1,1.0,0,1,0.686,0,1.0,1.0
+qa_03368,cove,"Wildsville, Louisiana is located on a US route that was extended to Colorado by what year?",1890,1,1,1.0,0,1,0.527,0,0.0,0.0
+qa_03368,healgen,"Wildsville, Louisiana is located on a US route that was extended to Colorado by what year?",1890,1,1,1.0,0,1,6.711,0,0.0,0.0
+qa_00390,vanilla,"Who won the election that ran concurrently with the North Dakota gubernatorial election, 2016?",democrats,1,1,1.0,0,0,0.469,0,0.0,0.0
+qa_00390,rag,"Who won the election that ran concurrently with the North Dakota gubernatorial election, 2016?",Donald Trump,1,1,1.0,0,1,0.944,0,1.0,1.0
+qa_00390,cove,"Who won the election that ran concurrently with the North Dakota gubernatorial election, 2016?",Asher Swissa,1,1,1.0,0,1,11.21,0,0.0,0.0
+qa_00390,healgen,"Who won the election that ran concurrently with the North Dakota gubernatorial election, 2016?",The relevant sentence in the passage is: The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft.,1,1,1.0,0,1,17.79,0,0.0,0.0
+qa_00670,vanilla,"Makers: Women Who Make America featured an interview with what talk who host, who was dubbed the ""Queen of all Media""?",Jeremy Irons,1,0,0.0,1,0,0.664,0,0.0,0.0
+qa_00670,rag,"Makers: Women Who Make America featured an interview with what talk who host, who was dubbed the ""Queen of all Media""?",Oprah Winfrey,1,1,1.0,0,1,1.421,0,1.0,1.0
+qa_00670,cove,"Makers: Women Who Make America featured an interview with what talk who host, who was dubbed the ""Queen of all Media""?",Alicia Keys,1,0,0.0,1,1,22.875,0,0.0,0.0
+qa_00670,healgen,"Makers: Women Who Make America featured an interview with what talk who host, who was dubbed the ""Queen of all Media""?",Jeremy Irons is the name of the character in All Souls.,1,0,0.0,1,1,14.132,0,0.0,0.0
+qa_04334,vanilla,Which actor from the 2001 movie Kiss Kiss was the voice actor for J.A.R.V.I.S in Iron Man?,john dillinger,1,1,1.0,0,0,0.716,0,0.0,0.0
+qa_04334,rag,Which actor from the 2001 movie Kiss Kiss was the voice actor for J.A.R.V.I.S in Iron Man?,Paul Bettany,1,1,1.0,0,1,1.28,0,1.0,1.0
+qa_04334,cove,Which actor from the 2001 movie Kiss Kiss was the voice actor for J.A.R.V.I.S in Iron Man?,Michael Caine,1,0,0.0,1,1,25.08,0,0.0,0.0
+qa_04334,healgen,Which actor from the 2001 movie Kiss Kiss was the voice actor for J.A.R.V.I.S in Iron Man?,The John Lennon Peace Monument is dedicated to the memory of John Lennon.,1,1,1.0,0,1,15.419,0,0.0,0.0
+qa_06235,vanilla,Where did the winner of the 2017 Major League Baseball Home Run Derby play college baseball?,st. louis,1,1,1.0,0,0,0.799,0,0.0,0.0
+qa_06235,rag,Where did the winner of the 2017 Major League Baseball Home Run Derby play college baseball?,Fresno State,1,1,1.0,0,1,1.264,0,1.0,1.0
+qa_06235,cove,Where did the winner of the 2017 Major League Baseball Home Run Derby play college baseball?,st. louis,1,1,1.0,0,1,0.976,0,0.0,0.0
+qa_06235,healgen,Where did the winner of the 2017 Major League Baseball Home Run Derby play college baseball?,st. louis,1,1,1.0,0,1,6.8,0,0.0,0.0
+qa_04159,vanilla,"What two property groups own the enclosed shopping malls in Santa Rosa, California?",el paso and el mercantile,1,1,1.0,0,0,1.229,0,0.0,0.1818
+qa_04159,rag,"What two property groups own the enclosed shopping malls in Santa Rosa, California?",Simon Property Group,1,1,1.0,0,1,0.938,0,0.0,0.6667
+qa_04159,cove,"What two property groups own the enclosed shopping malls in Santa Rosa, California?",el paso and el mercantile,1,1,1.0,0,1,16.162,0,0.0,0.1818
+qa_04159,healgen,"What two property groups own the enclosed shopping malls in Santa Rosa, California?",el paso and el mercantile,1,1,1.0,0,1,13.664,0,0.0,0.1818
+qa_02551,vanilla,The Bee Gees were a music group that was formed in 1958. Where was their album released in?,New York,1,1,1.0,0,0,0.449,0,0.0,0.0
+qa_02551,rag,The Bee Gees were a music group that was formed in 1958. Where was their album released in?,South America,1,1,1.0,0,1,0.799,0,1.0,1.0
+qa_02551,cove,The Bee Gees were a music group that was formed in 1958. Where was their album released in?,New York,1,1,1.0,0,1,0.456,0,0.0,0.0
+qa_02551,healgen,The Bee Gees were a music group that was formed in 1958. Where was their album released in?,New York,1,1,1.0,0,1,0.505,0,0.0,0.0
+qa_08553,vanilla,What was the politician's position that was in the biography Percy Jackson wrote?,a member of the house of representatives,1,1,1.0,0,0,0.952,0,0.0,0.0
+qa_08553,rag,What was the politician's position that was in the biography Percy Jackson wrote?,U.S. Senator,1,1,1.0,0,1,1.091,0,0.0,0.0
+qa_08553,cove,What was the politician's position that was in the biography Percy Jackson wrote?,a member of the house of representatives,1,1,1.0,0,1,11.841,0,0.0,0.0
+qa_08553,healgen,What was the politician's position that was in the biography Percy Jackson wrote?,a member of the house of representatives,1,1,1.0,0,1,12.129,0,0.0,0.0
+qa_07051,vanilla,"What genus has more species, Centradenia or Lindera?",Centradenia,1,1,1.0,0,0,0.57,0,0.0,0.0
+qa_07051,rag,"What genus has more species, Centradenia or Lindera?",Centradenia,1,1,1.0,0,1,1.073,0,0.0,0.0
+qa_07051,cove,"What genus has more species, Centradenia or Lindera?",Centradenia,1,1,1.0,0,1,0.786,0,0.0,0.0
+qa_07051,healgen,"What genus has more species, Centradenia or Lindera?",Centradenia,1,1,1.0,0,1,8.123,0,0.0,0.0
+qa_00012,vanilla,Where did the form of music played by Die Rhöner Säuwäntzt originate?,sweden,1,0,0.0,1,0,0.661,0,0.0,0.0
+qa_00012,rag,Where did the form of music played by Die Rhöner Säuwäntzt originate?,United States,1,1,1.0,0,1,1.118,0,1.0,1.0
+qa_00012,cove,Where did the form of music played by Die Rhöner Säuwäntzt originate?,israeli,1,1,1.0,0,1,14.131,0,0.0,0.0
+qa_00012,healgen,Where did the form of music played by Die Rhöner Säuwäntzt originate?,Sweden is the country that Douglas Corrigan was born in.,1,0,0.0,1,1,15.367,0,0.0,0.0
+qa_02575,vanilla,"Tony Carr, an English sports coach and former Director of Youth Development, coached the 2010 England squad which included which player that plays as a striker for Premier League club Bournemouth and the England national team?",Darren Clarke,1,0,0.0,1,0,0.675,0,0.0,0.0
+qa_02575,rag,"Tony Carr, an English sports coach and former Director of Youth Development, coached the 2010 England squad which included which player that plays as a striker for Premier League club Bournemouth and the England national team?",Jermain Colin Defoe,1,1,1.0,0,1,1.478,0,1.0,1.0
+qa_02575,cove,"Tony Carr, an English sports coach and former Director of Youth Development, coached the 2010 England squad which included which player that plays as a striker for Premier League club Bournemouth and the England national team?",Darren Fletcher,1,0,0.0,1,1,22.88,0,0.0,0.0
+qa_02575,healgen,"Tony Carr, an English sports coach and former Director of Youth Development, coached the 2010 England squad which included which player that plays as a striker for Premier League club Bournemouth and the England national team?",The director of The Wrestler is Darren Aronofsky.,1,1,1.0,0,1,13.137,0,0.0,0.0
+qa_03445,vanilla,What British tv show stars Jamie de Courcey and has been featured in both British and French TV?,saturday night live,1,0,0.0,1,0,0.735,0,0.0,0.0
+qa_03445,rag,What British tv show stars Jamie de Courcey and has been featured in both British and French TV?,The Tunnel,1,1,1.0,0,1,1.156,0,1.0,1.0
+qa_03445,cove,What British tv show stars Jamie de Courcey and has been featured in both British and French TV?,The Simpsons,1,0,0.0,1,1,22.11,0,0.0,0.0
+qa_03445,healgen,What British tv show stars Jamie de Courcey and has been featured in both British and French TV?,"The relevant sentence in the passage is: The John Lennon Peace Monument, also known as the European Peace Monument, is a peace monument entitled Peace & Harmony in Liverpool, England, dedicated to the memory of John Lennon.",1,1,1.0,0,1,15.764,0,0.0,0.0
+qa_08817,vanilla,Which american comedian starred in Seize the Day and has a son named Ben?,john dylan,1,0,0.0,1,0,0.686,0,0.0,0.0
+qa_08817,rag,Which american comedian starred in Seize the Day and has a son named Ben?,Jerry Stiller,1,1,1.0,0,1,1.012,0,1.0,1.0
+qa_08817,cove,Which american comedian starred in Seize the Day and has a son named Ben?,John Gilbert,1,1,1.0,0,1,12.22,0,0.0,0.0
+qa_08817,healgen,Which american comedian starred in Seize the Day and has a son named Ben?,"John Gilbert (born John Cecil Pringle; July 10, 1899 – January 9, 1936) was an American actor, screenwriter and director.",1,1,1.0,0,1,15.78,0,0.0,0.0
+qa_03197,vanilla,Capehart House is located in what city that is the second largest city in North Carolina?,Charlotte,1,1,1.0,0,0,0.402,0,0.0,0.0
+qa_03197,rag,Capehart House is located in what city that is the second largest city in North Carolina?,Raleigh,1,1,1.0,0,1,0.842,0,1.0,1.0
+qa_03197,cove,Capehart House is located in what city that is the second largest city in North Carolina?,Charlotte,1,1,1.0,0,1,0.492,0,0.0,0.0
+qa_03197,healgen,Capehart House is located in what city that is the second largest city in North Carolina?,Charlotte,1,1,1.0,0,1,3.266,0,0.0,0.0
+qa_00511,vanilla,"What American composer who died in 1978 was associated with an American Opera Company located in Jackson, Mississippi?",john dylan,1,0,0.0,1,0,0.702,0,0.0,0.0
+qa_00511,rag,"What American composer who died in 1978 was associated with an American Opera Company located in Jackson, Mississippi?",William Grant Still,1,1,1.0,0,1,0.954,0,1.0,1.0
+qa_00511,cove,"What American composer who died in 1978 was associated with an American Opera Company located in Jackson, Mississippi?",John Gilbert,1,1,1.0,0,1,12.209,0,0.0,0.0
+qa_00511,healgen,"What American composer who died in 1978 was associated with an American Opera Company located in Jackson, Mississippi?","John Gilbert (born John Cecil Pringle; July 10, 1899 – January 9, 1936) was an American actor, screenwriter and director.",1,1,1.0,0,1,15.675,0,0.0,0.0
+qa_06423,vanilla,In what year was the film in which Antje Traue appeared in her first English-language role released?,2007,1,1,1.0,0,0,0.35,0,0.0,0.0
+qa_06423,rag,In what year was the film in which Antje Traue appeared in her first English-language role released?,2009,1,1,1.0,0,1,0.776,0,1.0,1.0
+qa_06423,cove,In what year was the film in which Antje Traue appeared in her first English-language role released?,2007,1,1,1.0,0,1,0.389,0,0.0,0.0
+qa_06423,healgen,In what year was the film in which Antje Traue appeared in her first English-language role released?,2007,1,1,1.0,0,1,0.359,0,0.0,0.0
+qa_09633,vanilla,What Canadian Director of Military Operations and Intelligence also served as a senior staff officer in the Canadian Expeditionary Force (CEF)?,john mccartney,1,0,0.0,1,0,1.029,0,0.0,0.0
+qa_09633,rag,What Canadian Director of Military Operations and Intelligence also served as a senior staff officer in the Canadian Expeditionary Force (CEF)?,"Lieutenant Colonel James ""Buster"" Sutherland Brown",1,1,1.0,0,1,1.611,0,0.0,0.8
+qa_09633,cove,What Canadian Director of Military Operations and Intelligence also served as a senior staff officer in the Canadian Expeditionary Force (CEF)?,John Graves Shedd,1,1,1.0,0,1,12.601,0,0.0,0.0
+qa_09633,healgen,What Canadian Director of Military Operations and Intelligence also served as a senior staff officer in the Canadian Expeditionary Force (CEF)?,"John Gilbert (born John Cecil Pringle; July 10, 1899 – January 9, 1936) was an American actor, screenwriter and director.",1,1,1.0,0,1,15.74,0,0.0,0.0
+qa_04890,vanilla,"Which American screen writer won a Primetime Emmy Award for his work on ""The West Wing"", and also wrote ""Sportsnight"" and ""The Newsroom""?",john d. savage,1,0,0.0,1,0,0.937,0,0.0,0.0
+qa_04890,rag,"Which American screen writer won a Primetime Emmy Award for his work on ""The West Wing"", and also wrote ""Sportsnight"" and ""The Newsroom""?",Aaron Sorkin,1,1,1.0,0,1,1.399,0,1.0,1.0
+qa_04890,cove,"Which American screen writer won a Primetime Emmy Award for his work on ""The West Wing"", and also wrote ""Sportsnight"" and ""The Newsroom""?",Duane Swank,1,1,1.0,0,1,12.175,0,0.0,0.0
+qa_04890,healgen,"Which American screen writer won a Primetime Emmy Award for his work on ""The West Wing"", and also wrote ""Sportsnight"" and ""The Newsroom""?",John Savage is the name of the person who was the first wife of English musician John Lennon and mother of Julian Lennon.,1,0,0.0,1,1,14.845,0,0.0,0.0
+qa_08939,vanilla,Midway Studios Los Angeles is the video game franchise what originally developed Mortal Kombat in what year?,2004,1,1,1.0,0,0,0.418,0,0.0,0.0
+qa_08939,rag,Midway Studios Los Angeles is the video game franchise what originally developed Mortal Kombat in what year?,unanswerable,1,0,0.0,1,1,14.519,0,0.0,0.0
+qa_08939,cove,Midway Studios Los Angeles is the video game franchise what originally developed Mortal Kombat in what year?,2004,1,1,1.0,0,1,0.53,0,0.0,0.0
+qa_08939,healgen,Midway Studios Los Angeles is the video game franchise what originally developed Mortal Kombat in what year?,2004,1,1,1.0,0,1,0.562,0,0.0,0.0
+qa_09621,vanilla,"Which writer contributing to the comedy film ""Meet Wally Sparks"" is also a stand-up comedian?",eddie mccartney,1,0,0.0,1,0,1.035,0,0.0,0.0
+qa_09621,rag,"Which writer contributing to the comedy film ""Meet Wally Sparks"" is also a stand-up comedian?",Harry Basil,1,1,1.0,0,1,0.81,0,0.0,0.0
+qa_09621,cove,"Which writer contributing to the comedy film ""Meet Wally Sparks"" is also a stand-up comedian?",Astrix,1,1,1.0,0,1,13.083,0,0.0,0.0
+qa_09621,healgen,"Which writer contributing to the comedy film ""Meet Wally Sparks"" is also a stand-up comedian?",Eddie Mccartney is the name of the person who played the role of Eddie Mccartney in All Souls.,1,0,0.0,1,1,15.234,0,0.0,0.0
+qa_01749,vanilla,Which football team that was relegated to Tercera División in the 1962–63 Segunda División season was founded in 1958?,ltimo liga,1,0,0.0,1,0,0.806,0,0.0,0.0
+qa_01749,rag,Which football team that was relegated to Tercera División in the 1962–63 Segunda División season was founded in 1958?,Sevilla FC,1,1,1.0,0,1,1.224,0,0.0,0.5
+qa_01749,cove,Which football team that was relegated to Tercera División in the 1962–63 Segunda División season was founded in 1958?,FC Barcelona,1,1,1.0,0,1,22.42,0,0.0,0.0
+qa_01749,healgen,Which football team that was relegated to Tercera División in the 1962–63 Segunda División season was founded in 1958?,The Flying Irishman (aka Born to Fly) is a 1939 biographical drama film produced by RKO Pictures about Douglas Corrigan's unofficial transatlantic flight the previous year in a dilapidated Curtiss Robin light aircraft.,1,1,1.0,0,1,14.789,0,0.0,0.0
+qa_01607,vanilla,Are Pylon and Team Sleep experimental bands?,yes,1,1,1.0,0,0,0.333,0,0.0,0.0
+qa_01607,rag,Are Pylon and Team Sleep experimental bands?,yes,1,1,1.0,0,1,13.6,0,0.0,0.0
+qa_01607,cove,Are Pylon and Team Sleep experimental bands?,yes,1,1,1.0,0,1,9.441,0,0.0,0.0
+qa_01607,healgen,Are Pylon and Team Sleep experimental bands?,yes,1,1,1.0,0,1,10.012,0,0.0,0.0
+qa_09878,vanilla,"Was Mark Jung older than someone born in 1957, or younger?",younger,1,1,1.0,0,0,0.333,0,1.0,1.0
+qa_09878,rag,"Was Mark Jung older than someone born in 1957, or younger?",younger,1,1,1.0,0,1,0.744,0,1.0,1.0
+qa_09878,cove,"Was Mark Jung older than someone born in 1957, or younger?",younger,1,1,1.0,0,1,0.434,0,1.0,1.0
+qa_09878,healgen,"Was Mark Jung older than someone born in 1957, or younger?",younger,1,1,1.0,0,1,6.497,0,1.0,1.0
+qa_07988,vanilla,Man of the House was co-written by which artist and radio personality?,john dylan,1,0,0.0,1,0,0.65,0,0.0,0.0
+qa_07988,rag,Man of the House was co-written by which artist and radio personality?,Chuck Wicks,1,1,1.0,0,1,0.889,0,0.0,0.6667
+qa_07988,cove,Man of the House was co-written by which artist and radio personality?,John Gilbert,1,1,1.0,0,1,10.488,0,0.0,0.0
+qa_07988,healgen,Man of the House was co-written by which artist and radio personality?,"John Gilbert (born John Cecil Pringle; July 10, 1899 – January 9, 1936) was an American actor, screenwriter and director.",1,1,1.0,0,1,13.658,0,0.0,0.0
+qa_07045,vanilla,The southern terminus of North Williams Avenue is near an indoor sports arena formerly known as what?,st. louis arena,1,0,0.0,1,0,0.681,0,0.0,0.0
+qa_07045,rag,The southern terminus of North Williams Avenue is near an indoor sports arena formerly known as what?,the Rose Garden,1,1,1.0,0,1,0.934,0,1.0,1.0
+qa_07045,cove,The southern terminus of North Williams Avenue is near an indoor sports arena formerly known as what?,MGM Grand Garden Arena,1,1,1.0,0,1,7.771,0,0.0,0.3333
+qa_07045,healgen,The southern terminus of North Williams Avenue is near an indoor sports arena formerly known as what?,The MGM Grand Garden Arena (originally known as the MGM Grand Garden Special Events Center) is a multi-purpose arena located within the MGM Grand Las Vegas on the Las Vegas Strip.,1,1,1.0,0,1,11.785,0,0.0,0.0714
+qa_01491,vanilla,What is the name of the sixth studio album by American rapper Future which contains the song titled Selfish?,sexy sexy,1,0,0.0,1,0,0.823,0,0.0,0.0
+qa_01491,rag,What is the name of the sixth studio album by American rapper Future which contains the song titled Selfish?,Hndrxx,1,1,1.0,0,1,1.025,0,1.0,1.0
+qa_01491,cove,What is the name of the sixth studio album by American rapper Future which contains the song titled Selfish?,Future,1,1,1.0,0,1,13.579,0,0.0,0.0
+qa_01491,healgen,What is the name of the sixth studio album by American rapper Future which contains the song titled Selfish?,"The sentence ""Sexy sexy"" is incorrect.",1,1,1.0,0,1,6.378,0,0.0,0.0
+qa_00007,vanilla,"Who was once considered the best kick boxer in the world, however he has been involved in a number of controversies relating to his ""unsportsmanlike conducts"" in the sport and crimes of violence outside of the ring.",john dillinger,1,0,0.0,1,0,0.464,0,0.0,0.0
+qa_00007,rag,"Who was once considered the best kick boxer in the world, however he has been involved in a number of controversies relating to his ""unsportsmanlike conducts"" in the sport and crimes of violence outside of the ring.",Badr Hari,1,1,1.0,0,1,0.925,0,1.0,1.0
+qa_00007,cove,"Who was once considered the best kick boxer in the world, however he has been involved in a number of controversies relating to his ""unsportsmanlike conducts"" in the sport and crimes of violence outside of the ring.",John Lennon,1,1,1.0,0,1,5.938,0,0.0,0.0
+qa_00007,healgen,"Who was once considered the best kick boxer in the world, however he has been involved in a number of controversies relating to his ""unsportsmanlike conducts"" in the sport and crimes of violence outside of the ring.",The John Lennon Peace Monument is dedicated to the memory of John Lennon.,1,1,1.0,0,1,6.457,0,0.0,0.0
+qa_04202,vanilla,"An American reality-based nontraditional court show that debuted in syndication on September 26,2011, is produced by an Emmy winning producer and actor, who played what sport?",football,1,1,1.0,0,0,0.208,0,1.0,1.0
+qa_04202,rag,"An American reality-based nontraditional court show that debuted in syndication on September 26,2011, is produced by an Emmy winning producer and actor, who played what sport?",football,1,1,1.0,0,1,0.581,0,1.0,1.0
+qa_04202,cove,"An American reality-based nontraditional court show that debuted in syndication on September 26,2011, is produced by an Emmy winning producer and actor, who played what sport?",football,1,1,1.0,0,1,0.248,0,1.0,1.0
+qa_04202,healgen,"An American reality-based nontraditional court show that debuted in syndication on September 26,2011, is produced by an Emmy winning producer and actor, who played what sport?",football,1,1,1.0,0,1,0.237,0,1.0,1.0
+qa_02815,vanilla,Which of the two major peninsulas that make up the state of Michigan contains the M-69 Highway?,san antonio,1,1,1.0,0,0,0.473,0,0.0,0.0
+qa_02815,rag,Which of the two major peninsulas that make up the state of Michigan contains the M-69 Highway?,Upper Peninsula,1,1,1.0,0,1,0.527,0,1.0,1.0
+qa_02815,cove,Which of the two major peninsulas that make up the state of Michigan contains the M-69 Highway?,san antonio,1,1,1.0,0,1,0.532,0,0.0,0.0
+qa_02815,healgen,Which of the two major peninsulas that make up the state of Michigan contains the M-69 Highway?,san antonio,1,1,1.0,0,1,3.831,0,0.0,0.0
+qa_03541,vanilla,"Wayne R. Mass is a former American football offensive tackle who played five seasons in the National Football League, he played college football at Clemson University, an American public, coeducational, land-grant and sea-grant research university in Clemson, in which state?",North Carolina,1,1,1.0,0,0,0.287,0,0.0,0.5
+qa_03541,rag,"Wayne R. Mass is a former American football offensive tackle who played five seasons in the National Football League, he played college football at Clemson University, an American public, coeducational, land-grant and sea-grant research university in Clemson, in which state?",South Carolina,1,1,1.0,0,1,0.522,0,1.0,1.0
+qa_03541,cove,"Wayne R. Mass is a former American football offensive tackle who played five seasons in the National Football League, he played college football at Clemson University, an American public, coeducational, land-grant and sea-grant research university in Clemson, in which state?",North Carolina,1,1,1.0,0,1,0.337,0,0.0,0.5
+qa_03541,healgen,"Wayne R. Mass is a former American football offensive tackle who played five seasons in the National Football League, he played college football at Clemson University, an American public, coeducational, land-grant and sea-grant research university in Clemson, in which state?",North Carolina,1,1,1.0,0,1,1.24,0,0.0,0.5
+qa_06455,vanilla,"""Bart Carny"" is the twelfth episode from a season of ""The Simpson"" that began on what date?","September 11, 2001",1,1,1.0,0,0,0.269,0,0.0,0.3333
+qa_06455,rag,"""Bart Carny"" is the twelfth episode from a season of ""The Simpson"" that began on what date?","September 21, 1997",1,1,1.0,0,1,0.646,0,1.0,1.0
+qa_06455,cove,"""Bart Carny"" is the twelfth episode from a season of ""The Simpson"" that began on what date?","September 11, 2001",1,1,1.0,0,1,4.306,0,0.0,0.3333
+qa_06455,healgen,"""Bart Carny"" is the twelfth episode from a season of ""The Simpson"" that began on what date?","September 11, 2001",1,1,1.0,0,1,4.373,0,0.0,0.3333
+qa_00761,vanilla,"Which film director is younger, Del Lord or Wang Xiaoshuai?",Del Lord,1,1,1.0,0,0,0.209,0,1.0,1.0
+qa_00761,rag,"Which film director is younger, Del Lord or Wang Xiaoshuai?",Del Lord,1,1,1.0,0,1,0.386,0,1.0,1.0
+qa_00761,cove,"Which film director is younger, Del Lord or Wang Xiaoshuai?",Del Lord,1,1,1.0,0,1,0.252,0,1.0,1.0
+qa_00761,healgen,"Which film director is younger, Del Lord or Wang Xiaoshuai?",Del Lord,1,1,1.0,0,1,2.85,0,1.0,1.0
+qa_02700,vanilla,The Australian Minister for Sport is the Hon. Greg Hunt also serves as the Minister for what?,telecommunications,1,1,1.0,0,0,0.325,0,0.0,0.0
+qa_02700,rag,The Australian Minister for Sport is the Hon. Greg Hunt also serves as the Minister for what?,Health,1,1,1.0,0,1,0.391,0,0.0,0.5
+qa_02700,cove,The Australian Minister for Sport is the Hon. Greg Hunt also serves as the Minister for what?,telecommunications,1,1,1.0,0,1,4.497,0,0.0,0.0
+qa_02700,healgen,The Australian Minister for Sport is the Hon. Greg Hunt also serves as the Minister for what?,telecommunications,1,1,1.0,0,1,4.866,0,0.0,0.0
+qa_07814,vanilla,Marin Čilić won a Masters 1000 title at the 2016 tournament held in what suburb of Cincinnati?,st. johns,1,1,1.0,0,0,0.444,0,0.0,0.0
+qa_07814,rag,Marin Čilić won a Masters 1000 title at the 2016 tournament held in what suburb of Cincinnati?,Mason,1,1,1.0,0,1,0.452,0,1.0,1.0
+qa_07814,cove,Marin Čilić won a Masters 1000 title at the 2016 tournament held in what suburb of Cincinnati?,Cincinnati,1,1,1.0,0,1,6.273,0,0.0,0.0
+qa_07814,healgen,Marin Čilić won a Masters 1000 title at the 2016 tournament held in what suburb of Cincinnati?,"Daniel Paul Johns (born 22 April 1979) is an Australian musician, singer, and songwriter.",2,2,1.0,0,1,4.945,0,0.0,0.0
+qa_02915,vanilla,What former United States Army soldier and related to WikiLeaks-related Twitter court orders?,john d. savage,1,0,0.0,1,0,0.495,0,0.0,0.0
+qa_02915,rag,What former United States Army soldier and related to WikiLeaks-related Twitter court orders?,Chelsea Manning,1,1,1.0,0,1,0.639,0,1.0,1.0
+qa_02915,cove,What former United States Army soldier and related to WikiLeaks-related Twitter court orders?,Duane Swank,1,1,1.0,0,1,5.154,0,0.0,0.0
+qa_02915,healgen,What former United States Army soldier and related to WikiLeaks-related Twitter court orders?,John Savage is the name of the person who was the first wife of English musician John Lennon and mother of Julian Lennon.,1,0,0.0,1,1,6.43,0,0.0,0.0
+qa_09310,vanilla,When was the American rapper which Underground Volume 16: For da Summa is his first solo album born,"February 17, 2007",1,0,0.0,1,0,0.279,0,0.0,0.0
+qa_09310,rag,When was the American rapper which Underground Volume 16: For da Summa is his first solo album born,"October 13, 1977",1,1,1.0,0,1,0.528,0,1.0,1.0
+qa_09310,cove,When was the American rapper which Underground Volume 16: For da Summa is his first solo album born,"December 17, 1987",1,1,1.0,0,1,4.211,0,0.0,0.0
+qa_09310,healgen,When was the American rapper which Underground Volume 16: For da Summa is his first solo album born,"The date of release of Teardrops on My Guitar was February 17, 2007.",1,0,0.0,1,1,5.153,0,0.0,0.0
+qa_05563,vanilla,Writer Romeo Muller and actor Jackie Vernon worked in a 1976 animated Christmas television special which is owned by who?,Walt Disney,1,1,1.0,0,0,0.241,0,0.0,0.0
+qa_05563,rag,Writer Romeo Muller and actor Jackie Vernon worked in a 1976 animated Christmas television special which is owned by who?,Warner Bros,1,1,1.0,0,1,0.567,0,0.0,0.8
+qa_05563,cove,Writer Romeo Muller and actor Jackie Vernon worked in a 1976 animated Christmas television special which is owned by who?,Walt Disney,1,1,1.0,0,1,0.295,0,0.0,0.0
+qa_05563,healgen,Writer Romeo Muller and actor Jackie Vernon worked in a 1976 animated Christmas television special which is owned by who?,Walt Disney,1,1,1.0,0,1,3.102,0,0.0,0.0
+qa_00519,vanilla,What does the L stand for in Patriot Games star Samuel L. Jackson's name?,l,1,1,1.0,0,0,0.243,0,0.0,0.0
+qa_00519,rag,What does the L stand for in Patriot Games star Samuel L. Jackson's name?,L,1,1,1.0,0,1,0.492,0,0.0,0.0
+qa_00519,cove,What does the L stand for in Patriot Games star Samuel L. Jackson's name?,l,1,1,1.0,0,1,0.347,0,0.0,0.0
+qa_00519,healgen,What does the L stand for in Patriot Games star Samuel L. Jackson's name?,l,1,1,1.0,0,1,0.318,0,0.0,0.0
+qa_04141,vanilla,"The british rapper that released the song ""Never Be a Right Time"" is the co-host of what show?",The Tonight Show,1,0,0.0,1,0,0.271,0,0.0,0.0
+qa_04141,rag,"The british rapper that released the song ""Never Be a Right Time"" is the co-host of what show?","""Lip Sync Battle UK""",1,1,1.0,0,1,0.77,0,1.0,1.0
+qa_04141,cove,"The british rapper that released the song ""Never Be a Right Time"" is the co-host of what show?",The New York Times,1,0,0.0,1,1,6.765,0,0.0,0.0
+qa_04141,healgen,"The british rapper that released the song ""Never Be a Right Time"" is the co-host of what show?",The Tonight Show is a musical.,1,0,0.0,1,1,4.386,0,0.0,0.0
+qa_04745,vanilla,What state is Ruxton Park and Pikes Peak located in?,Colorado,1,1,1.0,0,0,0.169,0,1.0,1.0
+qa_04745,rag,What state is Ruxton Park and Pikes Peak located in?,Colorado,1,1,1.0,0,1,0.498,0,1.0,1.0
+qa_04745,cove,What state is Ruxton Park and Pikes Peak located in?,Colorado,1,1,1.0,0,1,0.215,0,1.0,1.0
+qa_04745,healgen,What state is Ruxton Park and Pikes Peak located in?,Colorado,1,1,1.0,0,1,1.37,0,1.0,1.0
+qa_07481,vanilla,"Who has written for more films, Colin Campbell or John Gilbert?",Colin Campbell,1,1,1.0,0,0,0.228,0,1.0,1.0
+qa_07481,rag,"Who has written for more films, Colin Campbell or John Gilbert?",Colin Campbell,1,1,1.0,0,1,0.515,0,1.0,1.0
+qa_07481,cove,"Who has written for more films, Colin Campbell or John Gilbert?",Colin Campbell,1,1,1.0,0,1,0.277,0,1.0,1.0
+qa_07481,healgen,"Who has written for more films, Colin Campbell or John Gilbert?",Colin Campbell,1,1,1.0,0,1,2.725,0,1.0,1.0
+qa_03816,vanilla,"At which University, is the scientist, who along with Jeff Forshaw, wrote the book The Quantum Universe: Everything That Can Happen Does Happen, a professor ?",harvard university,1,0,0.0,1,0,0.393,0,0.0,0.4
+qa_03816,rag,"At which University, is the scientist, who along with Jeff Forshaw, wrote the book The Quantum Universe: Everything That Can Happen Does Happen, a professor ?",University of Manchester,1,1,1.0,0,1,0.541,0,1.0,1.0
+qa_03816,cove,"At which University, is the scientist, who along with Jeff Forshaw, wrote the book The Quantum Universe: Everything That Can Happen Does Happen, a professor ?",University of Maryland,1,1,1.0,0,1,4.449,0,0.0,0.6667
+qa_03816,healgen,"At which University, is the scientist, who along with Jeff Forshaw, wrote the book The Quantum Universe: Everything That Can Happen Does Happen, a professor ?","The University of Kansas, often referred to as KU or Kansas, is a public research university in the U.S. state of Kansas.",1,1,1.0,0,1,5.532,0,0.0,0.1818
+qa_09087,vanilla,The Missouri Tigers coached by gary pinkel played this team in 2010 insight bowl in tempe arizona?,Arizona Cardinals,1,0,0.0,1,0,0.278,0,0.0,0.0
+qa_09087,rag,The Missouri Tigers coached by gary pinkel played this team in 2010 insight bowl in tempe arizona?,Iowa Hawkeyes,1,1,1.0,0,1,0.532,0,1.0,1.0
+qa_09087,cove,The Missouri Tigers coached by gary pinkel played this team in 2010 insight bowl in tempe arizona?,St. Louis Cardinals,1,1,1.0,0,1,5.066,0,0.0,0.0
+qa_09087,healgen,The Missouri Tigers coached by gary pinkel played this team in 2010 insight bowl in tempe arizona?,St. Louis Cardinals are the team Buck avowed to announce.,1,0,0.0,1,1,5.461,0,0.0,0.0
+qa_04131,vanilla,Were John Wain and Ödön von Horváth both novelists?,yes,1,1,1.0,0,0,0.198,0,1.0,1.0
+qa_04131,rag,Were John Wain and Ödön von Horváth both novelists?,yes,1,1,1.0,0,1,4.449,0,1.0,1.0
+qa_04131,cove,Were John Wain and Ödön von Horváth both novelists?,yes,1,1,1.0,0,1,4.392,0,1.0,1.0
+qa_04131,healgen,Were John Wain and Ödön von Horváth both novelists?,yes,1,1,1.0,0,1,4.713,0,1.0,1.0
+qa_05923,vanilla,As what super villain did the alleged sister of Zaladane appear ?,samurai,1,0,0.0,1,0,0.355,0,0.0,0.0
+qa_05923,rag,As what super villain did the alleged sister of Zaladane appear ?,Malice,1,1,1.0,0,1,0.53,0,1.0,1.0
+qa_05923,cove,As what super villain did the alleged sister of Zaladane appear ?,Zaladane,1,0,0.0,1,1,9.256,0,0.0,0.0
+qa_05923,healgen,As what super villain did the alleged sister of Zaladane appear ?,Asher Swissa (Hebrew:   ) is a member of the band Skazi.,1,1,1.0,0,1,6.518,0,0.0,0.0
+qa_07564,vanilla,"Which film director was from Brazil, Aleksander Ford or Nelson Pereira dos Santos?",Nelson Pereira dos Santos,1,1,1.0,0,0,0.464,0,1.0,1.0
+qa_07564,rag,"Which film director was from Brazil, Aleksander Ford or Nelson Pereira dos Santos?",Nelson Pereira dos Santos,1,1,1.0,0,1,0.7,0,1.0,1.0
+qa_07564,cove,"Which film director was from Brazil, Aleksander Ford or Nelson Pereira dos Santos?",Nelson Pereira dos Santos,1,1,1.0,0,1,0.526,0,1.0,1.0
+qa_07564,healgen,"Which film director was from Brazil, Aleksander Ford or Nelson Pereira dos Santos?",Nelson Pereira dos Santos,1,1,1.0,0,1,3.536,0,1.0,1.0
+qa_01355,vanilla,"The artist Mathangi ""Maya"" arulpragasm's song Bad Girls once appeared on what free online mixtape?",sexy sexy,1,0,0.0,1,0,0.479,0,0.0,0.0
+qa_01355,rag,"The artist Mathangi ""Maya"" arulpragasm's song Bad Girls once appeared on what free online mixtape?",Ricki Leekx,1,1,1.0,0,1,4.498,0,0.0,0.5
+qa_01355,cove,"The artist Mathangi ""Maya"" arulpragasm's song Bad Girls once appeared on what free online mixtape?","""Bad Girls""",1,1,1.0,0,1,9.68,0,0.0,0.0
+qa_01355,healgen,"The artist Mathangi ""Maya"" arulpragasm's song Bad Girls once appeared on what free online mixtape?","The sentence ""Sexy sexy"" is incorrect.",1,1,1.0,0,1,6.052,0,0.0,0.0
+qa_00429,vanilla,Are Randal Kleiser and Kyle Schickner of the same nationality?,no,1,1,1.0,0,0,0.171,0,0.0,0.0
+qa_00429,rag,Are Randal Kleiser and Kyle Schickner of the same nationality?,yes,1,1,1.0,0,1,6.514,0,1.0,1.0
+qa_00429,cove,Are Randal Kleiser and Kyle Schickner of the same nationality?,no,1,1,1.0,0,1,0.207,0,0.0,0.0
+qa_00429,healgen,Are Randal Kleiser and Kyle Schickner of the same nationality?,no,1,1,1.0,0,1,0.213,0,0.0,0.0
+qa_08296,vanilla,Sparks Fly was a song written before which first published Taylor Swift song?,i love you,1,0,0.0,1,0,0.31,0,0.0,0.0
+qa_08296,rag,Sparks Fly was a song written before which first published Taylor Swift song?,Tim McGraw,1,1,1.0,0,1,0.485,0,1.0,1.0
+qa_08296,cove,Sparks Fly was a song written before which first published Taylor Swift song?,"""Bad Girls""",1,1,1.0,0,1,4.941,0,0.0,0.0
+qa_08296,healgen,Sparks Fly was a song written before which first published Taylor Swift song?,"The song Bad Girls is a song by British recording artist M.I.A. for her fourth studio album, ""Matangi"" (2013).",2,2,1.0,0,1,6.378,0,0.0,0.0
+qa_04969,vanilla,The lead vocalist of the band Vega4 is from what Northern Irish town?,sacramento,1,0,0.0,1,0,0.407,0,0.0,0.0
+qa_04969,rag,The lead vocalist of the band Vega4 is from what Northern Irish town?,Derry,1,1,1.0,0,1,0.467,0,1.0,1.0
+qa_04969,cove,The lead vocalist of the band Vega4 is from what Northern Irish town?,Ulster,1,0,0.0,1,1,9.386,0,0.0,0.0
+qa_04969,healgen,The lead vocalist of the band Vega4 is from what Northern Irish town?,Sacramento is the capital of the state of California.,1,0,0.0,1,1,5.915,0,0.0,0.0

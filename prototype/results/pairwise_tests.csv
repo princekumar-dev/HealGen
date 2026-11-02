@@ -1,0 +1,7 @@
+comparison,system_a,system_b,metric,delta,ci_lo,ci_hi,raw_p_value,adjusted_p_value
+healgen vs vanilla,healgen,vanilla,sp_macro,0.2133,0.14,0.2867,0.0,0.0
+healgen vs rag,healgen,rag,sp_macro,-0.1733,-0.24,-0.1133,0.0,0.0
+healgen vs cove,healgen,cove,sp_macro,-0.0467,-0.1133,0.02,0.203,0.203
+cove vs rag,cove,rag,sp_macro,-0.1267,-0.18,-0.0733,0.0,0.0
+cove vs vanilla,cove,vanilla,sp_macro,0.26,0.18,0.34,0.0,0.0
+rag vs vanilla,rag,vanilla,sp_macro,0.3867,0.3067,0.4667,0.0,0.0
