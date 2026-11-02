@@ -32,8 +32,9 @@ predicted evidence-sufficiency score (AESP). Retrieval happens only when the
 sufficiency prediction says the evidence on hand is not enough for a
 particular claim; repair is \emph{localized}: only sentences that produced
 unsupported claims are regenerated or hedged, and everything else is left
-byte-identical. The final response is composed with a calibrated confidence
-per claim.
+byte-identical. The final response is composed with a per-claim
+confidence whose calibration we measure rather than assume
+(\S\ref{sec:limitations}).
 
 Our contributions are:
 \begin{enumerate}

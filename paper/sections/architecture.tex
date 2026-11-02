@@ -1,7 +1,7 @@
 ﻿% Architecture -- paper plan Task 2.
 % TikZ diagram of the pipeline AS IMPLEMENTED (prototype/healgen/*), not the
 % deck's 9-layer marketing split: draft-first decomposition (ledger R2),
-% sufficiency-gated retrieval, DCEG, localized repair, calibrated composer.
+% sufficiency-gated retrieval, DCEG, localized repair, confidence composer.
 
 \section{Architecture}
 \label{sec:architecture}
@@ -29,7 +29,7 @@ implements each.
   \node[stage, right=7mm of aesp] (retrieve) {Conditional BM25\\top-$k$ passages};
   \node[stage, below=9mm of retrieve] (dceg) {Claim--Evidence Graph\\DCEG (\texttt{graph.py})};
   \node[stage, left=9mm of dceg] (lshe) {Localized repair\\LSHE (\texttt{repair.py})};
-  \node[stage, left=9mm of lshe] (compose) {Calibrated composer\\per-claim confidence};
+  \node[stage, left=9mm of lshe] (compose) {Confidence composer\\per-claim confidence};
 
   \draw[arrow] (draft) -- (decompose);
   \draw[arrow] (decompose) -- (cre);
@@ -80,10 +80,12 @@ are regenerated against the evidence pool (or hedged, if regeneration still
 fails), and all other sentences are spliced through unchanged. The graph,
 not the response, is the unit of bookkeeping.
 
-\paragraph{Calibrated composition.}
+\paragraph{Confidence composition.}
 The final response is assembled with one confidence per claim derived from
 its graph support score, so downstream consumers can filter, hedge, or
 display reliability per statement rather than for the response as a whole.
+Calibration of these confidences is measured (ECE, Brier) rather than
+assumed; no temperature scaling is fitted (\S\ref{sec:limitations}).
 
 \begin{figure}[t]
 \centering

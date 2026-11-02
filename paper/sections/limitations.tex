@@ -43,7 +43,8 @@ agreement on this benchmark is unmeasured.
 \paragraph{Calibration without temperature scaling.}
 No temperature scaling is fitted anywhere ($T{=}1$ throughout), by
 design: the judge gate itself was validated at $T{=}1$, and one
-consistent setting beats mixing fitted and unfitted components.  The
+consistent setting is preferable to mixing fitted and unfitted
+components.  The
 consequence is that recorded confidences are raw softmax outputs and
 their ECE/Brier values (Table~\ref{tab:main}) should be read as
 ``calibration of an unfitted instrument'', not as a calibrated
@@ -65,4 +66,4 @@ domains without gold evidence, stronger generators, or learned dense
 retrievers; the contribution we defend is the \emph{measurement
 protocol} (frozen shared pools, gold-only condition, validated judge,
 emitted-answer scoring) and a working self-healing architecture under
-those measurements --- not a state-of-the-art claim.
+those measurements --- not a claim of record-setting performance.

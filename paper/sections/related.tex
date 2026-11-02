@@ -46,7 +46,7 @@ agentic trajectories and repairs only the diagnosed point
 protecting correct content \cite{wu2026optkraken}, and DSVD rolls back and
 re-decodes during generation \cite{guo2025dsvd}. RARR-style repair,
 however, is strictly post-hoc: no risk estimate precedes it, no sufficiency
-judgment gates it, and it emits no calibrated output.
+judgment gates it, and it emits no confidence estimate at all.
 
 \paragraph{Structured claim--evidence state.}
 Claim--evidence structures appear as an enterprise memory bank (ADORE
@@ -54,13 +54,13 @@ Claim--evidence structures appear as an enterprise memory bank (ADORE
 \cite{zhang2024causalwalk,guo2025muplon}; Enoki projects verified facts back
 to spans \cite{rykov2026enoki}. In these systems the structure is a store or
 an evaluation artifact, not a live control structure that simultaneously
-decides retrieval, drives repair, and calibrates the emitted confidence.
+decides retrieval, drives repair, and scores the emitted confidence.
 
 \paragraph{Positioning.}
 Each mechanism above has precedent, and we claim novelty only for the
 integration: a single closed inference loop in which a shared claim state ---
 draft-time decomposition, per-claim risk, sufficiency-gated retrieval, a
-dynamic claim--evidence graph, localized healing, and per-claim calibrated
+dynamic claim--evidence graph, localized healing, and per-claim
 confidence --- governs every decision. The burden of proof is therefore
 compositional: an ablation showing that each stage contributes and that the
 integrated loop behaves differently from its parts (\S\ref{sec:results}).
