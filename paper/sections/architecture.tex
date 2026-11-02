@@ -45,8 +45,8 @@ implements each.
 
   \node[below=4mm of lshe, text width=52mm, align=center, font=\tiny, text=black!70]
     {Unsupported claims only: \texttt{rephrase} $\rightarrow$
-     \texttt{reduce\_confidence} $\rightarrow$ \texttt{express\_uncertainty}
-     $\rightarrow$ \texttt{reconnect}; supported sentences are byte-identical.};
+     \texttt{reduce\_confidence} $\rightarrow$ \texttt{express\_uncertainty};
+     supported sentences are byte-identical.};
 \end{tikzpicture}
 \caption{HealGen's inference loop as implemented. Retrieval is conditional on
 the per-claim sufficiency prediction (not on relevance alone); repair touches

@@ -42,10 +42,12 @@ repair it locally: a claim-level risk estimator, an evidence-sufficiency
 predictor gating retrieval, a dynamic claim--evidence graph, and
 localized repair, all driven by one validated NLI judge.  We pair the
 architecture with an evaluation protocol designed to make such claims
-checkable: the judge never scores a system against its own retrieved
-evidence (frozen shared pools per question, plus a gold-only condition),
-itself passes a pre-registered validation gate before any benchmark run,
-and scores the \emph{emitted} answer rather than private intermediate
+checkable: the judge scores every system against one frozen shared pool
+per question (gold knowledge plus the union of all four systems'
+passages, so no system's retrievals are private evidence; a gold-only
+condition is also reported), itself passes a pre-registered validation
+gate before any benchmark run, and scores the \emph{emitted} answer
+rather than private intermediate
 state.  On $\NTest$ HaluEval-QA questions with a shared
 \texttt{flan-t5-base} generator, the protocol resolves the support/cost
 trade-off between vanilla generation, always-on RAG, Chain-of-Verification,

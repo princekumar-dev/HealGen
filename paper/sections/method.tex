@@ -112,9 +112,11 @@ is \emph{entailment}; the reported score is the maximum of the two
 components, with the NLI softmax taken at unit temperature (no temperature
 scaling is fitted anywhere; the judge gate below is also measured at
 $T{=}1$).
-Evaluation never scores a system against its own retrievals: each question
+Every system is scored against the same evidence: each question
 gets one \emph{frozen shared pool} (gold knowledge plus the union of all
-four systems' passages), so no system can win by retrieving more. The judge
+four systems' passages), so no system's retrievals are private evidence
+and none can win by retrieving more; the reported gold-only condition
+additionally bounds retrieval-overlap credit. The judge
 itself is validated on labeled contrast pairs before any benchmark run and
 its accuracy/AUC are reported as a gate (\S\ref{sec:experiments}). The
 lexical branch is a deliberate robustness choice for a small NLI model, and

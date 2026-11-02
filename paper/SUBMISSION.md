@@ -27,8 +27,11 @@ Copy-Item paper\main.pdf paper\healgen-arxiv.pdf
 
 Honesty invariants (design §4, enforced at Task 7):
 
-- `grep -r PLACEHOLDER paper/` → must return **0** hits (interim stubs
-  are overwritten by `make_tables.py`).
+- `grep -rn PLACEHOLDER paper/sections paper/tables paper/main.tex` →
+  must return exactly **1** hit: `main.tex:22` `PLACEHOLDER-BYLINE`
+  (the partner's byline decision — expected until Step 1 below lands).
+  0 hits means the byline was filled in; any *other* hit is an interim
+  stub that `make_tables.py` should have overwritten.
 - every number in prose is a headline macro (`\SPHealGen`, …) or inside
   an `\input{tables/…}` — `grep -E '[0-9]+\.[0-9]{2,}' paper/sections`
   should only hit protocol constants (seeds, k1, bins) — audit manually.
@@ -57,8 +60,16 @@ override, no copyright block.  arXiv compiles with its own TeX Live;
 
 ## Submission steps **[PARTNER]**
 
-1. arXiv account + **cs.CL endorsement** from someone who has published
-   in the category (arrange days ahead — not the night before).
+1. arXiv account + **cs.CL endorsement** — policy updated 2026-01-21
+   (details/sources: `research/04-arxiv-mechanics.md` §Endorsement):
+   - **Plan A (automatic, only if both hold):** institutional email
+     *and* a claimed prior arXiv-accepted paper in the cs.CL endorsement
+     domain (claim via info.arxiv.org/help/authority.html).
+   - **Plan B (personal endorsement, the likely route):** one positive
+     endorsement from an established arXiv author who knows you
+     personally and is knowledgeable in the area (thesis advisor /
+     faculty).  **Arrange days ahead — not the night before**; do not
+     mass-mail or repeat-contact potential endorsers.
 2. New submission → license (default arXiv non-exclusive is fine) →
    upload zip → wait for the compile preview → verify the rendered PDF
    against the local build (fonts, figures, citations resolved).
@@ -66,7 +77,10 @@ override, no copyright block.  arXiv compiles with its own TeX Live;
    macros by hand from the PDF — no `\SPHealGen`-style tokens in the
    metadata field), authors/byline **[decision pending]**, subjects:
    primary `cs.CL`, optional cross-list `cs.AI`.
-4. Comments field (optional): page/figure count.
+4. Comments field — suggested draft (8 pp, 4 figures, 6 tables):
+   > 8 pages, 4 figures, 6 tables. Draft-first claim-level self-healing
+   > generation with a frozen shared-pool support protocol; code, frozen
+   > evidence pools, and claim-level verdicts released.
 5. Deadline math: received by 14:00 ET → announced 20:00 ET same day.
 6. After moderation: share the paper ID; keep `main.bbl` in sync for any
    v2.

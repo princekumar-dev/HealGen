@@ -70,6 +70,7 @@ tests are two-sided against $\Delta = 0$ on SP$_{\text{macro}}$.
 \subsection{Threshold tuning}
 AESP's sufficiency threshold $\tau$ is selected on the 50-question dev
 split by F1 over the three-point grid $\{0.3, 0.5, 0.7\}$
-(Table~\ref{tab:tau}); the selected value is then frozen for every test
-run and every ablation.  The CRE risk estimator is trained only on
+(Table~\ref{tab:tau}); the committed runs instead froze $\tau{=}0.7$
+from an earlier partial sweep --- inert on this benchmark, disclosed in
+\S\ref{sec:method}.  The CRE risk estimator is trained only on
 training-side data with a split disjoint from both dev and test.
