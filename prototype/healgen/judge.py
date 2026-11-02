@@ -220,8 +220,9 @@ class Judge:
         the *best* passage (highest entailment score) is ``entailment`` (not
         a ``>= 0.5`` read-off, which would differ on flat distributions).
         The reported score is ``max(1.0 if lexical else 0.0,
-        entailment_score)``, so it always lands in [0, 1]; the fitted
-        temperature applies to the NLI component only.
+        entailment_score)``, so it always lands in [0, 1]; the temperature
+        is 1.0 in every committed run (``fit_temperature`` exists but is
+        never invoked -- the judge gate and all scoring are T=1).
         """
         if not isinstance(claim, str):
             raise TypeError("claim must be a string")

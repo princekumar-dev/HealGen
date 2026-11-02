@@ -31,8 +31,9 @@ sufficiency are properties of asserted content.
 
 \subsection{Claim Risk Estimator (CRE)}
 Each claim $c$ is mapped to a six-feature vector
-(\texttt{risk.py}): claim length in words; count of digit and capitalized
-tokens; maximum BM25 score of the claim against the corpus; MiniLM cosine
+(\texttt{risk.py}): claim length in words; count of non-initial tokens
+that contain a digit or begin with a capital letter; maximum BM25 score
+of the claim against the corpus; MiniLM cosine
 between claim and question; \emph{novelty}, defined as one minus the maximum
 MiniLM cosine between the claim and the top-$k$ retrieved passages; and a
 rarity flag for all-caps tokens. A logistic regression over standardized
@@ -48,7 +49,7 @@ value is in \emph{ranking} claims, not in separating classes.
 \subsection{Adaptive Evidence Sufficiency Predictor (AESP)}
 Sufficiency is embedding-based: $\mathrm{score}(c, E) = \max_{e \in E}
 \cos(\mathrm{MiniLM}(c), \mathrm{MiniLM}(e))$, and the claim is sufficient
-when the score exceeds a threshold $\tau$ (\texttt{sufficiency.py}). $\tau$
+when the score meets or exceeds a threshold $\tau$ (\texttt{sufficiency.py}). $\tau$
 is tuned over $\{0.3, 0.5, 0.7\}$ on the dev split by F1 against judge
 labels; the sensitivity of all three settings is reported. This judges
 whether available evidence is \emph{enough}, which is a different question
