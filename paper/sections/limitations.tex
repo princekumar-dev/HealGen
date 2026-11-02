@@ -6,12 +6,18 @@
 \label{sec:limitations}
 
 \paragraph{The benchmark collapses the selective gate.}
-HaluEval-QA answers are short (mean 3.9 words) and almost always a single
-atomic claim, so on this benchmark the Claim Risk Estimator flagged every
+HaluEval-QA answers are short by construction --- the data layer admits
+only ground-truth answers of at most eight words --- and almost always a
+single atomic claim, so on this benchmark the Claim Risk Estimator flagged every
 HealGen draft claim above its risk threshold and the Adaptive Evidence
 Sufficiency Predictor judged every claim insufficient: HealGen retrieved
 exactly once per question and never exercised its ``skip retrieval''
-branch or its multi-claim claim--evidence graph.  The architecture's
+branch or its multi-claim claim--evidence graph.  Relatedly, the
+committed run used sufficiency threshold $\tau{=}0.7$ from a partial dev
+sweep, while the full \NTauPairs-pair sweep selects $0.3$ --- inert here only
+because single-claim drafts are tested against an initially empty pool,
+so no $\tau$ in the grid can change any decision
+(\S\ref{sec:method}); we disclose it as a process artifact.  The architecture's
 selective-retrieval and graph-propagation machinery is therefore
 \emph{implemented and unit-tested} but not \emph{stressed} by this
 benchmark; a long-form benchmark (e.g.\ FaithDial

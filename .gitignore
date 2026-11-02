@@ -10,3 +10,5 @@ paper/main.log
 paper/main.blg
 paper/*.aux
 paper/*.xdv
+paper/*.out
+paper/healgen-arxiv.pdf

@@ -51,7 +51,17 @@ Sufficiency is embedding-based: $\mathrm{score}(c, E) = \max_{e \in E}
 \cos(\mathrm{MiniLM}(c), \mathrm{MiniLM}(e))$, and the claim is sufficient
 when the score meets or exceeds a threshold $\tau$ (\texttt{sufficiency.py}). $\tau$
 is tuned over $\{0.3, 0.5, 0.7\}$ on the dev split by F1 against judge
-labels; the sensitivity of all three settings is reported. This judges
+labels; the sensitivity of all three settings is reported
+(Table~\ref{tab:tau}).  The committed benchmark run used $\tau{=}0.7$,
+the value selected by an earlier partial sweep; re-running the full
+\NTauPairs-pair sweep (Table~\ref{tab:tau}) selects $0.3$.  On this benchmark
+the difference is provably inert: every draft decomposes to a single
+claim, which is tested for sufficiency against an initially \emph{empty}
+evidence pool, so the pre-retrieval sufficiency score is $0.0 < \tau$
+regardless of $\tau$ and retrieval is always issued, while the
+post-retrieval sufficiency flag is recorded but never gates any later
+decision --- consistent with the no-AESP ablation reproducing the full
+system exactly (\S\ref{sec:results}). This judges
 whether available evidence is \emph{enough}, which is a different question
 from whether it is \emph{relevant} \cite{qiu2026surerag}.
 

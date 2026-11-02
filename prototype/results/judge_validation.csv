@@ -1,0 +1,3 @@
+role,model,accuracy,auc,n,primary,gate_threshold_auc,gate_passed
+judge1,MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli,0.83,0.9895,200,true,0.7,true
+judge2,cross-encoder/nli-deberta-v3-small,0.85,0.9877999999999999,200,false,0.7,true

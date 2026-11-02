@@ -17,9 +17,10 @@ Status legend: **[DONE]** (agent-completed), **[PARTNER]** (needs a human).
 ```powershell
 # 1. regenerate every table/figure/headline from results/*.csv only
 python prototype/experiments/make_tables.py
-# 2. compile (run twice so cross-refs settle)
+# 2. compile (run twice so cross-refs settle); --keep-intermediates is
+#    required on the last pass so paper/main.bbl lands on disk for the zip
 & .\.tools\tectonic.exe --keep-logs paper\main.tex
-& .\.tools\tectonic.exe --keep-logs paper\main.tex
+& .\.tools\tectonic.exe --keep-logs --keep-intermediates paper\main.tex
 # 3. final artifact
 Copy-Item paper\main.pdf paper\healgen-arxiv.pdf
 ```
@@ -75,7 +76,7 @@ override, no copyright block.  arXiv compiles with its own TeX Live;
 - **Byline / endorsement** (design spec §8.2): solo vs. faculty
   supervisor — affects `\author{}` in `main.tex` (currently
   `PLACEHOLDER-BYLINE`).
-- Human spot-check rating (100 claims in `results/spotcheck.csv`,
+- Human spot-check rating (100 claims in `results/spotcheck_sample.csv`,
   `human_supported` column) → then Cohen's κ goes into the paper as the
   judge–human agreement number.
 - Which arXiv license + whether to also publish the repo publicly (a
