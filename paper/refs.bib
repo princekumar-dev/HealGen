@@ -1,0 +1,307 @@
+% HealGen bibliography — every entry ported from research/01-prior-art.md
+% (compiled 2026-10-26, arXiv-API-verified unless marked otherwise).
+% Keys are the BibTeX keys pinned there. Do NOT add entries not present
+% in the research doc without verifying arXiv ID + venue first.
+%
+% Additions (2026-10-31, both cited by name in research/03-eval-methodology.md
+% as the pinned dataset + statistics method; canonical venue metadata):
+%   liu2023halueval    — the benchmark dataset (EMNLP 2023, RUCAIBox/HaluEval)
+%   koehn2004statistical — paired bootstrap significance test (EMNLP 2004)
+
+% ---------- Part 1: core prior art ----------
+
+@inproceedings{lewis2020rag,
+  title     = {Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks},
+  author    = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2020},
+  eprint    = {2005.11401},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{asai2024selfrag,
+  title     = {Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection},
+  author    = {Asai, Akari and Wu, Zeqiu and Wang, Yizhong and Sil, Avirup and Hajishirzi, Hannaneh},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {oral; widely reported -- arXiv record does not state venue},
+  eprint    = {2310.11511},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{yan2024crag,
+  title     = {Corrective Retrieval Augmented Generation},
+  author    = {Yan, Shi-Qi and Gu, Jia-Chen and Zhu, Yun and Ling, Zhen-Hua},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {spotlight; widely reported -- arXiv record does not state venue},
+  eprint    = {2401.15884},
+  archivePrefix = {arXiv}
+}
+
+@misc{dhuliawala2023cove,
+  title   = {Chain-of-Verification Reduces Hallucination in Large Language Models},
+  author  = {Dhuliawala, Shehzaad and Komeili, Mojtaba and Xu, Jing and Raileanu, Roberta and Li, Xian and Celikyilmaz, Asli and Weston, Jason},
+  year    = {2023},
+  note    = {Meta AI preprint},
+  eprint  = {2309.11495},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{gao2023rarr,
+  title     = {RARR: Researching and Revising What Language Models Say, Using Language Models},
+  author    = {Gao, Luyu and Dai, Zhuyun and Pasupat, Panupong and Chen, Anthony and Chaganty, Arun Tejasvi and Fan, Yicheng and Zhao, Vincent Y. and Lao, Ni and Lee, Hongrae and Juan, Da-Cheng and Guu, Kelvin},
+  booktitle = {Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2023},
+  eprint    = {2210.08726},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{madaan2023selfrefine,
+  title     = {Self-Refine: Iterative Refinement with Self-Feedback},
+  author    = {Madaan, Aman and Tandon, Niket and Gupta, Prakhar and Hallinan, Skyler and Gao, Luyu and Wiegreffe, Sarah and Alon, Uri and Dziri, Nouha and Prabhumoye, Shrimai and Yang, Yiming and Gupta, Shashank and Majumder, Bodhisattwa Prasad and Hermann, Katherine and Welleck, Sean and Yazdanbakhsh, Amir and Clark, Peter},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  note      = {widely reported},
+  eprint    = {2303.17651},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{shinn2023reflexion,
+  title     = {Reflexion: Language Agents with Verbal Reinforcement Learning},
+  author    = {Shinn, Noah and Cassano, Federico and Berman, Edward and Gopinath, Ashwin and Narasimhan, Karthik and Yao, Shunyu},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  note      = {widely reported},
+  eprint    = {2303.11366},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{gou2024critic,
+  title     = {CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing},
+  author    = {Gou, Zhibin and Shao, Zhihong and Gong, Yeyun and Shen, Yelong and Yang, Yujiu and Duan, Nan and Chen, Weizhu},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv comment confirms venue},
+  eprint    = {2305.11738},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{su2024dragin,
+  title     = {DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models},
+  author    = {Su, Weihang and Tang, Yichen and Ai, Qingyao and Wu, Zhijing and Liu, Yiqun},
+  booktitle = {Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2024},
+  note      = {widely reported -- arXiv record does not state venue},
+  eprint    = {2403.10081},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{jeong2024adaptiverag,
+  title     = {Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity},
+  author    = {Jeong, Soyeong and Baek, Jinheon and Cho, Sukmin and Hwang, Sung Ju and Park, Jong C.},
+  booktitle = {North American Chapter of the Association for Computational Linguistics (NAACL)},
+  year      = {2024},
+  note      = {arXiv comment confirms venue},
+  eprint    = {2403.14403},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{min2023factscore,
+  title     = {FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation},
+  author    = {Min, Sewon and Krishna, Kalpesh and Lyu, Xinxi and Lewis, Mike and Yih, Wen-tau and Koh, Pang Wei and Iyyer, Mohit and Zettlemoyer, Luke and Hajishirzi, Hannaneh},
+  booktitle = {Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2023},
+  note      = {main conference; confirmed on arXiv},
+  eprint    = {2305.14251},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{wei2024longformfactuality,
+  title     = {Long-form Factuality in Large Language Models},
+  author    = {Wei, Jerry and Yang, Chengrun and Song, Xinying and Lu, Yifeng and Hu, Nathan and Huang, Jie and Tran, Dai and Peng, Daiyi and Liu, Ruibo and Huang, Da and Du, Cosmo and Le, Quoc V.},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024},
+  note      = {introduces LongFact and SAFE; arXiv comment confirms venue},
+  eprint    = {2403.18802},
+  archivePrefix = {arXiv}
+}
+
+@misc{ravichander2025halogen,
+  title   = {HALoGEN: Fantastic LLM Hallucinations and Where to Find Them},
+  author  = {Ravichander, Abhilasha and Ghela, Shrusti and Wadden, David and Choi, Yejin},
+  year    = {2025},
+  note    = {preprint; venue beyond arXiv unverified},
+  eprint  = {2501.08292},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{ding2025rowen,
+  title     = {Rowen: Adaptive Retrieval-Augmented Generation for Hallucination Mitigation in LLMs},
+  author    = {Ding, Hanxing and Pang, Liang and Wei, Zihao and Shen, Huawei and Cheng, Xueqi},
+  booktitle = {ACM SIGIR Conference on Asia-Pacific Chapter (SIGIR-AP)},
+  year      = {2025},
+  note      = {arXiv comment confirms acceptance},
+  eprint    = {2402.10612},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{he2024covrag,
+  title     = {Retrieving, Rethinking and Revising: The Chain-of-Verification Can Improve Retrieval Augmented Generation},
+  author    = {He, Bolei and Chen, Nuo and He, Xinran and Yan, Lingyong and Wei, Zhenkai and Luo, Jinchang and Ling, Zhen-Hua},
+  booktitle = {Findings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2024},
+  note      = {confirmed on arXiv},
+  eprint    = {2410.05801},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{joseph2025coveRAGplus,
+  title     = {Reducing Hallucinations in Large Language Models Through Integrated Self-Verification and Retrieval-Augmented Generation},
+  author    = {Joseph, Ashly},
+  booktitle = {ASME International Design Engineering Technical Conferences and Computers and Information in Engineering Conference (IDETC/CIE)},
+  year      = {2025},
+  note      = {Paper DETC2025-169730, DOI 10.1115/DETC2025-169730; posted to arXiv 2026},
+  eprint    = {2609.26229},
+  archivePrefix = {arXiv}
+}
+
+@article{dziri2022faithdial,
+  title   = {FaithDial: A Faithful Benchmark for Information-Seeking Dialogue},
+  author  = {Dziri, Nouha and Kamalloo, Ehsan and Milton, Sivan and Zaiane, Osmar and Yu, Mo and Ponti, Edoardo M. and Reddy, Siva},
+  journal = {Transactions of the Association for Computational Linguistics (TACL)},
+  year    = {2022},
+  note    = {confirmed on arXiv; DOI unverified},
+  eprint  = {2204.10757},
+  archivePrefix = {arXiv}
+}
+
+% ---------- Part 2: 2025-2026 landscape (arXiv-API-verified 2026-10-26) ----------
+
+@misc{hassan2026factor,
+  title   = {Not All Claims Are Equally Risky: FACTOR for Adaptive Verification in Factual Long-Form Generation},
+  author  = {Hassan, Areeba and Kausar, Arooj and Fatima, Syeda Kisaa and Islam, Gibrail and Fatima, Mehwish},
+  year    = {2026},
+  eprint  = {2606.22474},
+  archivePrefix = {arXiv}
+}
+
+@misc{abbasli2026claimcalib,
+  title   = {Claim-Level Confidence Calibration for Reliable Decision Making with Large Language Models},
+  author  = {Abbasli, Toghrul and Toyoda, Kentaroh and Wang, Yuan and Chen, Li},
+  year    = {2026},
+  note    = {KDD 2026 Uncertainty Workshop},
+  eprint  = {2608.22483},
+  archivePrefix = {arXiv}
+}
+
+@misc{liu2026cure,
+  title   = {Think Through Uncertainty: Improving Long-Form Generation Factuality via Reasoning Calibration},
+  author  = {Liu, Xin and Wang, Lu},
+  year    = {2026},
+  note    = {CURE},
+  eprint  = {2604.12046},
+  archivePrefix = {arXiv}
+}
+
+@misc{shelmanov2025uqheads,
+  title   = {A Head to Predict and a Head to Question: Pre-trained Uncertainty Quantification Heads for Hallucination Detection in LLM Outputs},
+  author  = {Shelmanov, Artem and others},
+  year    = {2025},
+  eprint  = {2505.08200},
+  archivePrefix = {arXiv}
+}
+
+@misc{qiu2026surerag,
+  title   = {SURE-RAG: Sufficiency and Uncertainty-Aware Evidence Verification for Selective Retrieval-Augmented Generation},
+  author  = {Qiu, Jingxi and Han, Zeyu and Huang, Cheng},
+  year    = {2026},
+  eprint  = {2605.03534},
+  archivePrefix = {arXiv}
+}
+
+@misc{xu2025simulrag,
+  title   = {SimulRAG: Simulator-based RAG for Grounding LLMs in Long-form Scientific QA},
+  author  = {Xu, Haozhou and Wu, Dongxia and Chinazzi, Matteo and Niu, Ruijia and Yu, Rose and Ma, Yi-An},
+  year    = {2025},
+  eprint  = {2509.25459},
+  archivePrefix = {arXiv}
+}
+
+@misc{jiao2026doctorrag,
+  title   = {Doctor-RAG: A Failure-Aware Repair Framework for Agentic Retrieval-Augmented Generation},
+  author  = {Jiao, Shuguang and others},
+  year    = {2026},
+  eprint  = {2604.00865},
+  archivePrefix = {arXiv}
+}
+
+@misc{wu2026optkraken,
+  title   = {Fix What's Wrong, Keep What's Right: Hallucination Repair for LLM-Based Optimization Modeling},
+  author  = {Wu, Jiageng and others},
+  year    = {2026},
+  eprint  = {2610.12529},
+  archivePrefix = {arXiv}
+}
+
+@misc{guo2025dsvd,
+  title   = {DSVD: Dynamic Self-Verify Decoding for Faithful Generation in Large Language Models},
+  author  = {Guo, YiQiu and others},
+  year    = {2025},
+  note    = {DSVD},
+  eprint  = {2503.03149},
+  archivePrefix = {arXiv}
+}
+
+@misc{you2026adore,
+  title   = {Orchestrating Specialized Agents for Trustworthy Enterprise RAG},
+  author  = {You, Xincheng and others},
+  year    = {2026},
+  note    = {ADORE},
+  eprint  = {2601.18267},
+  archivePrefix = {arXiv}
+}
+
+@misc{rykov2026enoki,
+  title   = {Enoki: Efficient Multi-Level Hallucination Detection},
+  author  = {Rykov, Elisei and others},
+  year    = {2026},
+  eprint  = {2609.00581},
+  archivePrefix = {arXiv}
+}
+
+@misc{guo2025muplon,
+  title   = {MuPlon: Multi-Path Causal Optimization for Claim Verification through Controlling Confounding},
+  author  = {Guo, Hanghui and others},
+  year    = {2025},
+  eprint  = {2509.25715},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{zhang2024causalwalk,
+  title     = {Causal Walk: Debiasing Multi-Hop Fact Verification with Front-Door Adjustment},
+  author    = {Zhang, Congzhi and Zhang, Linhai and Zhou, Deyu},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2024},
+  eprint    = {2403.02698},
+  archivePrefix = {arXiv}
+}
+
+% ---------- benchmark dataset + statistics (added 2026-10-31) ----------
+
+@inproceedings{liu2023halueval,
+  title     = {HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models},
+  author    = {Li, Junyi and Cheng, Xiaoxue and Zhao, Wayne Xin and Nie, Jian-Yun and Wen, Ji-Rong},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2023},
+  eprint    = {2305.11747},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{koehn2004statistical,
+  title     = {Statistical Significance Tests for Machine Translation Evaluation},
+  author    = {Koehn, Philipp},
+  booktitle = {Proceedings of the 2004 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2004},
+  pages     = {388--395}
+}

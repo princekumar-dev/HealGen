@@ -1,0 +1,75 @@
+﻿% EXPERIMENTS -- protocol only.  Every measured value appears via a
+% generated macro (\S tables/headline.tex) or an \input{}-ed generated
+% table; protocol constants (splits, seeds, k) trace to
+% prototype/healgen/config.py and are stated as design facts.
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Dataset and splits}
+We evaluate on the HaluEval QA subset~\cite{liu2023halueval}: each example
+carries a question, a ground-truth short answer, a model-generated
+hallucinated answer, and a supporting knowledge paragraph.  Filtering
+(non-empty knowledge, ground-truth answer $\le$ 8 tokens, deduplication by
+question) and fixed seeds pin two splits that are never resampled:
+$\NTest$ test questions (seed 42) for the benchmark and 50 development
+questions (seed 43) for threshold tuning, plus a 100-pair judge-validation
+slice (seed 44).  The BM25 retrieval index is the distinct knowledge
+paragraphs of the two splits (200 paragraphs, paragraph granularity,
+\texttt{rank\_bm25} Okapi with $k_1{=}1.5$, $b{=}0.75$, top-$k{=}3$),
+shared by every system; gold knowledge reaches a system only through
+retrieval, never through the prompt.
+
+\subsection{Systems and generator}
+All four systems share one generator -- \texttt{google/flan-t5-base},
+greedy decoding, $\texttt{max\_new\_tokens}{=}64$ -- so any difference in
+the tables is attributable to the verification/repair loop and not to
+model capacity: \emph{Vanilla} (generate only), \emph{RAG} (BM25 top-3
+always in the prompt), \emph{CoVe}~\cite{dhuliawala2023cove}
+(generate, decompose, verify all claims, regenerate once if any claim is
+unsupported), and \emph{HealGen} (draft, decompose, CRE risk, AESP
+sufficiency, conditional retrieval, DCEG, localized repair).
+HealGen's ablation variants (\S\ref{sec:results}) disable one component
+each on the same questions.
+
+\subsection{Judge validation gate}
+Before any benchmark number is computed, the NLI judge is validated on
+100 labeled contrast pairs (gold vs.\ hallucinated answers, seed 44) and
+must clear a pre-registered AUC threshold; accuracy and AUC for the
+primary and secondary judges are reported in
+Table~\ref{tab:judge-validation} and were fixed before the benchmark ran.
+The gate is measured at unit temperature, matching the scoring used
+throughout (\S\ref{sec:method}).
+
+\subsection{Frozen evidence pools and the gold-only condition}
+The judge never scores a system against system-private evidence
+(\S\ref{sec:method}): for each question we freeze one shared pool --
+gold knowledge $\cup$ the union of all four systems' retrieved passages,
+deduplicated -- and additionally score every emitted claim against the
+gold knowledge alone (a stricter condition that credits no retrieval
+overlap).  Pools are built once from the finished run and persisted, so
+the main systems and the ablations are judged against byte-identical
+evidence.  The unit of evaluation is the \emph{emitted} answer: its atomic
+claims are re-decomposed and judged, so a claim that repair rephrased is
+scored as the reader would see it, not as the pre-repair draft.
+
+\subsection{Metrics}
+Claim-level support precision is reported macro-averaged over answers
+(SP$_{\text{macro}}$, with a paired bootstrap 95\% CI over questions),
+micro-averaged over claims (SP$_{\text{micro}}$), and under the gold-only
+condition (SP$_{\text{gold}}$).  We also report hallucination rate (HR,
+the complement of SP$_{\text{micro}}$), any-hallucination rate (Any-HR,
+fraction of answers with $\ge 1$ unsupported claim), exact match and
+token $F_1$ against the ground-truth short answer, expected calibration
+error (ECE, 10 bins) and Brier score of the recorded confidences, mean
+BM25 calls per question (retrieval frugality), and mean end-to-end
+latency on CPU.  Significance uses the paired bootstrap test of
+\cite{koehn2004statistical} (2000 resamples, question-level pairing)
+with Holm--Bonferroni correction over the six pairwise comparisons; all
+tests are two-sided against $\Delta = 0$ on SP$_{\text{macro}}$.
+
+\subsection{Threshold tuning}
+AESP's sufficiency threshold $\tau$ is selected on the 50-question dev
+split by F1 over the three-point grid $\{0.3, 0.5, 0.7\}$
+(Table~\ref{tab:tau}); the selected value is then frozen for every test
+run and every ablation.  The CRE risk estimator is trained only on
+training-side data with a split disjoint from both dev and test.

@@ -1,0 +1,149 @@
+﻿% RESULTS -- all values via generated tables (\input) or headline macros.
+% Sentences marked %FILL-IN depend on the final ordering of the
+% frozen-pool numbers and are completed after make_tables.py runs.
+\section{Results}
+\label{sec:results}
+
+\subsection{Main benchmark}
+Table~\ref{tab:main} reports the headline metrics on the $\NTest$ test
+questions under the frozen shared-pool protocol (SP$_{\text{macro}}$,
+SP$_{\text{micro}}$, gold-only SP$_{\text{gold}}$) alongside the
+judge-free metrics (EM, $F_1$) and calibration (ECE).  Vanilla generation
+without retrieval is the floor on factual support
+(SP$_{\text{macro}}{=}\SPVanilla$); always-on RAG retrieves for every
+question and is the strongest system on this benchmark
+(SP$_{\text{macro}}{=}\SPRAG$, EM $\EMRAG$); CoVe verifies but
+regenerates wholesale, landing between them on support
+(SP$_{\text{macro}}{=}\SPCoVe$).  HealGen's localized repair attains
+SP$_{\text{macro}}{=}\SPHealGen$ with a mean of \RetrHealGen{} retrieval
+calls per question and mean latency \LatHealGen{}s on CPU
+(Table~\ref{tab:efficiency}).  On SP$_{\text{macro}}$, HealGen is
+significantly above vanilla ($\Delta{=}{+}0.213$, Holm
+$p{<}.001$), significantly below RAG ($\Delta{=}{-}0.173$, Holm
+$p{<}.001$), and not resolved against CoVe ($\Delta{=}{-}0.047$, Holm
+$p{=}.203$) --- the last comparison is uninformative at $N{=}150$, not
+evidence of equivalence.
+
+\begin{table}[t]
+\centering
+\caption{Main benchmark on $\NTest$ HaluEval-QA test questions, shared
+\texttt{flan-t5-base} generator, frozen shared-pool scoring (SP columns)
+plus the gold-only condition (SP$_{\text{gold}}$; judge credits only the
+gold passage).  95\% CIs are paired bootstrap over questions (2000
+resamples).}
+\label{tab:main}
+\input{tables/main_results}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Efficiency: mean BM25 calls per question, end-to-end latency on
+CPU (mean / p50 / p95), and abstention rate.}
+\label{tab:efficiency}
+\input{tables/efficiency}
+\end{table}
+
+\paragraph{Gold-only condition.}
+The SP$_{\text{gold}}$ columns (Table~\ref{tab:main}) score every
+emitted claim against the gold passage alone, removing retrieval-overlap
+credit.  The condition separates the systems sharply: RAG keeps almost
+all of its support ($\SPGoldRAG$ of its shared-pool SP survives), while
+CoVe ($\SPGoldCoVe$), HealGen ($\SPGoldHealGen$), and vanilla
+($\SPGoldVanilla$) drop to the bottom third.  This is the expected
+signature of each system's answer style on this benchmark --- RAG
+extracts the retrieved (usually gold) passage nearly verbatim, so its
+claims match gold under the lexical branch, whereas HealGen's localized
+repair rephrases claims into hedge or summary form that the same lexical
+branch does not credit against gold alone.  Read together, the two
+conditions say: HealGen's support under SP$_{\text{macro}}$ is real but
+partly retrieval-overlap-mediated, and its repair output is more
+abstractive than RAG's extractive answers --- a difference the
+judge-free EM/$F_1$ columns show from the other side (RAG's extraction
+also matches the short gold answer best).
+
+\subsection{Significance}
+Table~\ref{tab:pairwise} gives paired bootstrap tests on
+SP$_{\text{macro}}$ with Holm--Bonferroni correction over the six
+comparisons.  Five of six resolve: RAG beats every other system (all
+Holm $p{<}.001$), both CoVe and HealGen beat vanilla (Holm $p{<}.001$),
+and HealGen's deficit to RAG is significant (Holm $p{<}.001$).  The one
+unresolved comparison is HealGen vs.\ CoVe ($\Delta{=}{-}0.047$, Holm
+$p{=}.203$): at $N{=}150$ this test can only detect differences of
+roughly $3$--$5$ SP points, so we report it as ``not resolved'' rather
+than as a tie.
+
+\begin{table}[t]
+\centering
+\caption{Pairwise significance on SP$_{\text{macro}}$ (paired bootstrap,
+2000 resamples; Holm-corrected over 6 comparisons; $^{*}$ marks Holm
+$p<.05$).}
+\label{tab:pairwise}
+\input{tables/pairwise_tests}
+\end{table}
+
+\subsection{Ablations}
+Table~\ref{tab:ablation} removes one HealGen component at a time on the
+same questions, judged against the same frozen pools as the main systems
+(paired fairness).  %FILL-IN: interpret each ablation delta (CRE, AESP,
+% LSHE) -- which component the benchmark actually exercises and which is
+% inert here (cf. Limitations: AESP/CRE degenerate on short answers).
+
+\begin{table}[t]
+\centering
+\caption{Ablations on the same $\NTest$ questions and frozen pools.
+Any-HR is the fraction of answers with at least one unsupported claim.}
+\label{tab:ablation}
+\input{tables/ablation}
+\end{table}
+
+\subsection{Judge gate and threshold sensitivity}
+Table~\ref{tab:judge-validation} is the pre-registered judge gate
+measured before any benchmark run (contrast pairs, seed 44); it passed
+and the primary judge was then frozen.  Table~\ref{tab:tau} shows the
+AESP threshold sweep on the dev split; the selected $\tau$ is used
+unchanged everywhere in the test runs.
+
+\begin{table}[t]
+\centering
+\caption{Judge validation gate on 100 labeled contrast pairs (gold vs.\
+hallucinated answers), measured at $T{=}1$ before the benchmark ran.}
+\label{tab:judge-validation}
+\input{tables/judge_validation}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{AESP sufficiency-threshold sensitivity on the 50-question dev
+split (F1 over the candidate grid).}
+\label{tab:tau}
+\input{tables/tau_sensitivity}
+\end{table}
+
+\subsection{Calibration and diagnostics}
+Figure~\ref{fig:reliability} plots the reliability diagram of recorded
+confidences against frozen-pool support verdicts; the ECE column of
+Table~\ref{tab:main} summarizes it (unfitted confidences, see
+Limitations).  Figure~\ref{fig:efficiency} shows the support/latency and
+support/retrieval trade-off per system.
+
+\begin{figure}[t]
+\centering
+\IfFileExists{figures/reliability_diagram.png}{%
+\includegraphics[width=\columnwidth]{figures/reliability_diagram.png}}{%
+\fbox{\parbox[c][0.3\columnwidth][c]{\columnwidth}{\centering
+placeholder figure (generated by make\_tables.py)}}}
+\caption{Reliability diagram: recorded confidence vs.\ frozen-pool
+support frequency (10 bins) over all emitted claims.}
+\label{fig:reliability}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\IfFileExists{figures/latency_retrieval.png}{%
+\includegraphics[width=\columnwidth]{figures/latency_retrieval.png}}{%
+\fbox{\parbox[c][0.3\columnwidth][c]{\columnwidth}{\centering
+placeholder figure (generated by make\_tables.py)}}}
+\caption{Cost side of the ledger: end-to-end latency and retrieval calls
+per system against factual support.}
+\label{fig:efficiency}
+\end{figure}

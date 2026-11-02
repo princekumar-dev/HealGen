@@ -1,0 +1,30 @@
+﻿\section{Conclusion}
+\label{sec:conclusion}
+
+We presented HealGen, a draft-first self-healing generation architecture
+that couples a claim-level risk estimator, an evidence-sufficiency
+predictor, conditional retrieval, a dynamic claim--evidence graph, and
+localized repair behind one NLI judge --- and, more importantly, an
+\emph{honest evaluation protocol} for such systems: frozen shared
+evidence pools that no system can game by retrieving more, a gold-only
+condition that separates gold-grounded support from retrieval-overlap
+support, a pre-registered judge-validation gate, and scoring of the
+\emph{emitted} answer rather than a system's private intermediate state.
+On the HaluEval-QA benchmark at $N{=}\NTest$ with a shared
+\texttt{flan-t5-base} generator, the protocol resolves real differences
+between vanilla generation, always-on RAG, CoVe-style full-regeneration
+verification, and HealGen's localized repair --- including the cost side
+of the ledger (Table~\ref{tab:efficiency}) that single-metric leaderboards
+hide.
+
+The measurement itself surfaced findings a single-metric evaluation
+would have missed: verification signals computed against system-private
+evidence are structurally circular, and short-answer benchmarks collapse
+the selective-retrieval branch of every adaptive system tested.  We
+release the full pipeline, the frozen pools, the claim-level verdicts,
+and the human spot-check instrument so both claims can be checked.
+
+Future work runs the same protocol where the architecture has room to
+demonstrate its selectivity --- long-form generation with multi-claim
+answers --- and extends the judge stack (temperature scaling,
+multi-judge agreement, human $\kappa$) once the spot-check is rated.

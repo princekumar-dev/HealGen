@@ -1,0 +1,120 @@
+﻿% Method -- paper plan Task 4.
+% Cross-checked against prototype/healgen/{claims,risk,sufficiency,graph,
+% repair,systems,judge}.py at writing time. Describes the code as built:
+%  - draft-first decomposition (ledger R2)
+%  - 6 CRE features in FEATURE_NAMES order (risk.py)
+%  - repair actions actually implemented: rephrase / reduce_confidence /
+%    express_uncertainty (+ supported no-op); retrieval is conditional at
+%    the system level, not a repair action.
+%  - hybrid support rule (ledger R8) documented explicitly.
+
+\section{Method}
+\label{sec:method}
+
+\subsection{Problem setting}
+Given a question $q$ and a generator $G$, produce a response $r$ together
+with a per-claim reliability vector. The system may consult a corpus $C$
+through a BM25 retriever, at a cost we treat as a first-class quantity. No
+training of $G$ is performed; everything downstream of $G$ is training-free
+except the small logistic risk model, which is fit once on a split disjoint
+from all evaluation data.
+
+\subsection{Draft and claim decomposition}
+$G$ first answers $q$ with no context, yielding a draft. The draft is split
+into atomic claims by rule-based segmentation: sentence splitting with
+abbreviation guards, conjunctive-clause splitting at \emph{and/but/while/
+whereas}, and pronoun resolution that copies the subject onto clauses that
+begin with a pronoun, so each claim is a standalone declarative statement
+(\texttt{claims.py}). Decomposition is \emph{draft-first}: it operates on
+what the model chose to assert, not on the question, so that risk and
+sufficiency are properties of asserted content.
+
+\subsection{Claim Risk Estimator (CRE)}
+Each claim $c$ is mapped to a six-feature vector
+(\texttt{risk.py}): claim length in words; count of digit and capitalized
+tokens; maximum BM25 score of the claim against the corpus; MiniLM cosine
+between claim and question; \emph{novelty}, defined as one minus the maximum
+MiniLM cosine between the claim and the top-$k$ retrieved passages; and a
+rarity flag for all-caps tokens. A logistic regression over standardized
+features maps the vector to a risk score in $(0,1)$; the model is stored as
+plain JSON coefficients (\texttt{cre\_model.json}), not a pickle. Training
+labels come from judge-vs-gold judgments on claims sampled from splits
+disjoint from dev/test/judge sets. We report the estimator's training
+accuracy against the majority baseline and discuss its degeneracy openly in
+\S\ref{sec:limitations}: on this benchmark most draft claims are initially
+unsupported, so the positive rate is high and the estimator's practical
+value is in \emph{ranking} claims, not in separating classes.
+
+\subsection{Adaptive Evidence Sufficiency Predictor (AESP)}
+Sufficiency is embedding-based: $\mathrm{score}(c, E) = \max_{e \in E}
+\cos(\mathrm{MiniLM}(c), \mathrm{MiniLM}(e))$, and the claim is sufficient
+when the score exceeds a threshold $\tau$ (\texttt{sufficiency.py}). $\tau$
+is tuned over $\{0.3, 0.5, 0.7\}$ on the dev split by F1 against judge
+labels; the sensitivity of all three settings is reported. This judges
+whether available evidence is \emph{enough}, which is a different question
+from whether it is \emph{relevant} \cite{qiu2026surerag}.
+
+\subsection{Conditional retrieval}
+The claim loop is: compute risk; compute sufficiency against the evidence
+gathered so far; if and only if the claim is insufficient, issue one BM25
+query (Okapi, $k_1{=}1.5$, $b{=}0.75$, top-$k{=}3$) and merge the passages
+into the shared pool. Sufficient claims trigger no lookup. The number of
+BM25 calls is recorded per response as the retrieval-cost metric, which
+makes the loop's central efficiency hypothesis directly testable against a
+fixed-retrieval RAG baseline that always queries.
+
+\subsection{Dynamic Claim--Evidence Graph (DCEG)}
+Claims and passages become nodes of a bipartite graph (\texttt{graph.py}).
+Each claim--passage pair is scored by the judge and stored as a weighted
+edge; a claim is \emph{unsupported} when it has no edge above the support
+threshold or when it participates in a contradiction edge. The graph
+exports to DOT/PNG for inspection; Figure~\ref{fig:dceg} is produced by the
+prototype itself.
+
+\subsection{Localized Self-Healing Engine (LSHE)}
+Repair operates at sentence granularity. For every unsupported claim, the
+sentence that produced it is located by offsets; supported claims are never
+touched. The action sequence per unsupported sentence is:
+\begin{enumerate}
+  \item \textbf{rephrase} --- regenerate \emph{only that sentence} with the
+        evidence pool in the prompt; if the regeneration differs from the
+        original, splice it in;
+  \item \textbf{reduce\_confidence} --- if regeneration yields nothing new,
+        append an explicit hedge to that sentence;
+  \item \textbf{express\_uncertainty} --- when no evidence is available,
+        hedge without grounding.
+\end{enumerate}
+Sentences not selected for repair are reassembled byte-identically; a
+regression test pins this (\texttt{test\_repair\_preserves\_untouched\_
+sentences}). The invariants to state plainly: retrieval happens at the
+system level when a claim is insufficient, and there is no
+\emph{reconnect/drop} action in this prototype --- flagged claims that
+survive repair are emitted hedged, not silently removed.
+
+\subsection{Judge and evidence pools}
+Support decisions come from an NLI model
+(\texttt{DeBERTa-v3-base-mnli-fever-anli}) under a \textbf{hybrid support
+rule}: a claim counts as supported if its normalized form (lowercased,
+punctuation-stripped, whitespace-collapsed) is a substring of a normalized
+passage --- scored $1.0$ --- or if the NLI argmax label on the best passage
+is \emph{entailment}; the reported score is the maximum of the two
+components, with the NLI softmax taken at unit temperature (no temperature
+scaling is fitted anywhere; the judge gate below is also measured at
+$T{=}1$).
+Evaluation never scores a system against its own retrievals: each question
+gets one \emph{frozen shared pool} (gold knowledge plus the union of all
+four systems' passages), so no system can win by retrieving more. The judge
+itself is validated on labeled contrast pairs before any benchmark run and
+its accuracy/AUC are reported as a gate (\S\ref{sec:experiments}). The
+lexical branch is a deliberate robustness choice for a small NLI model, and
+its risk --- over-crediting lexical overlap --- is acknowledged in
+\S\ref{sec:limitations} with a pure-NLI sensitivity discussion.
+
+\subsection{Baselines}
+All four systems share the same generator, decoding (greedy,
+\texttt{max\_new\_tokens}=64), and BM25 index:
+\textbf{Vanilla} answers without retrieval;
+\textbf{RAG} always retrieves top-$k$ passages and conditions on them;
+\textbf{CoVe} drafts, verifies every claim, and regenerates the whole
+response once if anything is unsupported \cite{dhuliawala2023cove};
+\textbf{HealGen} runs the full loop above.

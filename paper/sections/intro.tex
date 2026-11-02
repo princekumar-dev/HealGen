@@ -1,0 +1,58 @@
+﻿% Intro -- paper plan Task 3.
+% Rule: no measured numbers here (they live in Results via \input/macros).
+
+\section{Introduction}
+
+Large language models fluent in prose still state facts their output cannot
+support. The failure is not marginal: hallucination benchmarks show that even
+strong models emit unsupported atomic statements at rates that make
+unverified generation unusable for high-stakes question answering
+\cite{ravichander2025halogen}. Retrieval augmentation reduces but does not
+eliminate the problem, because a model can retrieve adequate evidence and
+still write a claim the evidence does not support.
+
+Existing remedies each own one stage of the factuality loop. Retrieval
+systems decide \emph{when} to consult evidence
+\cite{asai2024selfrag,yan2024crag,jeong2024adaptiverag,su2024dragin,ding2025rowen};
+verifiers decide \emph{whether} an already-written statement is supported
+\cite{min2023factscore,wei2024longformfactuality,ravichander2025halogen};
+revision systems decide \emph{how} to fix unsupported text
+\cite{gao2023rarr,madaan2023selfrefine,dhuliawala2023cove}. What no single
+inference architecture does is run all three decisions over a \emph{shared,
+persistent claim state}: one representation of the claims being written, the
+evidence gathered for them, and each claim's reliability, used
+simultaneously to trigger retrieval, to drive repair, and to calibrate the
+confidence of the final response.
+
+We present \textbf{HealGen}, a claim-level, evidence-sufficiency-guided
+self-healing inference architecture. HealGen drafts an answer, decomposes the
+draft into atomic claims, and maintains a dynamic claim--evidence graph (DCEG)
+in which every claim carries a predicted hallucination risk (CRE) and a
+predicted evidence-sufficiency score (AESP). Retrieval happens only when the
+sufficiency prediction says the evidence on hand is not enough for a
+particular claim; repair is \emph{localized}: only sentences that produced
+unsupported claims are regenerated or hedged, and everything else is left
+byte-identical. The final response is composed with a calibrated confidence
+per claim.
+
+Our contributions are:
+\begin{enumerate}
+  \item \textbf{Architecture.} A closed claim-level control loop in which one
+        claim state governs retrieval, verification, repair, and output
+        reliability, with sufficiency-gated (not relevance-gated) retrieval
+        and span-localized repair as the operating principles.
+  \item \textbf{Measurement.} An open, fully local prototype of the loop
+        (no API keys, CPU-scale) evaluated with a paired design against
+        vanilla generation, standard RAG, and Chain-of-Verification on a
+        hallucination benchmark, with claim-level factuality, calibration,
+        retrieval-cost, and latency metrics, plus a validated NLI judge and
+        hypothesis tests with multiple-comparison correction.
+  \item \textbf{Ablations.} Component-wise removal of the risk estimator, the
+        sufficiency predictor, and the localized repair engine, quantifying
+        what each stage contributes to the whole.
+\end{enumerate}
+
+The paper is an \emph{architecture and measurement} report: we claim novelty
+for the integration, not for any individual mechanism, and we report results
+as they fall, including trade-offs against cost and latency
+(\S\ref{sec:limitations}).

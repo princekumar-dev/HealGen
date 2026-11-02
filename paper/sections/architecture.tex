@@ -1,0 +1,96 @@
+﻿% Architecture -- paper plan Task 2.
+% TikZ diagram of the pipeline AS IMPLEMENTED (prototype/healgen/*), not the
+% deck's 9-layer marketing split: draft-first decomposition (ledger R2),
+% sufficiency-gated retrieval, DCEG, localized repair, calibrated composer.
+
+\section{Architecture}
+\label{sec:architecture}
+
+HealGen wraps a single generator with a claim-level control loop. The
+generator produces a draft; from that point on, decisions are made per claim,
+and only the sentences that own unsupported claims are ever rewritten.
+Figure~\ref{fig:pipeline} shows the implemented stages and the module that
+implements each.
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+    font=\scriptsize,
+    stage/.style={draw, rounded corners=2pt, align=center, minimum height=9mm,
+                  inner xsep=4pt, inner ysep=3pt},
+    cond/.style={stage, fill=gray!12},
+    arrow/.style={-{Stealth[length=2.2mm]}, semithick},
+    dedge/.style={arrow, dashed, gray!70!black},
+  ]
+  \node[stage] (draft) {Draft generation\\(shared T5 generator)};
+  \node[stage, right=7mm of draft] (decompose) {Claim decomposition\\(\texttt{claims.py})};
+  \node[stage, right=7mm of decompose] (cre) {Per-claim risk\\CRE (\texttt{risk.py})};
+  \node[cond, right=7mm of cre] (aesp) {Evidence sufficient?\\AESP (\texttt{sufficiency.py})};
+  \node[stage, right=7mm of aesp] (retrieve) {Conditional BM25\\top-$k$ passages};
+  \node[stage, below=9mm of retrieve] (dceg) {Claim--Evidence Graph\\DCEG (\texttt{graph.py})};
+  \node[stage, left=9mm of dceg] (lshe) {Localized repair\\LSHE (\texttt{repair.py})};
+  \node[stage, left=9mm of lshe] (compose) {Calibrated composer\\per-claim confidence};
+
+  \draw[arrow] (draft) -- (decompose);
+  \draw[arrow] (decompose) -- (cre);
+  \draw[arrow] (cre) -- (aesp);
+  \draw[arrow] (aesp) -- node[above, yshift=1pt] {no} (retrieve);
+  \draw[arrow] (aesp) to[bend left=18] node[above] {yes: reuse} (dceg);
+  \draw[arrow] (retrieve) -- (dceg);
+  \draw[arrow] (dceg) -- (lshe);
+  \draw[arrow] (lshe) -- (compose);
+  \draw[dedge] (compose) .. controls +(left:14mm) and +(up:10mm) ..
+        node[left, midway, text width=20mm, align=center] {localized splice: only affected sentences change}
+        (decompose);
+
+  \node[below=4mm of lshe, text width=52mm, align=center, font=\tiny, text=black!70]
+    {Unsupported claims only: \texttt{rephrase} $\rightarrow$
+     \texttt{reduce\_confidence} $\rightarrow$ \texttt{express\_uncertainty}
+     $\rightarrow$ \texttt{reconnect}; supported sentences are byte-identical.};
+\end{tikzpicture}
+\caption{HealGen's inference loop as implemented. Retrieval is conditional on
+the per-claim sufficiency prediction (not on relevance alone); repair touches
+only sentences that produced unsupported claims; the dashed edge is the
+localized splice back into the untouched draft.}
+\label{fig:pipeline}
+\end{figure*}
+
+\paragraph{Draft and decomposition.}
+The draft is generated from the question alone. The draft text is then split
+into atomic claims: sentence segmentation, conjunctive-clause splitting, and
+pronoun resolution so each claim stands alone. Decomposition happens on
+asserted content (\emph{draft-first}), because risk and sufficiency are
+properties of what the model chose to assert, not of the question.
+
+\paragraph{Risk, sufficiency, and conditional retrieval.}
+Each claim carries a risk score from a small feature-based estimator and a
+sufficiency score from an embedding model against the evidence collected so
+far. A claim that is already sufficiently supported triggers no retrieval;
+one that is not triggers a single BM25 lookup whose passages join the
+evidence pool. This is the loop's cost lever: retrieval effort is spent per
+claim, on demand.
+
+\paragraph{Claim--evidence graph and localized healing.}
+Claims and passages become nodes in a bipartite graph with support-weighted
+edges; claims without a sufficiently supported edge are flagged
+(Figure~\ref{fig:dceg} shows a real instance exported by the prototype).
+Repair then
+operates at sentence granularity: the sentences that produced flagged claims
+are regenerated against the evidence pool (or hedged, if regeneration still
+fails), and all other sentences are spliced through unchanged. The graph,
+not the response, is the unit of bookkeeping.
+
+\paragraph{Calibrated composition.}
+The final response is assembled with one confidence per claim derived from
+its graph support score, so downstream consumers can filter, hedge, or
+display reliability per statement rather than for the response as a whole.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/dceg_example.png}
+\caption{Claim--evidence graph exported by the prototype
+(\texttt{healgen/graph.py}): claim nodes linked to evidence nodes with
+support weights; claims lacking a sufficiently supported edge are flagged
+for repair.}
+\label{fig:dceg}
+\end{figure}

@@ -1,0 +1,66 @@
+﻿% Related work -- paper plan Task 3.
+% Source: research/02-differentiation.md §3 draft paragraph, with author-year
+% placeholders expanded to refs.bib keys and the §"pre-generation decomposition
+% of the query" wording corrected per ledger ruling R2 (the implementation
+% decomposes the *draft*, not the query, before final response assembly).
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Adaptive retrieval.}
+Work on \emph{whether and when} to consult external evidence is well
+established: Self-RAG trains reflection tokens to retrieve and self-critique
+on demand \cite{asai2024selfrag}; CRAG gates generation on a
+retrieval-quality evaluator with corrective search \cite{yan2024crag};
+Adaptive-RAG routes queries by predicted complexity
+\cite{jeong2024adaptiverag}; Rowen triggers retrieval on cross-response
+inconsistency \cite{ding2025rowen}; and DRAGIN estimates the decoder's
+real-time information need to retrieve mid-generation \cite{su2024dragin}.
+None of these estimates \emph{per-claim hallucination risk}, and none judges
+whether retrieved evidence is \emph{sufficient} for the specific claims
+being written --- their triggers are relevance, uncertainty, complexity, or
+information need.
+
+\paragraph{Claim-level factuality.}
+Atomic-claim decomposition has been formalized as \emph{evaluation}: FActScore
+decomposes generations into atomic facts \cite{min2023factscore}, SAFE
+verifies each fact with search-augmented agents
+\cite{wei2024longformfactuality}, and HALoGEN adds high-precision atomic
+verifiers and an error taxonomy \cite{ravichander2025halogen}. At inference
+time, FACTOR allocates verification effort by claim-level risk
+\cite{hassan2026factor} and SURE-RAG verifies claim-level evidence
+sufficiency for selective answering \cite{qiu2026surerag}; CURE trains
+claim-level confidence estimation \cite{liu2026cure} and Abbasli et al.
+calibrate claim confidences post-hoc \cite{abbasli2026claimcalib}. These
+systems evaluate, rank, or abstain --- they do not retrieve or repair.
+
+\paragraph{Self-correction and localized repair.}
+Self-correction ranges from full-response iteration
+\cite{madaan2023selfrefine,shinn2023reflexion} to verification-then-full-
+regeneration \cite{dhuliawala2023cove} and tool-grounded revision
+\cite{gou2024critic}. RARR is the closest precedent for our repair stage:
+it attributes and \emph{locally} edits unsupported content post-hoc while
+preserving wording \cite{gao2023rarr}. DoctorRAG localizes failures in
+agentic trajectories and repairs only the diagnosed point
+\cite{jiao2026doctorrag}, OPT-Kraken selects repair granularity while
+protecting correct content \cite{wu2026optkraken}, and DSVD rolls back and
+re-decodes during generation \cite{guo2025dsvd}. RARR-style repair,
+however, is strictly post-hoc: no risk estimate precedes it, no sufficiency
+judgment gates it, and it emits no calibrated output.
+
+\paragraph{Structured claim--evidence state.}
+Claim--evidence structures appear as an enterprise memory bank (ADORE
+\cite{you2026adore}) and in fact verification over graphs
+\cite{zhang2024causalwalk,guo2025muplon}; Enoki projects verified facts back
+to spans \cite{rykov2026enoki}. In these systems the structure is a store or
+an evaluation artifact, not a live control structure that simultaneously
+decides retrieval, drives repair, and calibrates the emitted confidence.
+
+\paragraph{Positioning.}
+Each mechanism above has precedent, and we claim novelty only for the
+integration: a single closed inference loop in which a shared claim state ---
+draft-time decomposition, per-claim risk, sufficiency-gated retrieval, a
+dynamic claim--evidence graph, localized healing, and per-claim calibrated
+confidence --- governs every decision. The burden of proof is therefore
+compositional: an ablation showing that each stage contributes and that the
+integrated loop behaves differently from its parts (\S\ref{sec:results}).

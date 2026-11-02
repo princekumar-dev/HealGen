@@ -1,0 +1,68 @@
+﻿% LIMITATIONS -- every factual statement here traces to a committed
+% artifact (results/*.csv or results/main.jsonl) or to a documented
+% design decision (ledger R*).  No result numbers are hand-typed;
+% measured values appear via headline macros where cited.
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{The benchmark collapses the selective gate.}
+HaluEval-QA answers are short (mean 3.9 words) and almost always a single
+atomic claim, so on this benchmark the Claim Risk Estimator flagged every
+HealGen draft claim above its risk threshold and the Adaptive Evidence
+Sufficiency Predictor judged every claim insufficient: HealGen retrieved
+exactly once per question and never exercised its ``skip retrieval''
+branch or its multi-claim claim--evidence graph.  The architecture's
+selective-retrieval and graph-propagation machinery is therefore
+\emph{implemented and unit-tested} but not \emph{stressed} by this
+benchmark; a long-form benchmark (e.g.\ FaithDial
+turns~\cite{dziri2022faithdial} or long-form factuality
+sets~\cite{wei2024longformfactuality}) is the natural next test.
+
+\paragraph{Support rule and lexical overlap.}
+Support decisions use a hybrid rule (normalized substring
+\emph{or} NLI entailment; \S\ref{sec:method}).  The lexical branch is a
+deliberate robustness choice for a small NLI judge, but it can
+over-credit surface overlap, and HaluEval questions share vocabulary
+with their knowledge paragraphs by construction.  The gold-only
+condition (SP$_{\text{gold}}$) partially controls for this --- a claim
+must match the gold passage itself, not a convenient retrieval --- but
+pure-NLI scoring remains a stricter instrument we report as sensitivity,
+not as the headline.
+
+\paragraph{Judge quality is measured, not assumed.}
+The primary NLI judge clears the pre-registered gate
+(Table~\ref{tab:judge-validation}) but is far from perfect; all support
+verdicts are instrument readings of one validated model, and the
+frozen shared pool deliberately contains every system's retrievals, so a
+system whose answer copies its own retrieved passage receives lexical
+credit under SP$_{\text{macro}}$ (the gold-only column bounds this
+effect).  The 100-claim human spot-check with Cohen's $\kappa$ is
+exported and ready but has not yet been rated; until it is, judge--human
+agreement on this benchmark is unmeasured.
+
+\paragraph{Calibration without temperature scaling.}
+No temperature scaling is fitted anywhere ($T{=}1$ throughout), by
+design: the judge gate itself was validated at $T{=}1$, and one
+consistent setting beats mixing fitted and unfitted components.  The
+consequence is that recorded confidences are raw softmax outputs and
+their ECE/Brier values (Table~\ref{tab:main}) should be read as
+``calibration of an unfitted instrument'', not as a calibrated
+probability claim.
+
+\paragraph{Statistical power.}
+With $\NTest$ paired questions, only effects of roughly $3$--$5$ SP
+points reach significance at the Holm-corrected level; we therefore
+emphasize paired bootstrap confidence intervals over binary
+significance, and every null result in
+Table~\ref{tab:pairwise} should be read as ``not resolved at this
+$N$'', not as evidence of equivalence.
+
+\paragraph{Scope of claims.}
+The prototype answers short factual questions with a small open
+generator and BM25 retrieval against a 200-paragraph corpus.  Nothing
+here establishes behavior for long-form generation, parametric-knowledge
+domains without gold evidence, stronger generators, or learned dense
+retrievers; the contribution we defend is the \emph{measurement
+protocol} (frozen shared pools, gold-only condition, validated judge,
+emitted-answer scoring) and a working self-healing architecture under
+those measurements --- not a state-of-the-art claim.
