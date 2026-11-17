@@ -296,58 +296,169 @@ def write_reliability_diagram() -> None:
     n_bins = 10
     bin_edges = np.linspace(0.0, 1.0, n_bins + 1)
     xs, ys, counts = [], [], []
+    total_claims = len(confs)
+    ece = 0.0
+
     for i in range(n_bins):
         mask = (confs >= bin_edges[i]) & (confs < bin_edges[i + 1] if i < n_bins - 1 else confs <= 1.0)
         if mask.sum() == 0:
             continue
-        xs.append(float(np.mean(confs[mask])))
-        ys.append(float(np.mean(correct[mask])))
-        counts.append(int(mask.sum()))
-    fig, ax = plt.subplots(figsize=(4.6, 4.2))
-    ax.plot([0, 1], [0, 1], linestyle="--", color="gray", linewidth=1, label="perfect")
-    ax.plot(xs, ys, marker="o", color="#1f77b4", linewidth=1.5, label="HealGen claims")
+        acc = float(np.mean(correct[mask]))
+        conf = float(np.mean(confs[mask]))
+        count = int(mask.sum())
+        xs.append(conf)
+        ys.append(acc)
+        counts.append(count)
+        ece += (count / total_claims) * abs(acc - conf)
+
+    # Calculate overall Brier score
+    brier = float(np.mean((confs - correct) ** 2))
+
+    fig = plt.figure(figsize=(4.8, 4.6), dpi=300)
+    gs = fig.add_gridspec(2, 1, height_ratios=[3.2, 1.3], hspace=0.15)
+    ax1 = fig.add_subplot(gs[0])
+    ax2 = fig.add_subplot(gs[1], sharex=ax1)
+
+    # Top Panel: Calibration curve
+    # Subtle background shading for over/under-confidence
+    ax1.fill_between([0, 1], [0, 1], [1, 1], color="#E0F2FE", alpha=0.35, label="Under-confident")
+    ax1.fill_between([0, 1], [0, 0], [0, 1], color="#FEF3C7", alpha=0.35, label="Over-confident")
+
+    ax1.plot([0, 1], [0, 1], linestyle="--", color="#64748B", linewidth=1.2, label="Perfect calibration ($y=x$)")
+    ax1.plot(xs, ys, marker="o", markersize=6, color="#0284C7", linewidth=2.0,
+             label="Empirical support", zorder=4)
+
+    # Calibration error gap bars
     for x, y, n in zip(xs, ys, counts):
-        ax.annotate(str(n), (x, y), textcoords="offset points", xytext=(4, 4), fontsize=7)
-    ax.set_xlabel("Confidence (support score)")
-    ax.set_ylabel("Empirical support rate")
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.legend(loc="upper left", fontsize=8)
-    ax.set_title("Reliability diagram (all claims, 4 systems)", fontsize=9)
-    fig.tight_layout()
+        ax1.plot([x, x], [x, y], color="#DC2626", linestyle=":", linewidth=1.2, alpha=0.7)
+        ax1.annotate(f"n={n}", (x, y), textcoords="offset points",
+                     xytext=(4, 6 if y >= x else -10), fontsize=7, color="#0F172A",
+                     fontweight="semibold")
+
+    # Diagnostic Stat Box
+    stat_text = (f"Calibration Summary:\n"
+                 f"  ECE = {ece:.3f}\n"
+                 f"  Brier = {brier:.3f}\n"
+                 f"  Claims N = {total_claims}")
+    ax1.text(0.04, 0.68, stat_text, transform=ax1.transAxes, fontsize=7.5,
+             verticalalignment="top", fontfamily="monospace",
+             bbox=dict(boxstyle="round,pad=0.4", fc="#F8FAFC", ec="#CBD5E1", lw=0.9))
+
+    ax1.set_ylabel("Empirical Support Rate", fontsize=8.5, fontweight="semibold")
+    ax1.set_xlim(-0.02, 1.02)
+    ax1.set_ylim(-0.02, 1.05)
+    ax1.tick_params(labelsize=8, labelbottom=False)
+    ax1.grid(True, linestyle=":", alpha=0.5, color="#CBD5E1")
+    ax1.legend(loc="lower right", fontsize=7.2, framealpha=0.9)
+    ax1.set_title("Reliability Diagram & Calibration Diagnostics", fontsize=9.5, fontweight="bold", pad=8)
+
+    # Bottom Panel: Claim count distribution
+    bin_centers = 0.5 * (bin_edges[:-1] + bin_edges[1:])
+    all_counts = [int(((confs >= bin_edges[i]) & (confs < bin_edges[i + 1] if i < n_bins - 1 else confs <= 1.0)).sum())
+                  for i in range(n_bins)]
+    bars = ax2.bar(bin_centers, all_counts, width=0.08, color="#38BDF8", edgecolor="#0284C7", lw=0.9)
+    ax2.set_xlabel("Predicted Confidence (Support Score)", fontsize=8.5, fontweight="semibold")
+    ax2.set_ylabel("Claim Count", fontsize=8.5, fontweight="semibold")
+    ax2.set_yscale("log")
+    ax2.set_ylim(1, 1000)
+    ax2.tick_params(labelsize=8)
+    ax2.grid(True, linestyle=":", alpha=0.5, color="#CBD5E1")
+
+    for b, c in zip(bars, all_counts):
+        if c > 0:
+            ax2.annotate(str(c), (b.get_x() + b.get_width() / 2, c),
+                         textcoords="offset points", xytext=(0, 2),
+                         ha="center", fontsize=6.5, color="#0369A1")
+
     out = PAPER_FIGURES / "reliability_diagram.png"
-    fig.savefig(out, dpi=200)
+    fig.savefig(out, dpi=300, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {out}")
+    print(f"Wrote enhanced {out}")
 
 
 def write_latency_retrieval_figure() -> None:
     rows = read_csv(RESULTS / "system_summary.csv")
     order = {"vanilla": 0, "rag": 1, "cove": 2, "healgen": 3}
     rows.sort(key=lambda r: order.get(r["system"], 99))
-    labels = [r["system"] for r in rows]
-    lat = [float(r["mean_latency_s"]) for r in rows]
+
+    labels = [r["system"].upper() for r in rows]
+    support = [float(r["sp_macro"]) for r in rows]
+    ci_lo = [float(r["sp_macro_ci_lo"]) for r in rows]
+    ci_hi = [float(r["sp_macro_ci_hi"]) for r in rows]
+    yerr = [
+        [s - lo for s, lo in zip(support, ci_lo)],
+        [hi - s for s, hi in zip(support, ci_hi)]
+    ]
+    mean_lat = [float(r["mean_latency_s"]) for r in rows]
+    p95_lat = [float(r["p95_latency_s"]) for r in rows]
     calls = [float(r["mean_bm25_calls"]) for r in rows]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.6, 3.2), dpi=300)
+
+    colors = {
+        "VANILLA": "#94A3B8",
+        "RAG": "#3B82F6",
+        "COVE": "#F59E0B",
+        "HEALGEN": "#10B981"
+    }
+    sys_colors = [colors.get(lbl, "#6B7280") for lbl in labels]
+
+    # Panel A: Support vs Retrieval Calls (The Efficiency Frontier)
+    for lbl, c, s, col in zip(labels, calls, support, sys_colors):
+        ax1.scatter(c, s, color=col, s=90, edgecolors="#0F172A", linewidth=1.2, zorder=5, label=lbl)
+
+    # Error bars on support
+    for i in range(len(labels)):
+        ax1.errorbar(calls[i], support[i],
+                     yerr=[[yerr[0][i]], [yerr[1][i]]],
+                     fmt="none", ecolor=sys_colors[i], capsize=3, elinewidth=1.2, zorder=4)
+
+    # Annotate points
+    offsets = {
+        "VANILLA": (0.05, -0.05),
+        "RAG": (-0.25, 0.02),
+        "COVE": (-0.28, -0.05),
+        "HEALGEN": (0.05, -0.02)
+    }
+    for lbl, c, s in zip(labels, calls, support):
+        dx, dy = offsets.get(lbl, (0.04, 0.02))
+        ax1.annotate(f"{lbl}\n{s*100:.1f}%", (c + dx, s + dy), fontsize=7.2,
+                     fontweight="bold", color="#1E293B",
+                     bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="#CBD5E1", lw=0.6, alpha=0.85))
+
+    ax1.set_xlabel("Mean BM25 Retrieval Calls / Question", fontsize=8.5, fontweight="semibold")
+    ax1.set_ylabel("Macro Factual Support Rate ($SP_{macro}$)", fontsize=8.5, fontweight="semibold")
+    ax1.set_xlim(-0.15, 1.35)
+    ax1.set_ylim(0.50, 1.05)
+    ax1.grid(True, linestyle=":", alpha=0.5, color="#CBD5E1")
+    ax1.set_title("(a) Factuality vs. Retrieval Effort", fontsize=9, fontweight="bold")
+
+    # Panel B: Latency Profile (Mean and P95)
     x = np.arange(len(labels))
-    fig, ax1 = plt.subplots(figsize=(5.4, 3.4))
-    bars = ax1.bar(x, lat, width=0.55, color="#4c78a8", label="mean latency (s)")
-    ax1.set_ylabel("Mean latency (s)")
-    ax1.set_xticks(x)
-    ax1.set_xticklabels(labels)
-    ax2 = ax1.twinx()
-    ax2.plot(x, calls, marker="s", color="#e45756", linewidth=1.8, label="BM25 calls")
-    ax2.set_ylabel("Mean BM25 calls")
-    for b, v in zip(bars, lat):
-        ax1.annotate(f"{v:.2f}", (b.get_x() + b.get_width() / 2, v), ha="center", fontsize=7)
-    handles1, labels1 = ax1.get_legend_handles_labels()
-    handles2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(handles1 + handles2, labels1 + labels2, fontsize=8, loc="upper left")
-    ax1.set_title("Cost profile per system", fontsize=9)
+    width = 0.36
+    b1 = ax2.bar(x - width/2, mean_lat, width, label="Mean Latency", color="#60A5FA", edgecolor="#2563EB", lw=0.8)
+    b2 = ax2.bar(x + width/2, p95_lat, width, label="P95 Latency", color="#F87171", edgecolor="#DC2626", lw=0.8)
+
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(labels, fontsize=7.5, fontweight="semibold")
+    ax2.set_ylabel("Inference Latency (seconds, CPU)", fontsize=8.5, fontweight="semibold")
+    ax2.set_ylim(0, 24)
+    ax2.grid(True, linestyle=":", alpha=0.5, color="#CBD5E1")
+    ax2.legend(loc="upper left", fontsize=7.5, framealpha=0.9)
+    ax2.set_title("(b) Latency Profile (Mean vs. P95)", fontsize=9, fontweight="bold")
+
+    # Annotate mean latency bars
+    for bar in b1:
+        h = bar.get_height()
+        ax2.annotate(f"{h:.1f}s", (bar.get_x() + bar.get_width() / 2, h),
+                     textcoords="offset points", xytext=(0, 2), ha="center",
+                     fontsize=6.5, color="#1E3A8A", fontweight="semibold")
+
     fig.tight_layout()
     out = PAPER_FIGURES / "latency_retrieval.png"
-    fig.savefig(out, dpi=200)
+    fig.savefig(out, dpi=300, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {out}")
+    print(f"Wrote enhanced {out}")
 
 
 def write_headline_macros() -> None:

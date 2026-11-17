@@ -38,24 +38,6 @@ S.-Q. Yan, J.-C. Gu, Y.~Zhu, and Z.-H. Ling, ``Corrective retrieval augmented
   (ICLR)}, 2024, spotlight; widely reported -- arXiv record does not state
   venue.
 
-\bibitem{jeong2024adaptiverag}
-S.~Jeong, J.~Baek, S.~Cho, S.~J. Hwang, and J.~C. Park, ``Adaptive-rag:
-  Learning to adapt retrieval-augmented large language models through question
-  complexity,'' in \emph{North American Chapter of the Association for
-  Computational Linguistics (NAACL)}, 2024, arXiv comment confirms venue.
-
-\bibitem{su2024dragin}
-W.~Su, Y.~Tang, Q.~Ai, Z.~Wu, and Y.~Liu, ``Dragin: Dynamic retrieval augmented
-  generation based on the information needs of large language models,'' in
-  \emph{Annual Meeting of the Association for Computational Linguistics (ACL)},
-  2024, widely reported -- arXiv record does not state venue.
-
-\bibitem{ding2025rowen}
-H.~Ding, L.~Pang, Z.~Wei, H.~Shen, and X.~Cheng, ``Rowen: Adaptive
-  retrieval-augmented generation for hallucination mitigation in llms,'' in
-  \emph{ACM SIGIR Conference on Asia-Pacific Chapter (SIGIR-AP)}, 2025, arXiv
-  comment confirms acceptance.
-
 \bibitem{min2023factscore}
 S.~Min, K.~Krishna, X.~Lyu, M.~Lewis, W.-t. Yih, P.~W. Koh, M.~Iyyer,
   L.~Zettlemoyer, and H.~Hajishirzi, ``Factscore: Fine-grained atomic
@@ -69,11 +51,10 @@ J.~Wei, C.~Yang, X.~Song, Y.~Lu, N.~Hu, J.~Huang, D.~Tran, D.~Peng, R.~Liu,
   models,'' in \emph{Advances in Neural Information Processing Systems
   (NeurIPS)}, 2024, introduces LongFact and SAFE; arXiv comment confirms venue.
 
-\bibitem{gao2023rarr}
-L.~Gao, Z.~Dai, P.~Pasupat, A.~Chen, A.~T. Chaganty, Y.~Fan, V.~Y. Zhao,
-  N.~Lao, H.~Lee, D.-C. Juan, and K.~Guu, ``Rarr: Researching and revising what
-  language models say, using language models,'' in \emph{Annual Meeting of the
-  Association for Computational Linguistics (ACL)}, 2023.
+\bibitem{dhuliawala2023cove}
+S.~Dhuliawala, M.~Komeili, J.~Xu, R.~Raileanu, X.~Li, A.~Celikyilmaz, and
+  J.~Weston, ``Chain-of-verification reduces hallucination in large language
+  models,'' 2023, meta AI preprint.
 
 \bibitem{madaan2023selfrefine}
 A.~Madaan, N.~Tandon, P.~Gupta, S.~Hallinan, L.~Gao, S.~Wiegreffe, U.~Alon,
@@ -82,10 +63,23 @@ A.~Madaan, N.~Tandon, P.~Gupta, S.~Hallinan, L.~Gao, S.~Wiegreffe, U.~Alon,
   refinement with self-feedback,'' in \emph{Advances in Neural Information
   Processing Systems (NeurIPS)}, 2023, widely reported.
 
-\bibitem{dhuliawala2023cove}
-S.~Dhuliawala, M.~Komeili, J.~Xu, R.~Raileanu, X.~Li, A.~Celikyilmaz, and
-  J.~Weston, ``Chain-of-verification reduces hallucination in large language
-  models,'' 2023, meta AI preprint.
+\bibitem{jeong2024adaptiverag}
+S.~Jeong, J.~Baek, S.~Cho, S.~J. Hwang, and J.~C. Park, ``Adaptive-rag:
+  Learning to adapt retrieval-augmented large language models through question
+  complexity,'' in \emph{North American Chapter of the Association for
+  Computational Linguistics (NAACL)}, 2024, arXiv comment confirms venue.
+
+\bibitem{ding2025rowen}
+H.~Ding, L.~Pang, Z.~Wei, H.~Shen, and X.~Cheng, ``Rowen: Adaptive
+  retrieval-augmented generation for hallucination mitigation in llms,'' in
+  \emph{ACM SIGIR Conference on Asia-Pacific Chapter (SIGIR-AP)}, 2025, arXiv
+  comment confirms acceptance.
+
+\bibitem{su2024dragin}
+W.~Su, Y.~Tang, Q.~Ai, Z.~Wu, and Y.~Liu, ``Dragin: Dynamic retrieval augmented
+  generation based on the information needs of large language models,'' in
+  \emph{Annual Meeting of the Association for Computational Linguistics (ACL)},
+  2024, widely reported -- arXiv record does not state venue.
 
 \bibitem{hassan2026factor}
 A.~Hassan, A.~Kausar, S.~K. Fatima, G.~Islam, and M.~Fatima, ``Not all claims
@@ -116,6 +110,12 @@ Z.~Gou, Z.~Shao, Y.~Gong, Y.~Shen, Y.~Yang, N.~Duan, and W.~Chen, ``Critic:
   Large language models can self-correct with tool-interactive critiquing,'' in
   \emph{International Conference on Learning Representations (ICLR)}, 2024,
   arXiv comment confirms venue.
+
+\bibitem{gao2023rarr}
+L.~Gao, Z.~Dai, P.~Pasupat, A.~Chen, A.~T. Chaganty, Y.~Fan, V.~Y. Zhao,
+  N.~Lao, H.~Lee, D.-C. Juan, and K.~Guu, ``Rarr: Researching and revising what
+  language models say, using language models,'' in \emph{Annual Meeting of the
+  Association for Computational Linguistics (ACL)}, 2023.
 
 \bibitem{jiao2026doctorrag}
 S.~Jiao \emph{et~al.}, ``Doctor-rag: A failure-aware repair framework for

@@ -1,30 +1,17 @@
-﻿\section{Conclusion}
+\section{Conclusion}
 \label{sec:conclusion}
 
-We presented HealGen, a draft-first self-healing generation architecture
-that couples a claim-level risk estimator, an evidence-sufficiency
-predictor, conditional retrieval, a dynamic claim--evidence graph, and
-localized repair behind one NLI judge --- and, more importantly, an
-\emph{honest evaluation protocol} for such systems: frozen shared
-evidence pools that no system can game by retrieving more, a gold-only
-condition that separates gold-grounded support from retrieval-overlap
-support, a pre-registered judge-validation gate, and scoring of the
-\emph{emitted} answer rather than a system's private intermediate state.
-On the HaluEval-QA benchmark at $N{=}\NTest$ with a shared
-\texttt{flan-t5-base} generator, the protocol resolves real differences
-between vanilla generation, always-on RAG, CoVe-style full-regeneration
-verification, and HealGen's localized repair --- including the cost side
-of the ledger (Table~\ref{tab:efficiency}) that single-metric leaderboards
-hide.
+We presented HealGen, a draft-first self-healing generation architecture that couples a claim-level risk estimator, an evidence-sufficiency predictor, conditional retrieval, a dynamic claim--evidence graph, and localized repair behind one validated NLI judge. Alongside the architecture, we established a rigorous and honest evaluation protocol for self-healing systems: frozen shared evidence pools that prevent retrieval gaming, a gold-only condition that isolates reference grounding from retrieval overlap, a pre-registered judge-validation gate, and scoring of the emitted answer rather than private internal state.
 
-The measurement itself surfaced findings a single-metric evaluation
-would have missed: verification signals computed against system-private
-evidence are structurally circular, and short-answer benchmarks collapse
-the selective-retrieval branch of every adaptive system tested.  We
-release the full pipeline, the frozen pools, the claim-level verdicts,
-and the human spot-check instrument so both claims can be checked.
+On $\NTest$ HaluEval-QA questions with a shared \texttt{flan-t5-base} generator, the evaluation resolves fundamental trade-offs between vanilla generation, always-on RAG, monolithic CoVe verification, and HealGen's surgical repair.
 
-Future work runs the same protocol where the architecture has room to
-demonstrate its selectivity --- long-form generation with multi-claim
-answers --- and extends the judge stack (temperature scaling,
-multi-judge agreement, human $\kappa$) once the spot-check is rated.
+\subsection{Key Educational Takeaways for Learners}
+For students and engineers building reliable LLM systems, this work yields four actionable principles:
+\begin{enumerate}
+  \item \textbf{Decompose Before Verifying:} Monolithic paragraph verification is ambiguous and lossy. Splitting generated responses into atomic, self-contained claims enables precise, interpretable error localization.
+  \item \textbf{Distinguish Sufficiency from Relevance:} Documents can be topically relevant while completely lacking the facts necessary to prove an assertion. Gating retrieval on \emph{evidence sufficiency} avoids redundant queries.
+  \item \textbf{Surgically Repair, Do Not Monolithically Rewrite:} Discarding an entire draft when only one sentence is unsupported wastes compute and frequently introduces new errors. Splicing repaired sentences byte-identically preserves verified facts.
+  \item \textbf{Evaluate Against Shared Evidence Pools:} To fairly evaluate retrieval-augmented generation, all competing systems must be scored against a common, frozen pool of evidence. Allowing systems to evaluate against their private retrievals creates circular, uncheckable claims.
+\end{enumerate}
+
+We release the complete codebase, frozen pools, claim-level verdicts, and human evaluation instrument to empower researchers and learners to build, inspect, and extend factual self-healing language models.

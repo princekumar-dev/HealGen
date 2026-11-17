@@ -162,11 +162,11 @@ class DCEG:
 def export_example_figure() -> Path:
     """Generate and export the canonical DCEG figure for the paper."""
     fig_path = config.PATHS["figures"] / "dceg_example.png"
-    graph = DCEG()
-    graph.add_claim("c1", "Douglas Corrigan was an American aviator.", risk=0.12)
-    graph.add_claim("c2", "He was born in Galveston, Texas.", risk=0.25)
-    graph.add_evidence("e1", "Douglas Corrigan was born in Galveston, Texas.")
-    graph.link("c1", "e1", support=0.88)
-    graph.link("c2", "e1", support=0.96)
-    graph.draw(fig_path)
+    paper_fig_path = config.PROTOTYPE_ROOT.parent / "paper" / "figures" / "dceg_example.png"
+    
+    # Import and render pedagogical DCEG figure
+    from healgen.render_dceg import draw_enhanced_dceg
+    draw_enhanced_dceg(fig_path)
+    if paper_fig_path.parent.exists():
+        draw_enhanced_dceg(paper_fig_path)
     return fig_path

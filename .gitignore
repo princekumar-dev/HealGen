@@ -12,3 +12,6 @@ paper/*.aux
 paper/*.xdv
 paper/*.out
 paper/healgen-arxiv.pdf
+scratch/
+.vscode/
+.idea/

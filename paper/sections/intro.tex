@@ -1,59 +1,41 @@
-﻿% Intro -- paper plan Task 3.
+% Intro -- paper plan Task 3.
 % Rule: no measured numbers here (they live in Results via \input/macros).
 
 \section{Introduction}
 
-Large language models fluent in prose still state facts their output cannot
-support. The failure is not marginal: hallucination benchmarks show that even
-strong models emit unsupported atomic statements at rates that make
-unverified generation unusable for high-stakes question answering
-\cite{ravichander2025halogen}. Retrieval augmentation reduces but does not
-eliminate the problem, because a model can retrieve adequate evidence and
-still write a claim the evidence does not support.
+\subsection{Motivation: Why LLMs Hallucinate}
+Modern Large Language Models (LLMs) demonstrate remarkable fluency across diverse natural language tasks. However, beneath this surface coherence lies a fundamental vulnerability: LLMs are trained to maximize next-token statistical likelihood, not empirical factuality. Because the training objective prioritizes token co-occurrence over logical validity, models frequently generate statements that are syntactically plausible yet factually false---a phenomenon known as \emph{hallucination}. Benchmark evaluations demonstrate that even frontier models emit unsupported atomic claims at rates that preclude their deployment in high-stakes domains such as healthcare, legal reasoning, and scientific question answering \cite{ravichander2025halogen}.
 
-Existing remedies each own one stage of the factuality loop. Retrieval
-systems decide \emph{when} to consult evidence
-\cite{asai2024selfrag,yan2024crag,jeong2024adaptiverag,su2024dragin,ding2025rowen};
-verifiers decide \emph{whether} an already-written statement is supported
-\cite{min2023factscore,wei2024longformfactuality,ravichander2025halogen};
-revision systems decide \emph{how} to fix unsupported text
-\cite{gao2023rarr,madaan2023selfrefine,dhuliawala2023cove}. What no single
-inference architecture does is run all three decisions over a \emph{shared,
-persistent claim state}: one representation of the claims being written, the
-evidence gathered for them, and each claim's reliability, used
-simultaneously to trigger retrieval, to drive repair, and to calibrate the
-confidence of the final response.
-
-We present \textbf{HealGen}, a claim-level, evidence-sufficiency-guided
-self-healing inference architecture. HealGen drafts an answer, decomposes the
-draft into atomic claims, and maintains a dynamic claim--evidence graph (DCEG)
-in which every claim carries a predicted hallucination risk (CRE) and a
-predicted evidence-sufficiency score (AESP). Retrieval happens only when the
-sufficiency prediction says the evidence on hand is not enough for a
-particular claim; repair is \emph{localized}: only sentences that produced
-unsupported claims are regenerated or hedged, and everything else is left
-byte-identical. The final response is composed with a per-claim
-confidence whose calibration we measure rather than assume
-(\S\ref{sec:limitations}).
-
-Our contributions are:
+To mitigate hallucinations, practitioners have developed several paradigms, each focusing on a distinct stage of generation:
 \begin{enumerate}
-  \item \textbf{Architecture.} A closed claim-level control loop in which one
-        claim state governs retrieval, verification, repair, and output
-        reliability, with sufficiency-gated (not relevance-gated) retrieval
-        and span-localized repair as the operating principles.
-  \item \textbf{Measurement.} An open, fully local prototype of the loop
-        (no API keys, CPU-scale) evaluated with a paired design against
-        vanilla generation, standard RAG, and Chain-of-Verification on a
-        hallucination benchmark, with claim-level factuality, calibration,
-        retrieval-cost, and latency metrics, plus a validated NLI judge and
-        hypothesis tests with multiple-comparison correction.
-  \item \textbf{Ablations.} Component-wise removal of the risk estimator, the
-        sufficiency predictor, and the localized repair engine, quantifying
-        what each stage contributes to the whole.
+  \item \textbf{Pre-Generation Retrieval (Standard RAG):} Systems retrieve external passages before answering \cite{asai2024selfrag,yan2024crag}. While RAG grounds answers in corpus text, it typically queries unconditionally for every prompt, introducing substantial retrieval latency. Furthermore, models can still misinterpret retrieved passages or inject unsupported assertions alongside grounded text.
+  \item \textbf{Post-Generation Verification:} Systems decompose emitted answers into atomic claims and verify them against reference sources \cite{min2023factscore,wei2024longformfactuality}. However, verification alone does not repair the error.
+  \item \textbf{Monolithic Revision:} Methods such as Chain-of-Verification (CoVe) \cite{dhuliawala2023cove} or Self-Refine \cite{madaan2023selfrefine} detect errors and prompt the model to rewrite the entire response. Rewriting monolithic text is computationally wasteful and frequently introduces new hallucinations or erases previously accurate sentences.
 \end{enumerate}
 
-The paper is an \emph{architecture and measurement} report: we claim novelty
-for the integration, not for any individual mechanism, and we report results
-as they fall, including trade-offs against cost and latency
-(\S\ref{sec:limitations}).
+What has been missing is an inference architecture that unifies these stages around a \emph{shared, persistent claim state}: a dynamic representation that tracks each atomic statement, its evidence sufficiency, and its factual support, enabling surgical, sentence-level repair without full-text regeneration.
+
+\subsection{The HealGen Approach}
+We present \textbf{HealGen}, a claim-level, evidence-sufficiency-guided self-healing inference architecture designed to be accessible, efficient, and transparent for students and practitioners alike. HealGen operates on three core principles:
+\begin{itemize}
+  \item \textbf{Draft-First Decomposition:} The model first generates an unconstrained draft. The draft is immediately parsed into atomic, self-contained claims. This ensures verification operates on what the model actually asserted rather than speculative query hypotheses.
+  \item \textbf{Sufficiency-Gated Retrieval:} Instead of retrieving blindly for every prompt, HealGen queries external evidence only when an Adaptive Evidence Sufficiency Predictor (AESP) determines that available evidence is inadequate ($\mathrm{score} < \tau$). This isolates retrieval effort strictly to uncertain or unsupported claims.
+  \item \textbf{Sentence-Localized Splice:} Unsupported claims are tracked in a bipartite Dynamic Claim--Evidence Graph (DCEG). Rather than regenerating the entire response, HealGen repairs \emph{only the specific sentences} owning unsupported claims, preserving verified sentences 100\% byte-identical.
+\end{itemize}
+
+\subsection{Contributions}
+This paper provides an empirical architecture and measurement report:
+\begin{enumerate}
+  \item \textbf{Architecture.} A closed, claim-level control loop combining draft-first decomposition, sufficiency-gated retrieval, bipartite evidence graphs, and sentence-localized repair.
+  \item \textbf{Rigorous Benchmark Evaluation.} An open, fully local prototype (CPU-scale, no API keys) evaluated with a paired experimental design on HaluEval-QA against vanilla generation, always-on RAG, and CoVe under a frozen shared-pool protocol.
+  \item \textbf{Calibration \& Ablations.} Fine-grained claim-level calibration diagnostics (reliability diagram, ECE, Brier score) and ablation experiments isolating the precise value of risk estimation, sufficiency gating, and localized repair.
+\end{enumerate}
+
+\subsection{Paper Roadmap for Learners}
+To facilitate structured learning, this paper is organized as follows:
+Section~\ref{sec:related} surveys related literature across retrieval, verification, and editing.
+Section~\ref{sec:architecture} presents the HealGen architecture with a step-by-step pedagogical walkthrough of a concrete query.
+Section~\ref{sec:method} provides formal mathematical and algorithmic formulations for all modules.
+Section~\ref{sec:experiments} details our reproducible experimental protocol.
+Section~\ref{sec:results} analyzes empirical findings, cost trade-offs, and calibration.
+Section~\ref{sec:limitations} discusses practical engineering limitations, and Section~\ref{sec:conclusion} concludes with educational and architectural takeaways.

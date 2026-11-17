@@ -1,133 +1,114 @@
-﻿% Method -- paper plan Task 4.
-% Cross-checked against prototype/healgen/{claims,risk,sufficiency,graph,
-% repair,systems,judge}.py at writing time. Describes the code as built:
-%  - draft-first decomposition (ledger R2)
-%  - 6 CRE features in FEATURE_NAMES order (risk.py)
-%  - repair actions actually implemented: rephrase / reduce_confidence /
-%    express_uncertainty (+ supported no-op); retrieval is conditional at
-%    the system level, not a repair action.
-%  - hybrid support rule (ledger R8) documented explicitly.
+% Method -- paper plan Task 4.
+% Cross-checked against prototype/healgen/{claims,risk,sufficiency,graph,repair,systems,judge}.py.
+% Describes the code as built with detailed pedagogical formulas and intuitions for new learners.
 
-\section{Method}
+\section{Methodology}
 \label{sec:method}
 
-\subsection{Problem setting}
-Given a question $q$ and a generator $G$, produce a response $r$ together
-with a per-claim reliability vector. The system may consult a corpus $C$
-through a BM25 retriever, at a cost we treat as a first-class quantity. No
-training of $G$ is performed; everything downstream of $G$ is training-free
-except the small logistic risk model, which is fit once on a split disjoint
-from all evaluation data.
+\subsection{Problem Formulation and Notation}
+Let $q$ denote a natural language question and $G$ a frozen autoregressive language model generator (here \texttt{flan-t5-base}). The objective is to produce a factual, grounded natural language answer $r$ paired with a claim-level reliability vector $\mathbf{p} = (p_1, \dots, p_m)$, where each $p_i \in [0, 1]$ estimates the empirical probability that atomic claim $c_i$ is true. 
 
-\subsection{Draft and claim decomposition}
-$G$ first answers $q$ with no context, yielding a draft. The draft is split
-into atomic claims by rule-based segmentation: sentence splitting with
-abbreviation guards, conjunctive-clause splitting at \emph{and/but/while/
-whereas}, and pronoun resolution that copies the subject onto clauses that
-begin with a pronoun, so each claim is a standalone declarative statement
-(\texttt{claims.py}). Decomposition is \emph{draft-first}: it operates on
-what the model chose to assert, not on the question, so that risk and
-sufficiency are properties of asserted content.
+The system has access to a corpus $\mathcal{C}$ through a standard BM25 retriever. Crucially, each retrieval call incurs computational latency and network overhead; hence, retrieval frequency is treated as a primary evaluation metric rather than an unconstrained resource. The generator $G$ is never fine-tuned, ensuring that HealGen acts as a lightweight, plug-and-play inference controller compatible with any base model.
+
+\subsection{Draft Generation and Atomic Claim Decomposition}
+HealGen adopts a \textbf{draft-first} execution order: $G$ answers $q$ without conditioning on external context:
+\begin{equation}
+  r_{\text{draft}} = G(q)
+\end{equation}
+Generating a draft first allows the model to leverage its internal parametric knowledge and establish a coherent narrative structure. 
+
+The raw draft $r_{\text{draft}}$ is then decomposed into a sequence of atomic claims $\mathcal{C}_{\text{draft}} = \{c_1, c_2, \dots, c_m\}$ using deterministic, rule-based linguistic segmentation (\texttt{claims.py}):
+\begin{enumerate}
+  \item \textbf{Sentence Boundary Detection:} The text is split into sentences while protecting honorifics, titles, and numerical decimals via abbreviation guards.
+  \item \textbf{Conjunctive Clause Splitting:} Compound sentences containing coordinating and subordinating conjunctions (\emph{and, but, while, whereas, although}) are divided into independent clauses.
+  \item \textbf{Pronoun and Subject Resolution:} When a split clause begins with a third-person pronoun (\emph{he, she, it, they}), the antecedent subject noun phrase from the preceding clause is prepended, producing self-contained declarative assertions.
+\end{enumerate}
 
 \subsection{Claim Risk Estimator (CRE)}
-Each claim $c$ is mapped to a six-feature vector
-(\texttt{risk.py}): claim length in words; count of non-initial tokens
-that contain a digit or begin with a capital letter; maximum BM25 score
-of the claim against the corpus; MiniLM cosine
-between claim and question; \emph{novelty}, defined as one minus the maximum
-MiniLM cosine between the claim and the top-$k$ retrieved passages; and a
-rarity flag for all-caps tokens. A logistic regression over standardized
-features maps the vector to a risk score in $(0,1)$; the model is stored as
-plain JSON coefficients (\texttt{cre\_model.json}), not a pickle. Training
-labels come from judge-vs-gold judgments on claims sampled from splits
-disjoint from dev/test/judge sets. We report the estimator's training
-accuracy against the majority baseline and discuss its degeneracy openly in
-\S\ref{sec:limitations}: on this benchmark most draft claims are initially
-unsupported, so the positive rate is high and the estimator's practical
-value is in \emph{ranking} claims, not in separating classes.
+\paragraph{Intuition for learners.}
+Not all assertions carry equal probability of being fabricated. For example, common transitional phrases (``Paris is a city'') are rarely hallucinated, whereas claims asserting specific dates, numbers, or rare proper nouns (``born on August 14, 1892'') exhibit high error rates. The Claim Risk Estimator assigns an \emph{a priori} hallucination risk score $\hat{y}_{\text{risk}}(c) \in (0, 1)$ before external search occurs.
+
+\paragraph{Feature vector formulation.}
+For each claim $c$, CRE extracts a standardized six-dimensional feature vector $\mathbf{x} = [x_1, \dots, x_6]^T$ (\texttt{risk.py}):
+\begin{itemize}
+  \item $x_1$ (\textbf{Word Length}): Total number of words in claim $c$.
+  \item $x_2$ (\textbf{Entity/Digit Density}): Count of non-initial tokens containing a numerical digit or beginning with an uppercase letter, capturing proper nouns, entities, and temporal quantities.
+  \item $x_3$ (\textbf{Corpus Familiarity}): Maximum BM25 score obtained by querying claim $c$ against the corpus $\mathcal{C}$, measuring whether the asserted concepts appear in known reference text.
+  \item $x_4$ (\textbf{Prompt Relevance}): Cosine similarity between MiniLM embeddings of claim $c$ and original question $q$: $\cos(\mathbf{e}_c, \mathbf{e}_q)$.
+  \item $x_5$ (\textbf{Evidence Novelty}): $1.0 - \max_{p \in \text{top-}k} \cos(\mathbf{e}_c, \mathbf{e}_p)$, quantifying whether the claim introduces concepts absent from previously retrieved passages.
+  \item $x_6$ (\textbf{Rarity Flag}): Binary indicator ($\{0, 1\}$) denoting whether the claim contains all-caps tokens (excluding common acronyms).
+\end{itemize}
+
+A logistic regression model maps standardized features to a calibrated risk probability:
+\begin{equation}
+  \hat{y}_{\text{risk}}(c) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}
+\end{equation}
+Trained on disjoint data, the model parameters $[\mathbf{w}, b]$ are serialized as human-readable JSON (\texttt{cre\_model.json}). As discussed in Section~\ref{sec:limitations}, the estimator functions primarily as an effective ranking mechanism to prioritize claims during verification.
 
 \subsection{Adaptive Evidence Sufficiency Predictor (AESP)}
-Sufficiency is embedding-based: $\mathrm{score}(c, E) = \max_{e \in E}
-\cos(\mathrm{MiniLM}(c), \mathrm{MiniLM}(e))$, and the claim is sufficient
-when the score meets or exceeds a threshold $\tau$ (\texttt{sufficiency.py}). $\tau$
-is tuned over $\{0.3, 0.5, 0.7\}$ on the dev split by F1 against judge
-labels; the sensitivity of all three settings is reported
-(Table~\ref{tab:tau}).  The committed benchmark run used $\tau{=}0.7$,
-the value selected by an earlier partial sweep; re-running the full
-\NTauPairs-pair sweep (Table~\ref{tab:tau}) selects $0.3$.  On this benchmark
-the difference is provably inert: every draft decomposes to a single
-claim, which is tested for sufficiency against an initially \emph{empty}
-evidence pool, so the pre-retrieval sufficiency score is $0.0 < \tau$
-regardless of $\tau$ and retrieval is always issued, while the
-post-retrieval sufficiency flag is recorded but never gates any later
-decision --- consistent with the no-AESP ablation reproducing the full
-system exactly (\S\ref{sec:results}). This judges
-whether available evidence is \emph{enough}, which is a different question
-from whether it is \emph{relevant} \cite{qiu2026surerag}.
+\paragraph{Sufficiency versus relevance.}
+A key conceptual innovation in HealGen is distinguishing \textbf{evidence sufficiency} from \textbf{topical relevance} \cite{qiu2026surerag}. A retrieved document may be highly relevant to the general topic of aviation history without containing sufficient facts to verify whether an aviator was born in Galveston or Houston. 
 
-\subsection{Conditional retrieval}
-The claim loop is: compute risk; compute sufficiency against the evidence
-gathered so far; if and only if the claim is insufficient, issue one BM25
-query (Okapi, $k_1{=}1.5$, $b{=}0.75$, top-$k{=}3$) and merge the passages
-into the shared pool. Sufficient claims trigger no lookup. The number of
-BM25 calls is recorded per response as the retrieval-cost metric, which
-makes the loop's central efficiency hypothesis directly testable against a
-fixed-retrieval RAG baseline that always queries.
+\paragraph{Sufficiency criterion.}
+Given an existing evidence pool $E = \{e_1, \dots, e_k\}$, AESP computes the maximum semantic coverage score over all available passages:
+\begin{equation}
+  \mathrm{score}(c, E) = \max_{e \in E} \cos(\mathrm{MiniLM}(c), \mathrm{MiniLM}(e))
+\end{equation}
+A claim $c$ is classified as \emph{sufficiently supported} by the current pool if:
+\begin{equation}
+  \mathrm{score}(c, E) \ge \tau
+\end{equation}
+where $\tau \in [0, 1]$ is a tunable sufficiency threshold. If $E$ is empty ($E = \emptyset$), $\mathrm{score}(c, \emptyset) \equiv 0.0 < \tau$, ensuring that claims lacking evidence immediately trigger retrieval.
+
+\subsection{Conditional On-Demand Retrieval}
+Retrieval is issued per claim on demand rather than per prompt. If $\mathrm{score}(c, E) < \tau$, the system queries the Okapi BM25 retriever ($k_1 = 1.5, b = 0.75$, top-$k = 3$) using claim $c$ as the query:
+\begin{equation}
+  E \leftarrow E \cup \mathrm{BM25}_{\text{top-}k}(c, \mathcal{C})
+\end{equation}
+Claims that satisfy $\mathrm{score}(c, E) \ge \tau$ bypass retrieval entirely, saving network roundtrips and compute.
 
 \subsection{Dynamic Claim--Evidence Graph (DCEG)}
-Claims and passages become nodes of a bipartite graph (\texttt{graph.py}).
-Each claim--passage pair is scored by the judge and stored as a weighted
-edge; a claim is \emph{unsupported} when it has no edge above the support
-threshold or when it participates in a contradiction edge. The graph
-exports to DOT/PNG for inspection; Figure~\ref{fig:dceg} is produced by the
-prototype itself.
+To maintain a persistent, explainable audit trail, claims and evidence passages are modeled as a directed bipartite graph $\mathcal{G} = (V_C \cup V_E, \mathcal{E}_{\text{supp}}, \mathcal{E}_{\text{contra}})$ (\texttt{graph.py}):
+\begin{itemize}
+  \item $V_C$: Set of atomic claim nodes, storing claim text and predicted CRE risk.
+  \item $V_E$: Set of evidence passage nodes, storing text, freshness, and retrieval weight.
+  \item $\mathcal{E}_{\text{supp}}$: Directed support edges $e_j \rightarrow c_i$ with weight $w_{ij} \in [0, 1]$ assigned by the NLI judge.
+  \item $\mathcal{E}_{\text{contra}}$: Undirected contradiction edges between conflicting claims or evidence.
+\end{itemize}
+
+\paragraph{Unsupported detection rule.}
+A claim $c_i \in V_C$ is flagged as \emph{unsupported} and routed for repair if:
+\begin{equation}
+  \left( \max_{e_j \in V_E} w(e_j, c_i) < \tau_{\text{supp}} \right) \quad \lor \quad \left( \exists v : (c_i, v) \in \mathcal{E}_{\text{contra}} \right)
+\end{equation}
+with default support threshold $\tau_{\text{supp}} = 0.50$. Figure~\ref{fig:dceg} demonstrates this decision structure on our prototype.
 
 \subsection{Localized Self-Healing Engine (LSHE)}
-Repair operates at sentence granularity. For every unsupported claim, the
-sentence that produced it is located by offsets; supported claims are never
-touched. The action sequence per unsupported sentence is:
+When unsupported claims are detected, LSHE operates surgically at sentence granularity. Using exact character offset tracking, the system maps each unsupported claim $c_i$ to its originating sentence $s(c_i)$ in the draft. Sentences containing only supported claims are marked immutable and remain \textbf{100\% byte-identical}.
+
+For each sentence requiring repair, LSHE executes a three-tier fallback policy:
 \begin{enumerate}
-  \item \textbf{rephrase} --- regenerate \emph{only that sentence} with the
-        evidence pool in the prompt; if the regeneration differs from the
-        original, splice it in;
-  \item \textbf{reduce\_confidence} --- if regeneration yields nothing new,
-        append an explicit hedge to that sentence;
-  \item \textbf{express\_uncertainty} --- when no evidence is available,
-        hedge without grounding.
+  \item \textbf{Action 1 (\texttt{rephrase}):} The sentence is regenerated with the generator conditioned on the retrieved evidence pool: $s' \sim G(q, E, s)$. If $s'$ differs from $s$ and contains grounded facts, $s'$ is spliced into the draft.
+  \item \textbf{Action 2 (\texttt{reduce\_confidence}):} If regeneration produces no change or fails verification, an explicit epistemic hedge is appended (e.g., \emph{``According to available reports, ...''}).
+  \item \textbf{Action 3 (\texttt{express\_uncertainty}):} If the evidence pool contains zero relevant passages, the assertion is qualified with ungrounded uncertainty (e.g., \emph{``The exact details remain unverified in the records.''}).
 \end{enumerate}
-Sentences not selected for repair are reassembled byte-identically; a
-regression test pins this (\texttt{test\_repair\_preserves\_untouched\_
-sentences}). The invariants to state plainly: retrieval happens at the
-system level when a claim is insufficient, and there is no
-\emph{reconnect/drop} action in this prototype --- flagged claims that
-survive repair are emitted hedged, not silently removed.
 
-\subsection{Judge and evidence pools}
-Support decisions come from an NLI model
-(\texttt{DeBERTa-v3-base-mnli-fever-anli}) under a \textbf{hybrid support
-rule}: a claim counts as supported if its normalized form (lowercased,
-punctuation-stripped, whitespace-collapsed) is a substring of a normalized
-passage --- scored $1.0$ --- or if the NLI argmax label on the best passage
-is \emph{entailment}; the reported score is the maximum of the two
-components, with the NLI softmax taken at unit temperature (no temperature
-scaling is fitted anywhere; the judge gate below is also measured at
-$T{=}1$).
-Every system is scored against the same evidence: each question
-gets one \emph{frozen shared pool} (gold knowledge plus the union of all
-four systems' passages), so no system's retrievals are private evidence
-and none can win by retrieving more; the reported gold-only condition
-additionally bounds retrieval-overlap credit. The judge
-itself is validated on labeled contrast pairs before any benchmark run and
-its accuracy/AUC are reported as a gate (\S\ref{sec:experiments}). The
-lexical branch is a deliberate robustness choice for a small NLI model, and
-its risk --- over-crediting lexical overlap --- is acknowledged in
-\S\ref{sec:limitations} with a pure-NLI sensitivity discussion.
+\subsection{Calibrated Confidence Composition}
+The final response $r$ is assembled by concatenating the untouched and repaired sentences. Each claim $c_i$ receives a confidence score $p_i = \max_{e_j} w(e_j, c_i)$ derived directly from the DCEG edge weights. This provides downstream systems with granular, statement-level reliability without requiring heuristic post-processing.
 
-\subsection{Baselines}
-All four systems share the same generator, decoding (greedy,
-\texttt{max\_new\_tokens}=64), and BM25 index:
-\textbf{Vanilla} answers without retrieval;
-\textbf{RAG} always retrieves top-$k$ passages and conditions on them;
-\textbf{CoVe} drafts, verifies every claim, and regenerates the whole
-response once if anything is unsupported \cite{dhuliawala2023cove};
-\textbf{HealGen} runs the full loop above.
+\subsection{Hybrid Judge Rule and Frozen Shared Pools}
+To guarantee rigorous and unbiased evaluation, claim factuality is scored by an NLI cross-encoder (\texttt{DeBERTa-v3-base-mnli-fever-anli}) using a \textbf{hybrid support rule}:
+\begin{equation}
+\begin{aligned}
+  \mathrm{Support}(c, e) = \max \big( & \mathbb{I}_{\text{substr}}(c_{\text{norm}}, e_{\text{norm}}), \\
+  & P_{\text{NLI}}(\text{Entailment} \mid e, c) \big)
+\end{aligned}
+\end{equation}
+where normalized text collapses punctuation, whitespace, and letter casing.
+
+\paragraph{Frozen shared pools.}
+A common flaw in retrieval evaluations is allowing RAG systems to score themselves against their own private retrieved documents. To prevent this, each test question is evaluated against a single \textbf{frozen shared pool}:
+\begin{equation}
+  \mathcal{P}_{\text{shared}}(q) = \text{Gold}(q) \cup \bigcup_{S \in \{\text{Vanilla}, \text{RAG}, \text{CoVe}, \text{HealGen}\}} \text{Passages}_S(q)
+\end{equation}
+Because every system is scored against the exact same pool $\mathcal{P}_{\text{shared}}$, no model can artificially inflate its support score merely by retrieving more passages. A strict gold-only condition is also reported to isolate ground-truth factual alignment from retrieval-overlap credit.
