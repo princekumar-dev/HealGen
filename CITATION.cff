@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use HealGen in your research, please cite it as below."
+type: software
+title: "HealGen: Claim-Level Evidence-Sufficiency-Guided Self-Healing Inference for Factual LLM Generation"
+abstract: >-
+  HealGen is a draft-first self-healing inference architecture for factual
+  large language model generation.  It decides, per atomic claim, whether to
+  trust it, retrieve evidence for it, or repair it locally, using a
+  claim-level risk estimator, an evidence-sufficiency predictor gating
+  retrieval, a dynamic claim-evidence graph, and localized repair, all driven
+  by one validated NLI judge.  The repository also implements the associated
+  evaluation protocol: frozen shared evidence pools per question, a gold-only
+  scoring condition, a pre-registered judge-validation gate, and scoring of
+  the emitted answer rather than private intermediate state.
+authors:
+  - family-names: PLACEHOLDER
+    given-names: BYLINE
+    email: princekumar-dev@users.noreply.github.com
+repository-code: "https://github.com/princekumar-dev/HealGen"
+url: "https://github.com/princekumar-dev/HealGen"
+license: MIT
+keywords:
+  - large language models
+  - hallucination
+  - factuality
+  - retrieval-augmented generation
+  - self-correction
+  - claim verification
+  - evidence sufficiency
+  - calibration
+  - natural language inference
+  - reproducibility
+preferred-citation:
+  type: article
+  title: "HealGen: Claim-Level Evidence-Sufficiency-Guided Self-Healing Inference for Factual LLM Generation"
+  authors:
+    - family-names: PLACEHOLDER
+      given-names: BYLINE
+  year: 2026
+  journal: "arXiv preprint (submission pending)"
+  notes: "Code, frozen evidence pools, and claim-level verdicts released at https://github.com/princekumar-dev/HealGen"
