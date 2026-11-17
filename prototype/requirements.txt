@@ -1,0 +1,31 @@
+# HealGen prototype dependencies
+# ------------------------------------------------------------------
+# Verified working set (Python 3.14.8, CPU-only, no GPU required).
+# Floor versions reflect the oldest API surface the code relies on;
+# the recorded experiment numbers were produced with the versions
+# noted in the comments.  See prototype/healgen/config.py for the
+# pinned experiment contract.
+# ------------------------------------------------------------------
+
+# --- Core numerics & data ------------------------------------------------
+numpy>=1.26            # measured with 2.5.4
+scipy>=1.11            # measured with 1.18.1  (optimize.minimize_scalar, expit)
+scikit-learn>=1.4      # measured with 1.9.1   (logistic regression CRE, roc_auc_score)
+
+# --- Retrieval -----------------------------------------------------------
+rank-bm25>=0.2.2       # measured with 0.2.2   (Okapi BM25, k1=1.5 b=0.75)
+
+# --- Local models (CPU, no API keys) ------------------------------------
+torch>=2.2             # measured with 2.14.1+cpu
+transformers>=4.40     # measured with 5.20.2  (flan-t5 generator, DeBERTa NLI judge)
+sentence-transformers>=3.0  # measured with 6.2.0  (all-MiniLM-L6-v2 embedder)
+
+# --- Graph export / figures ---------------------------------------------
+networkx>=3.2          # measured with 3.6.1   (DCEG bipartite graph)
+matplotlib>=3.8        # measured with 3.11.2  (all paper figures)
+
+# --- Data download -------------------------------------------------------
+requests>=2.31         # measured with 2.34.2  (HaluEval qa_data.json, cached once)
+
+# --- Test suite ----------------------------------------------------------
+pytest>=8.0            # measured with 9.1.1   (85 tests; -m "not slow" for a fast pass)
